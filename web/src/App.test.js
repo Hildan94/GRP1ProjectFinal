@@ -12,3 +12,8 @@ test('has login button', () => {
   let button = screen.getByRole("button");
   expect(button).toHaveTextContent("Login");
 });
+
+test('username', ()=> {
+  let usernameField = screen.getByLabelText("username");
+  expect(usernameField).toHaveAttribute("placeholder", "indtast brugernavn");
+});
