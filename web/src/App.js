@@ -3,11 +3,11 @@ import './App.css';
 import Frontpage from "./pages/frontpage";
 
 function App() {
-  return (
-  <div className="App">
-    <Frontpage></Frontpage>
-  </div>
-  );
+    return (
+        <div className="App">
+            <Frontpage></Frontpage>
+        </div>
+    );
 }
 
 export default App;
