@@ -16,16 +16,16 @@ function Home() {
                 <h2> Vælg et fag </h2>
             </div>
             <div>
-                <a href="#/" onClick={toQuizzes}>* Matematik</a>
+                <button onClick={toQuizzes}>* Matematik</button>
             </div>
             <div>
-                <a href="#/" onClick={toQuizzes}>* Dansk</a>
+                <a onClick={toQuizzes}>* Dansk</a>
             </div>
             <div>
-                <a href="#/" onClick={toQuizzes}>* Historie</a>
+                <a onClick={toQuizzes}>* Historie</a>
             </div>
             <div>
-                <a href="#/" onClick={toQuizzes}>* Geografi</a>
+                <a onClick={toQuizzes}>* Geografi</a>
             </div>
             <div>
             </div>
