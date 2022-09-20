@@ -19,13 +19,13 @@ function Home() {
                 <button onClick={toQuizzes}>* Matematik</button>
             </div>
             <div>
-                <a onClick={toQuizzes}>* Dansk</a>
+                <button onClick={toQuizzes}>* Dansk</button>
             </div>
             <div>
-                <a onClick={toQuizzes}>* Historie</a>
+                <button onClick={toQuizzes}>* Historie</button>
             </div>
             <div>
-                <a onClick={toQuizzes}>* Geografi</a>
+                <button onClick={toQuizzes}>* Geografi</button>
             </div>
             <div>
             </div>
