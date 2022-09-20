@@ -4,7 +4,7 @@ import App from './App';
 
 
 test('shows frontpage', () => {
-  const a = "0";//render(<App />);
+  //render(<App />);
 });
 
 /*
