@@ -16,7 +16,7 @@ function Home() {
                 <h2> Vælg et fag </h2>
             </div>
             <div>
-                <a href{'./quizzes'}>* Matematik</a>
+                <a onClick={toQuizzes}>* Matematik</a>
             </div>
             <div>
                 <a onClick={toQuizzes}>* Dansk</a>
