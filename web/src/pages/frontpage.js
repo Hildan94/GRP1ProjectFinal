@@ -1,5 +1,8 @@
 import {React} from "react";
 import {useNavigate} from "react-router-dom";
+import {Button} from "@mui/material";
+import {giraffeStore} from "./GiraffeStore";
+import {observer} from "mobx-react-lite";
 
 function Frontpage() {
 
@@ -36,9 +39,20 @@ function Frontpage() {
                 <button onClick={toHome}>Log ind</button>
                 <button onClick={toSignup}>Opret bruger</button>
             </div>
+            <div>
+                <Button onClick={()=>giraffeStore.addGiraffe("Elmer")}>Tilføj giraf</Button>
+            </div>
+            <div>
+                <ul>
+                    {giraffeStore.giraffes.map((giraffeName,key)=>
+                        <li key={key}>{giraffeName}</li>
+                    )}
+                </ul>
+            </div>
+
         </div>
     );
 
 }
 
-export default Frontpage;
+export default observer(Frontpage);
