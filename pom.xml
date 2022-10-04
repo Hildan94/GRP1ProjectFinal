@@ -54,5 +54,11 @@
             <artifactId>jersey-hk2</artifactId>
             <version>3.0.6</version>
         </dependency>
+        <!-- JSON Serializer -->
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-json-jackson</artifactId>
+            <version>3.0.6</version>
+        </dependency>
     </dependencies>
 </project>
