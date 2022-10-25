@@ -35,7 +35,7 @@ jobs:
     # Trigger deploy on Caprover instance
     - name: Deploy app
       env:
-        APP_NAME: 'Nem Læringsplatform'
+        APP_NAME: 'nem'
         APP_URL: 'https://grp1.diplomportal.dk/'
         IMAGE_NAME: 'hildan94/laeringsplatform:${{github.run_number}}'
       run:
