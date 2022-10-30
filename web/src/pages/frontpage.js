@@ -40,7 +40,7 @@ function Frontpage() {
                 <button onClick={toSignup}>Opret bruger</button>
             </div>
             <div>
-                <Button onClick={()=>giraffeStore.addGiraffe("Elmer")}>Tilføj giraf</Button>
+                <Button onClick={()=>giraffeStore.addGiraffe("Poul")}>Tilføj giraf</Button>
             </div>
             <div>
                 <ul>
