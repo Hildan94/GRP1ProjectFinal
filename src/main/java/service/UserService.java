@@ -13,7 +13,7 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 @Path("users")
 public class UserService {
-    private static final SessionFactory sessionFactory = new HibernateController("pgtest-db.4a4b.dk:6543/pg").getSessionFactory();
+    private static final SessionFactory sessionFactory = new HibernateController("pgtest-db.caprover.grp1.diplomportal.dk:6543/pg").getSessionFactory();
 
     @POST
     public int createUser(User user){
