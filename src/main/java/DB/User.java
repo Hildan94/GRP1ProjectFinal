@@ -1,12 +1,9 @@
 package DB;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import org.hibernate.annotations.Table;
 
-    @Entity
+import jakarta.persistence.*;
+
+@Entity
     @Table(name = "DBUSER") //WATCH out  USER is a reserved name!
     public class User {
         @Id
@@ -15,6 +12,14 @@ import org.hibernate.annotations.Table;
         private int id;
         @Column(name = "username")
         private String username;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 // TODO: Remember Getters and setters as well
 
 
