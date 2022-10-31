@@ -119,5 +119,11 @@
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
+        <!-- Object mapper-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
+        </dependency>
     </dependencies>
 </project>

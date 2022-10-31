@@ -1,27 +1,29 @@
 package DB;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
-    @Table(name = "DBUSER") //WATCH out  USER is a reserved name!
-    public class User {
-        @Id
-        @GeneratedValue
-        @Column(name = "id")
-        private int id;
-        @Column(name = "username")
-        private String username;
+@Table(name="DBUser") //!!WATCH out  USER is a reserved name!
+@Getter
+@Setter
+@Builder
+@ToString
+@RequiredArgsConstructor
+@AllArgsConstructor
+public class User {
 
-    public int getId() {
-        return id;
-    }
+    @Id @GeneratedValue
+    @Column
+    private int id;
+    @Column
+    private String username;
+    @Column @Transient
+    private String password;
+    @Column @JsonIgnore
+    private String hash;
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-// TODO: Remember Getters and setters as well
+}
 
-
-
-    }
