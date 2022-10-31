@@ -11,7 +11,7 @@ public class TestClass {
     @Test
     public void testCreate(){
         HibernateController hibernateController =
-                new HibernateController("pgtest-db.4a4b.dk:6543/pg");
+                new HibernateController("pgtest-db.nem.grp1.diplomportal.dk:6543/pg");
         SessionFactory sessionFactory = hibernateController.getSessionFactory();
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
