@@ -7,7 +7,6 @@ import jakarta.ws.rs.core.MediaType;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.criteria.JpaCriteriaQuery;
-
 import java.util.List;
 
 @Produces(MediaType.APPLICATION_JSON)
@@ -28,6 +27,13 @@ public class UserService {
         query.from(User.class);
         List<User> data = session.createQuery(query).getResultList();
         return data;
+    }
+
+    @GET
+    @Path("query")
+    public List<User> queryUsers(@QueryParam("name") String name) throws NoImplementationException {
+        //No implementation yet
+        throw new NoImplementationException("user-queries not implemented yet");
     }
 }
 
