@@ -14,8 +14,8 @@ function Reports() {
     return (
         <div>
             <div>
-                <h1 onClick={toHome}> NEM Læringsplatform </h1>
-                <button> Hjem</button>
+                <h1>NEM Læringsplatform </h1>
+                <button onClick={toHome}> Hjem</button>
             </div>
             <div>
                 <h1> Matematik </h1>
