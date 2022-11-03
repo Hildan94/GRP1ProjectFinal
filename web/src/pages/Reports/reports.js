@@ -1,9 +1,7 @@
 import {useNavigate} from "react-router-dom";
 import {React} from "react";
 import {observer} from "mobx-react-lite";
-import {makeAutoObservable, runInAction} from "mobx";
-import {giraffeStore} from "../GiraffeStore";
-import {scores} from "./reportsStore";
+import {scores} from "./reportsFetcher";
 
 function Reports() {
 

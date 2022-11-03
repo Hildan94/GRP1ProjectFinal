@@ -4,7 +4,7 @@ import {makeAutoObservable, runInAction} from "mobx";
 const baseUrl = process.env.NODE_ENV === 'development' ?
     "http://localhost:8080/":""; //Check if dev environment
 
-class ReportsStore{
+class ReportsFetcher {
     scores = ["YO", "Du har gjort det godt"];
 
     constructor() {
@@ -25,4 +25,4 @@ class ReportsStore{
     }
 }
 
-export const scores = new ReportsStore();
+export const scores = new ReportsFetcher();
