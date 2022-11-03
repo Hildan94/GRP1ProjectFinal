@@ -1,6 +1,7 @@
 package DB;
 
-
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
 public class HibernateController {//Should be a singleton…
     private final SessionFactory sessionFactory;
