@@ -5,8 +5,16 @@ import './../Backend/frontpage.css';
 import profile from "./../image/a.png";
 import email from "./../image/email.png";
 import pass from "./../image/pass.png";
+import {useNavigate} from "react-router-dom";
 
 function Frontpage() {
+
+    const navigate = useNavigate()
+
+    const toHome = () => {
+        navigate('/home')
+    }
+
         return (
             <div className="main">
                 <div className="sub-main">
@@ -29,7 +37,7 @@ function Frontpage() {
                                 <input type="password" placeholder="Password" className="name"/>
                             </div>
                             <div className="login-button">
-                                <button>Log ind</button>
+                                <button onClick={toHome}>Log ind</button>
                             </div>
 
                             <p className="link">
