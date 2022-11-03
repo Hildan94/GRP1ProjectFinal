@@ -1,5 +1,9 @@
 import {useNavigate} from "react-router-dom";
 import {React} from "react";
+import {observer} from "mobx-react-lite";
+import {makeAutoObservable, runInAction} from "mobx";
+import {giraffeStore} from "../GiraffeStore";
+import {scores} from "./reportsStore";
 
 function Reports() {
 
@@ -8,8 +12,6 @@ function Reports() {
     const toHome = () => {
         navigate('/home')
     }
-
-
 
     return (
         <div>
@@ -25,11 +27,22 @@ function Reports() {
                 <button> Quiz 1 blok</button>
             </div>
             <div>
-                <button>Generer rapport</button>
+                {scores.scores.map((scoreName,key)=>
+                    <li key = {key}>{scoreName}</li>)}
+            </div>
+            <div>
+                <form>
+                    <label>
+                        Input liste
+                        <input type="text" name="password"/>
+                    </label>
+
+                </form>
+                <button onClick={()=> scores.addSomething("LALA")}> Lav shit </button>
             </div>
         </div>
     );
 
 }
 
-export default Reports;
+export default observer(Reports);

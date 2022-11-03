@@ -9,7 +9,7 @@ import Home from "./pages/home";
 import Quizzes from "./pages/quizzes";
 import Quiz from "./pages/quiz";
 import Quiznew from "./pages/quiznew";
-import Reports from "./pages/reports";
+import Reports from "./pages/Reports/reports";
 
 //<---------- Roboto font ---------->
 import '@fontsource/roboto/300.css';
