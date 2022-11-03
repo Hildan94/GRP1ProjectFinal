@@ -1,3 +1,5 @@
+package service;
+
 import DB.User;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;

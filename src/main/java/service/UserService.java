@@ -7,6 +7,8 @@ import jakarta.ws.rs.core.MediaType;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.criteria.JpaCriteriaQuery;
+import service.exceptions.NoImplementationException;
+
 import java.util.List;
 
 @Produces(MediaType.APPLICATION_JSON)
