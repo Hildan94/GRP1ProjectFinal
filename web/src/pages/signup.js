@@ -1,5 +1,6 @@
 import {useNavigate} from "react-router-dom";
 import {React} from "react";
+import { Helmet } from 'react-helmet';
 
 function Signup() {
 
@@ -15,6 +16,9 @@ function Signup() {
 
     return (
         <div>
+            <Helmet>
+                <title>NEM Læringsplatform | Tilmeld</title>
+            </Helmet>
             <div>
                 <form>
                     <label>

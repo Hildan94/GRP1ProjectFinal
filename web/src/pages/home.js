@@ -1,5 +1,6 @@
 import {useNavigate} from "react-router-dom";
 import {React} from "react";
+import { Helmet } from 'react-helmet';
 
 function Home() {
 
@@ -11,6 +12,9 @@ function Home() {
 
     return (
         <div>
+            <Helmet>
+                <title>NEM Læringsplatform</title>
+            </Helmet>
             <div>
                 <h1> NEM Læringsplatform </h1>
                 <h2> Vælg et fag </h2>
