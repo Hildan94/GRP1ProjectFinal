@@ -13,6 +13,8 @@ var questionCounter; //used to keep track of current question no for page no | l
 //firstName = "Dennis";
 //quizName = "Matematik 5-1"
 
+var quizIdParam = 1;
+
 var quizObject = {
     "id": quizId = 10001,
     "courseName": courseName = 'Matematik 5-1',
@@ -37,9 +39,14 @@ function Quiz() {
     const [searchParams] = useSearchParams();
     const params = new URLSearchParams(window.location.pathname);
 
+    var currPath = window.location.pathname;
+    var pathParams = currPath.substring(currPath.indexOf('/') + 6);
+    var paramQuizId = pathParams.slice(0,5);
+    var paramQuestionId = pathParams.substring(pathParams.indexOf('/') + 1);
 
+    var questionFromParam = 'quizObject.question' + (paramQuestionId -100 );
+    console.log(questionFromParam);
 
-    var tester = searchParams.quizid;
 
     const navigate = useNavigate()
 
@@ -52,15 +59,15 @@ function Quiz() {
     }
 
     const toNextQuestion = () => {
-        questionCounter = questionCounter + 1;
-        navigate(window.location.pathname + '/' + 1)
+        paramQuestionId ++;
+        navigate(currPath.slice(0,-3) + paramQuestionId)
     }
 
     const toPrevQuestion = () => {
-        if (questionCounter != 1) {
-        questionCounter = questionCounter -1;
+        if (paramQuestionId > 101) {
+            paramQuestionId --;
         }
-        navigate(window.location.pathname -1)
+        navigate(currPath.slice(0,-3) + paramQuestionId)
     }
 
     const toQuestion = () => {
@@ -84,10 +91,10 @@ function Quiz() {
                 <div> <h1>{quizObject.courseName}</h1></div>
             </div>
             <div>
-                <h3> 1: {quizObject.question1} </h3>
+                <h3> 1: {eval(questionFromParam)} </h3>
                 <h5> <Checkbox></Checkbox>{quizObject.answer1}</h5>
-                <h5> <Checkbox></Checkbox>* {quizObject.answer2}</h5>
-                <h5> <Checkbox></Checkbox>* {quizObject.answer3}</h5>
+                <h5> <Checkbox></Checkbox>{quizObject.answer2}</h5>
+                <h5> <Checkbox></Checkbox>{quizObject.answer3}</h5>
             </div>
                 <div>
                     <button onClick={toPrevQuestion}>Tilbage</button>
@@ -97,11 +104,6 @@ function Quiz() {
                 <button onClick={toQuizzes}>Gem og luk</button>
                 <button onClick={toQuizzes}>Afslut quiz</button>
             </div>
-                <div>
-                    <p>Under dette</p>
-                    <p>{searchParams.quizid}</p>
-                    <p>{params.get("quizid")}</p>
-                </div>
         </div>
         </div>
     );

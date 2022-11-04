@@ -14,7 +14,8 @@ function Quizzes() {
 
     const toQuiz = () => {
         quizId = 10001;//Fix quiz id here
-        questionId = 1; //default to 1 atm
+        questionId = 101; //default to 101 atm
+        //navigate('/quiz/?quizid=' + quizId + '&questionid=' + questionId)
         navigate('/quiz/' + quizId + '/' + questionId)
     }
 
