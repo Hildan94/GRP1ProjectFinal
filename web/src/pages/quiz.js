@@ -4,7 +4,9 @@ import {Helmet} from 'react-helmet';
 import logo from "./../image/NEM_logo_noBackground2.png";
 import './../Backend/quiz.css';
 
-var currUserId, courseId, quizId, firstName, questionsCount;
+var currUserId, courseId, quizId, firstName, questionsCount, quizName;
+firstName = "Dennis";
+quizName = "Matematik 5-1"
 
 function Quiz() {
 
@@ -24,13 +26,15 @@ function Quiz() {
             <Helmet>
                 <title>NEM Læringsplatform | Quiz</title>
             </Helmet>
+
             <div>
                 <img onClick={toHome} src={logo} alt="logo" className="logo"/>
-                <p className={"right"}>Velkommen Dennis</p>
+                <div className={"right"}>Velkommen {firstName}</div>
             </div>
+
             <div className={"center_p"}>
             <div>
-                <h1> VALGT QUIZ </h1>
+                <div> <h1>{quizName}</h1></div>
                 <h2> Besvar spørgsmålene</h2>
             </div>
             <div>
