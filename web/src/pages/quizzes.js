@@ -2,6 +2,8 @@ import {useNavigate} from "react-router-dom";
 import {React} from "react";
 import { Helmet } from 'react-helmet';
 
+var quizId, questionId;
+
 function Quizzes() {
 
     const navigate = useNavigate()
@@ -11,7 +13,9 @@ function Quizzes() {
     }
 
     const toQuiz = () => {
-        navigate('/quiz')
+        quizId = 10001;//Fix quiz id here
+        questionId = 1; //default to 1 atm
+        navigate('/quiz/' + quizId + '/' + questionId)
     }
 
     const toReports = () => {
