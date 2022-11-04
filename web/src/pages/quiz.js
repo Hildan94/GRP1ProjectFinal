@@ -1,6 +1,8 @@
 import {useNavigate} from "react-router-dom";
 import {React} from "react";
 
+var currUserId, courseId, quizId, firstName, questionsCount;
+
 function Quiz() {
 
     const navigate = useNavigate()
