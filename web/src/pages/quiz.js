@@ -1,6 +1,8 @@
 import {useNavigate} from "react-router-dom";
 import {React} from "react";
-import { Helmet } from 'react-helmet';
+import {Helmet} from 'react-helmet';
+import logo from "./../image/NEM_logo_noBackground2.png";
+import './../Backend/quiz.css';
 
 var currUserId, courseId, quizId, firstName, questionsCount;
 
@@ -17,13 +19,16 @@ function Quiz() {
     }
 
     return (
+
         <div>
             <Helmet>
                 <title>NEM Læringsplatform | Quiz</title>
             </Helmet>
             <div>
-                <h1 onClick={toHome}> NEM Læringsplatform</h1>
+                <img onClick={toHome} src={logo} alt="logo" className="logo"/>
+                <p className={"right"}>Velkommen Dennis</p>
             </div>
+            <div className={"center_p"}>
             <div>
                 <h1> VALGT QUIZ </h1>
                 <h2> Besvar spørgsmålene</h2>
@@ -46,6 +51,7 @@ function Quiz() {
                 <button onClick={toQuizzes}>Gem og luk</button>
                 <button onClick={toQuizzes}>Afslut quiz</button>
             </div>
+        </div>
         </div>
     );
 
