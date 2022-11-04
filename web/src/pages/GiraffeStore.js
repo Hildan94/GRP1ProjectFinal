@@ -1,4 +1,5 @@
 import {makeAutoObservable, runInAction} from "mobx";
+import { Helmet } from 'react-helmet';
 
 const baseUrl = process.env.NODE_ENV === 'development' ?
     "http://localhost:8080/":""; //Check if dev environment

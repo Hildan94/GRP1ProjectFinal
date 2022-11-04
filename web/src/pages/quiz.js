@@ -1,5 +1,6 @@
 import {useNavigate} from "react-router-dom";
 import {React} from "react";
+import { Helmet } from 'react-helmet';
 
 var currUserId, courseId, quizId, firstName, questionsCount;
 
@@ -17,6 +18,9 @@ function Quiz() {
 
     return (
         <div>
+            <Helmet>
+                <title>NEM Læringsplatform | Quiz</title>
+            </Helmet>
             <div>
                 <h1 onClick={toHome}> NEM Læringsplatform</h1>
             </div>
