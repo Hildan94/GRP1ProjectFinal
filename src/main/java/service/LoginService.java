@@ -1,5 +1,6 @@
 package service;
 
+import DB.User;
 import DB.LoginData;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -13,7 +14,7 @@ public class LoginService {
     @POST
     public String postLoginData(LoginData login) throws NotAuthorizedException {
         if (login != null && "brian".equals(login.getUsername()) && "kodeord".equals(login.getPassword())){
-            return JWTHandler.generateJwtToken(new User(login.getUsername(), ""));
+            return JWTHandler.generateJwtToken(new User(login.getId(),login.getUsername(), ""));
         }
         throw new NotAuthorizedException("forkert brugernavn/kodeord");
     }
