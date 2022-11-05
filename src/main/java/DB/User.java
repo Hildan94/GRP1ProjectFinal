@@ -1,7 +1,6 @@
 package DB;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,8 +21,8 @@ public class User {
     private String username;
     @Column @Transient
     private String password;
-    @Column @JsonIgnore
-    private String hash;
+    //@Column @JsonIgnore
+    //private String hash;
 
 
 }
