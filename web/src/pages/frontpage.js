@@ -1,10 +1,8 @@
-import {observer} from "mobx-react-lite";
-import anime from "animejs";
-import {useEffect} from "react";
 import './../Backend/frontpage.css';
 import profile from "./../image/a.png";
 import email from "./../image/email.png";
 import pass from "./../image/pass.png";
+import {tokenStore} from "../stores/TokenStore";
 
 function Frontpage() {
         return (
@@ -29,7 +27,7 @@ function Frontpage() {
                                 <input type="password" placeholder="Password" className="name"/>
                             </div>
                             <div className="login-button">
-                                <button>Log ind</button>
+                                <button onClick={()=>tokenStore.doLogin()}>Log ind</button>
                             </div>
 
                             <p className="link">
