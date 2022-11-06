@@ -98,6 +98,7 @@
         </dependency>
         <!-- connection pool -->
         <dependency>
+
              <groupId>org.hibernate</groupId>
              <artifactId>hibernate-c3p0</artifactId>
              <version>6.1.5.Final</version>
@@ -109,6 +110,7 @@
         </dependency>
          <!-- Database connector -->
         <dependency>
+
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>42.5.0</version>
