@@ -5,6 +5,8 @@ import './../Backend/frontpage.css';
 import profile from "./../image/a.png";
 import email from "./../image/email.png";
 import pass from "./../image/pass.png";
+import {useNavigate} from "react-router-dom";
+import {Helmet} from "react-helmet";
 
 
 function Frontpage() {
