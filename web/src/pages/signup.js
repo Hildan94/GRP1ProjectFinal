@@ -1,67 +1,60 @@
 import {useNavigate} from "react-router-dom";
 import {React} from "react";
 
+/**
+ * Page for signing up to use the site. When a user signs up they are to be assigned a unique ID.
+ *
+ * The className attribute is used to specify a CSS class
+ * */
+
 function Signup() {
 
     const navigate = useNavigate()
 
-    const toHome = () => {
+    const toHome = () => { // Homepage of app after login
         navigate('/home')
     }
 
-    const toFrontpage = () => {
+    const toFrontpage = () => { // Login page
         navigate('/')
     }
 
     return (
-        <div>
-            <div>
-                <form>
-                    <label>
-                        Brugernavn
-                        <input type="text" name="username"/>
-                    </label>
-                </form>
-                <form>
-                    <label>
-                        Fulde navn
-                        <input type="text" name="name"/>
-                    </label>
-                </form>
-                <form>
-                    <label>
-                        Skole
-                        <input type="text" name="school"/>
-                    </label>
-                </form>
-                <form>
-                    <label>
-                        Klassetrin
-                        <input type="text" name="gradeno"/>
-                    </label>
-                </form>
-                <form>
-                    <label>
-                        Kodeord
-                        <input type="text" name="password"/>
-                    </label>
-                </form>
-                <form>
-                    <label>
-                        Gentag kodeord
-                        <input type="text" name="passwordconfirm"/>
-                    </label>
-                </form>
-            </div>
-            <div>
-                <button onClick={toHome}>Opret bruger</button>
-            </div>
-            <div>
-                <button onClick={toFrontpage}>Tilbage</button>
+        <div className="main">
+            <div className={"sub-main"}>
+                <div>
+
+                    <h1>Opret ny bruger</h1>
+
+                    <div>
+                        <input type="text" placeholder="Fornavn" className="name"/>
+                    </div>
+                    <div className="second-input">
+                        <input type="text" placeholder="Efternavn" className="name"/>
+                    </div>
+                    <div className="second-input">
+                        <input type="text" placeholder="Skole" className="name"/>
+                    </div>
+                    <div className="second-input">
+                        <input type="text" placeholder="Klassetrin" className="name"/>
+                    </div>
+                    <div className="second-input">
+                        <input type="text" placeholder="Kodeord" className="name"/>
+                    </div>
+                    <div className="second-input">
+                        <input type="text" placeholder="Bekræft kodeord" className="name"/>
+                    </div>
+
+                    <div className="login-button">
+                        <button onClick={toHome}>Opret bruger</button>
+                    </div>
+                    <p className="link">
+                        <a href="/">Allerede oprettet?</a>
+                    </p>
+                </div>
             </div>
         </div>
     );
-
 }
 
 export default Signup;

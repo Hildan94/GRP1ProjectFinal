@@ -5,7 +5,7 @@ import './../Backend/frontpage.css';
 import profile from "./../image/a.png";
 import email from "./../image/email.png";
 import pass from "./../image/pass.png";
-import {useNavigate} from "react-router-dom";
+
 
 function Frontpage() {
 
@@ -17,6 +17,9 @@ function Frontpage() {
 
         return (
             <div className="main">
+                <Helmet>
+                    <title>NEM Læringsplatform</title>
+                </Helmet>
                 <div className="sub-main">
                     <div>
                         <div className="img">
