@@ -33,7 +33,7 @@ function Report(){
                     </label>
 
                 </form>
-                <button onClick={()=> scores.addSomething("FUCK")}> Lav shit </button>
+                <button onClick={()=> scores.addSomething("Ny Quiz")}> Lav shit </button>
             </div>
         </div>
 

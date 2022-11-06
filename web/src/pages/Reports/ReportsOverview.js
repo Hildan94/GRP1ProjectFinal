@@ -20,8 +20,6 @@ function ReportsOverview() {
         navigate('/home')
     }
 
-
-
     return (
         <div>
             <div>
