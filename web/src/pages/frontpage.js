@@ -29,7 +29,7 @@ function Frontpage() {
 
                         </div>
                         <div>
-                            <h1>Login side</h1>
+                            <h1>Loginside</h1>
                             <div>
                                 <img src={email} alt="email" className="email"/>
                                 <input type="text" placeholder="Brugernavn" className="name"/>
@@ -39,7 +39,7 @@ function Frontpage() {
                                 <input type="password" placeholder="Kodeord" className="name"/>
                             </div>
                             <div className="login-button">
-                                <button onClick={toHome}>Login</button>
+                                <button onClick={toHome}>Log ind</button>
                             </div>
 
                             <p className="link">
