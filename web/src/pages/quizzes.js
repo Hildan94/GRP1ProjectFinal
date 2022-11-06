@@ -14,7 +14,7 @@ function Quizzes() {
     }
 
     const toReports = () => {
-        navigate('/reports')
+        navigate('/reportsoverview')
     }
 
     const toHome = () => {

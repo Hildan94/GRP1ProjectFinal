@@ -5,7 +5,7 @@ const baseUrl = process.env.NODE_ENV === 'development' ?
     "http://localhost:8080/":""; //Check if dev environment
 
 class ReportsFetcher {
-    scores = ["YO", "Du har gjort det godt"];
+    scoresString = ["YO", "Du har gjort det godt", "MOFO"];
 
     constructor() {
         makeAutoObservable(this,{},{autoBind:true});
@@ -15,13 +15,13 @@ class ReportsFetcher {
     fetchString() {
         fetch(baseUrl + "api/reports").then(
             (response) => response.json().then(
-                (json) => runInAction(() => this.scores= json)
+                (json) => runInAction(() => this.scoresString= json)
             )
         )
     }
 
     addSomething(something){
-       this.scores.push(something);
+       this.scoresString.push(something);
     }
 }
 
