@@ -2,6 +2,12 @@ import {useNavigate} from "react-router-dom";
 import {React} from "react";
 import {Button, TextField} from "@mui/material";
 
+/**
+ * Page for signing up to use the site. When a user signs up they are to be assigned a unique ID.
+ *
+ * The className attribute is used to specify a CSS class
+ * */
+
 function Signup() {
 
     const navigate = useNavigate()
@@ -15,48 +21,39 @@ function Signup() {
     }
 
     return (
-        <div style={{
-            position: 'absolute', left: '50%', top: '50%',
-            transform: 'translate(-50%, -50%)'
-        }}>
-            <div>
-                <h1>Opret ny bruger</h1>
-            </div>
-            <div>
-                <form>
-                    <label>
-                        <input type="text" placeholder="  Fornavn" name="name"/>
-                        <input type="text" placeholder="  Efternavn" name="name"/>
-                    </label>
-                </form>
-                <form>
-                    <label>
-                        <input type="text" placeholder="   Skole" name="school"/>
-                    </label>
-                </form>
-                <form>
-                    <label>
-                        <input type="text" placeholder="   Klassetrin" name="gradeno"/>
-                    </label>
-                </form>
-                <form>
-                    <label>
-                        <input type="text" placeholder="   Kodeord" name="password"/>
-                    </label>
-                </form>
-                <form>
-                    <label>
-                        <input type="text" placeholder="   Bekræft kodeord" name="passwordconfirm"/>
-                    </label>
-                </form>
-            </div>
-            <div>
-                <button onClick={toHome}>Opret bruger</button>
-            </div>
-            <div>
-                <button onClick={toFrontpage}>Allerede oprettet?</button>
-            </div>
+        <div className="main">
+            <div className={"sub-main"}>
+                <div>
 
+                    <h1>Opret ny bruger</h1>
+
+                    <div>
+                        <input type="text" placeholder="Fornavn" className="name"/>
+                    </div>
+                    <div className="second-input">
+                        <input type="text" placeholder="Efternavn" className="name"/>
+                    </div>
+                    <div className="second-input">
+                        <input type="text" placeholder="Skole" className="name"/>
+                    </div>
+                    <div className="second-input">
+                        <input type="text" placeholder="Klassetrin" className="name"/>
+                    </div>
+                    <div className="second-input">
+                        <input type="text" placeholder="Kodeord" className="name"/>
+                    </div>
+                    <div className="second-input">
+                        <input type="text" placeholder="Bekræft kodeord" className="name"/>
+                    </div>
+
+                    <div className="login-button">
+                        <button onClick={toHome}>Opret bruger</button>
+                    </div>
+                    <p className="link">
+                        <a href="/">Allerede oprettet?</a>
+                    </p>
+                </div>
+            </div>
         </div>
     );
 }
@@ -64,7 +61,16 @@ function Signup() {
 export default Signup;
 
 /*
-<div className="link">
-    <a href="/">Allerede oprettet?</a>
+
+<div>
+    <button onClick={toFrontpage}>Allerede oprettet?</button>
+</div>
+* */
+
+/*
+<div style={{
+            position: 'absolute', left: '50%', top: '50%',
+            transform: 'translate(-50%, -50%)'
+        }}>
 </div>
 * */
