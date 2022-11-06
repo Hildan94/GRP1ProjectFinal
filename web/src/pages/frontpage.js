@@ -32,7 +32,7 @@ function Frontpage() {
                             <h1>Login side</h1>
                             <div>
                                 <img src={email} alt="email" className="email"/>
-                                <input type="text" placeholder="Bruger navn" className="name"/>
+                                <input type="text" placeholder="Brugernavn" className="name"/>
                             </div>
                             <div className="second-input">
                                 <img src={pass} alt="pass" className="email"/>
