@@ -1,6 +1,5 @@
 import {useNavigate} from "react-router-dom";
 import {React} from "react";
-import {Button, TextField} from "@mui/material";
 
 /**
  * Page for signing up to use the site. When a user signs up they are to be assigned a unique ID.
@@ -12,11 +11,11 @@ function Signup() {
 
     const navigate = useNavigate()
 
-    const toHome = () => { // Startside
+    const toHome = () => { // Homepage of app after login
         navigate('/home')
     }
 
-    const toFrontpage = () => { // Loginside
+    const toFrontpage = () => { // Login page
         navigate('/')
     }
 
@@ -59,18 +58,3 @@ function Signup() {
 }
 
 export default Signup;
-
-/*
-
-<div>
-    <button onClick={toFrontpage}>Allerede oprettet?</button>
-</div>
-* */
-
-/*
-<div style={{
-            position: 'absolute', left: '50%', top: '50%',
-            transform: 'translate(-50%, -50%)'
-        }}>
-</div>
-* */
