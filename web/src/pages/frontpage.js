@@ -29,21 +29,21 @@ function Frontpage() {
 
                         </div>
                         <div>
-                            <h1>Login Page</h1>
+                            <h1>Login side</h1>
                             <div>
                                 <img src={email} alt="email" className="email"/>
-                                <input type="text" placeholder="User name" className="name"/>
+                                <input type="text" placeholder="Bruger navn" className="name"/>
                             </div>
                             <div className="second-input">
                                 <img src={pass} alt="pass" className="email"/>
-                                <input type="password" placeholder="Password" className="name"/>
+                                <input type="password" placeholder="Kodeord" className="name"/>
                             </div>
                             <div className="login-button">
-                                <button onClick={toHome}>Log ind</button>
+                                <button onClick={toHome}>Login</button>
                             </div>
 
                             <p className="link">
-                                <a href="#">Forgot password?</a> Or <a href="#"> Sign Up </a>
+                                <a href="#">Glemt kodeord?</a> Or <a href="#">Opret bruger</a>
                             </p>
 
                         </div>
