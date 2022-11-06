@@ -1,6 +1,3 @@
-import {observer} from "mobx-react-lite";
-import anime from "animejs";
-import {useEffect} from "react";
 import './../Backend/frontpage.css';
 import profile from "./../image/a.png";
 import email from "./../image/email.png";
