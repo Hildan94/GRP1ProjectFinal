@@ -21,7 +21,7 @@ public class Report {
     @Column
     private String userId;
     @Column
-    private String quizResultRights;
+    private String quizRightResults;
     @Column
-    private String quizResultQuestions;
+    private String quizResultTotalQuestions;
 }

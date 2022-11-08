@@ -1,5 +1,7 @@
 package TestClass;
 
+import DB.DataObjects.DummyController;
+import DB.DataObjects.Report;
 import DB.HibernateController;
 import DB.User;
 import org.hibernate.Session;
@@ -27,6 +29,7 @@ public class TestClass {
         readTransaction.commit();
         session.close();
     }
+
 
 
 }

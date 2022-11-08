@@ -6,15 +6,18 @@ import {observable} from "mobx";
 
 function ReportsOverview() {
 
-    const toReport = () => {
-        navigate('report')
+    let reportId = 'nan'
+
+    function toReport(key){
+        let temp = key+1
+        reportId = temp.toString()
+        navigate('report/' + key.toString())
     }
+
     const myList = observable(scores.scoresString.map((scoreName,key)=>
-    <h2> Quiz {key+1} <button onClick={toReport}> <li key = {key}>{scoreName}</li></button></h2>))
+    <h2> Quiz {key+1} <button onClick={e => toReport(key)}> <li key = {key}>{scoreName}</li></button></h2>))
 
     const navigate = useNavigate()
-
-    const numbers = [1,2,3,4,5]
 
     const toHome = () => {
         navigate('/home')

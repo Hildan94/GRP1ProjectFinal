@@ -6,6 +6,7 @@ const baseUrl = process.env.NODE_ENV === 'development' ?
 
 class ReportsFetcher {
     scoresString = ["YO", "Du har gjort det godt", "MOFO"];
+    report = ["Det her er en test"]
 
     constructor() {
         makeAutoObservable(this,{},{autoBind:true});
@@ -18,6 +19,10 @@ class ReportsFetcher {
                 (json) => runInAction(() => this.scoresString= json)
             )
         )
+    }
+
+    fetchReport(index){
+        scores.scoresString.at(index)
     }
 
     addSomething(something){

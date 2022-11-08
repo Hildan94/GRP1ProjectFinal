@@ -2,11 +2,13 @@ package service;
 
 
 import DB.DataObjects.Report;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.PUT;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import DB.HibernateController;
+import DB.User;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.criteria.JpaCriteriaQuery;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,10 +16,13 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 @Path("reports")
 public class ReportService {
-    List<String>  score = Arrays.asList("36/60", "50/60");
+    List <String> score = Arrays.asList("36/60", "54/60");
 
     @GET
-    public List<String>  Score(){return score;}
+    public List<String> Score() {
+        return score;
+    }
+
 
 
 }

@@ -11,7 +11,6 @@ function Report(){
     const toReports = () => {
         navigate('/reportsoverview')
     }
-
     return(
         <div>
             <h1> Resultater for din test
@@ -19,25 +18,15 @@ function Report(){
                 <li key = {key}>{scoreName}</li>)} </h2>
             </h1>
             <button onClick={toReports} > Tryk her for at gå tilbage </button>
-
-            <div>
-                <h1>
-
-                </h1>
-            </div>
-
             <div>
                 <form>
                     <label>
                         <input type="text" name="input" />
                     </label>
-
                 </form>
                 <button onClick={()=> scores.addSomething("Ny Quiz")}> Lav shit </button>
             </div>
         </div>
-
-
     );
 }
 
