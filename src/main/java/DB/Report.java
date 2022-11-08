@@ -1,4 +1,4 @@
-package DB.DataObjects;
+package DB;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

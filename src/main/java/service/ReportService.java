@@ -1,8 +1,8 @@
 package service;
 
 
-import DB.DataObjects.Report;
 import DB.HibernateController;
+import DB.Report;
 import DB.User;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;

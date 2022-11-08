@@ -1,6 +1,5 @@
 package DB;
 
-import DB.DataObjects.Report;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
