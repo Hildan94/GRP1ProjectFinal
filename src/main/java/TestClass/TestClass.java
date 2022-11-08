@@ -47,6 +47,7 @@ public class TestClass {
         Report readReport = session.get(Report.class, report.getQuizId());
         System.out.println("Read user back: " + readReport.toString());
         readTransaction.commit();
+
         session.close();
     }
 
