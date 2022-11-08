@@ -30,6 +30,27 @@ public class TestClass {
         session.close();
     }
 
+    @Test
+    public void testCreateReport(){
+        HibernateController hibernateController =
+                new HibernateController("pgtest-db.caprover.grp1.diplomportal.dk:6543/pg");
+        SessionFactory sessionFactory = hibernateController.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        Report report = new Report();
+        System.out.println("QuizId before commit: " + report.getQuizId());
+        report.setUserId("Melman");
+        session.persist(report);
+        transaction.commit();
+        System.out.println("QuizID after commit: " + report.getUserId());
+        Transaction readTransaction = session.beginTransaction();
+        Report readReport = session.get(Report.class, report.getQuizId());
+        System.out.println("Read user back: " + readReport.toString());
+        readTransaction.commit();
+        session.close();
+    }
+
+
 
 
 }

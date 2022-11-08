@@ -17,7 +17,7 @@ public class Report {
     @Id
     @GeneratedValue
     @Column
-    private String quizId;
+    private int quizId;
     @Column
     private String userId;
     @Column
