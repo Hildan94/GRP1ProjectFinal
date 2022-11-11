@@ -24,4 +24,6 @@ public class Report {
     private String quizRightResults;
     @Column
     private String quizResultTotalQuestions;
+    @Column
+    private String quizName;
 }
