@@ -1,4 +1,5 @@
 import {makeAutoObservable, runInAction} from "mobx";
+import Report from "./Report";
 
 
 const baseUrl = process.env.NODE_ENV === 'development' ?
@@ -6,12 +7,14 @@ const baseUrl = process.env.NODE_ENV === 'development' ?
 
 class ReportsFetcher {
     scoresString = ["YO", "Du har gjort det godt", "MOFO"];
-    report = ["Det her er en test"]
+    report = ["something"];
 
     constructor() {
         makeAutoObservable(this,{},{autoBind:true});
         this.fetchString();
+        this.fetchReport();
     }
+
 
     fetchString() {
         fetch(baseUrl + "api/reports").then(
@@ -21,8 +24,12 @@ class ReportsFetcher {
         )
     }
 
-    fetchReport(index){
-        scores.scoresString.at(index)
+    fetchReport(){
+        fetch(baseUrl + "api/reports/1").then(
+            (respose) => respose.json().then(
+                (json) => runInAction(() => this.report = json)
+            )
+        )
     }
 
     addSomething(something){

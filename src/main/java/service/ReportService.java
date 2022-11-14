@@ -1,13 +1,9 @@
 package service;
 
 
-import DB.HibernateController;
 import DB.Report;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,12 +13,12 @@ import java.util.List;
 public class ReportService {
 
     List <String> score = Arrays.asList("36/60", "54/60");
-    List <Report> _reports = Arrays.asList(
+    List <Report> reports = Arrays.asList(
             //new Report(40, "Melman", "40","60","Matematik"),
             new Report(40, "Melman2", "43","60","Matematik"))
             ;
     public void addItem(){
-        _reports.add(_reports.get(0));
+        reports.add(reports.get(0));
     }
     @GET
     public List<String> Score() {
@@ -37,12 +33,12 @@ public class ReportService {
     @Path("1")
     @GET
     public List<Report> reports(){
-        return _reports;
+        return reports;
     }
     @Path("new")
     @GET
     public List<Report> score(){
-        return _reports;
+        return reports;
     }
     /*
 
