@@ -15,18 +15,25 @@ function ReportsOverview() {
         navigate('report/' + key.toString())
     }
 
-    /*
-    const report ={
-        id: 1,
-        quizresultat: 'Alice',
-        quizrightresult: "something",
-        userId: "Blabla",
-        quizname: "daada",
-    };
+    /**
+     * Mapper hvert objekt og dets value til et table
+     * /TODO : Skal vise rigtigt videre
+     *
      */
+    const reports = scores.report.map((reportName,outer) =>
+        <tr>
+            {Object.values(reportName).map((value, ) =>
+                <td>
+                    {value}
+                </td>
+        )}
+            <td onClick={e=>toReport(outer)}> Se resultat </td>
+        </tr>
+    )
 
-    const report = scores.report
-
+    /**
+     * Skabelon for at lave et  table for et objekt
+     */
     const myListtable = observable(scores.scoresString.map((Scorename, key) =>
         <tr> <td>Quiz {key+1} </td> <td> {Scorename} </td> <td onClick={e=> toReport(key)}> Se resultat </td> </tr>))
 
@@ -45,15 +52,21 @@ function ReportsOverview() {
                 <h1> Oversigt over resultater</h1>
                 <h3> Tryk på den ønskede quiz at se rapport ud fra</h3>
             </div>
-                <table>
-                    <td colSpan={3} align={"center"}>
-                        Matematik
-                    </td>
-                    {myListtable}
-                </table>
+
             </div>
             <div>
-
+                <table>
+                    <td colSpan={6} align={"center"}>Matematik</td>
+                    <tr>
+                        <td>quizId</td>
+                        <td>quizresultat</td>
+                        <td>quizrigtige</td>
+                        <td>userid</td>
+                        <td>quizname</td>
+                        <td>Klik for at se resultater</td>
+                    </tr>
+                    {reports}
+                </table>
             </div>
 
         </div>

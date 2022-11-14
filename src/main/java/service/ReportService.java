@@ -14,7 +14,7 @@ public class ReportService {
 
     List <String> score = Arrays.asList("36/60", "54/60");
     List <Report> reports = Arrays.asList(
-            //new Report(40, "Melman", "40","60","Matematik"),
+            new Report(40, "Melman", "40","60","Matematik"),
             new Report(40, "Melman2", "43","60","Matematik"))
             ;
     public void addItem(){
