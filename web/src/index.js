@@ -10,6 +10,7 @@ import Quizzes from "./pages/quizzes";
 import Quiz from "./pages/quiz";
 import Quiznew from "./pages/quiznew";
 import Reports from "./pages/reports";
+import Notfound from "./pages/notFound";
 
 //<---------- Roboto font ---------->
 import '@fontsource/roboto/300.css';
@@ -28,6 +29,7 @@ root.render(
             <Route path="/quiz" element={<Quiz/>}/>
             <Route path="/quiznew" element={<Quiznew/>}/>
             <Route path="/reports" element={<Reports/>}/>
+            <Route path="*" element={<Notfound/>}/>
         </Routes>
     </Router>
 );
