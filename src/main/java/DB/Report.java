@@ -14,10 +14,11 @@ import lombok.*;
 @AllArgsConstructor
 public class Report {
 
+
     @Id
     @GeneratedValue
     @Column
-    private int quizId;
+    private int id;
     @Column
     private String userId;
     @Column

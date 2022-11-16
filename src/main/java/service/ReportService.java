@@ -5,7 +5,9 @@ import DB.Report;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 @Produces(MediaType.APPLICATION_JSON)
@@ -13,12 +15,13 @@ import java.util.List;
 public class ReportService {
 
     List <String> score = Arrays.asList("36/60", "54/60");
-    List <Report> reports = Arrays.asList(
+    static List <Report> reports = new LinkedList<>(Arrays.asList(
             new Report(40, "Melman", "40","60","Matematik"),
-            new Report(40, "Melman2", "43","60","Matematik"))
-            ;
+            new Report(40, "Melman2", "43","60","Matematik")));
+
+
     public void addItem(){
-        reports.add(reports.get(0));
+        reports.add(new Report(55, "Marius", "60","60","Matematik"));
     }
     @GET
     public List<String> Score() {
@@ -27,7 +30,9 @@ public class ReportService {
 
     @POST
     public void createReport(){
+        System.out.println(reports);
         addItem();
+        System.out.println(reports);
     }
 
     @Path("1")
@@ -35,21 +40,10 @@ public class ReportService {
     public List<Report> reports(){
         return reports;
     }
-    @Path("new")
+    @Path("bla")
     @GET
     public List<Report> score(){
         return reports;
     }
-    /*
-
-    public int createReport(Report report){
-        Session session = sessionFactory.openSession();
-        session.persist(report);
-        return report.getQuizId();
-    }
-
-     */
-
-
 
 }

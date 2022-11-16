@@ -5,6 +5,13 @@ import {scores} from "./ReportsFetcher";
 import {observable} from "mobx";
 
 
+//TODO: Tokens
+//TODO: Tests
+//TODO: Skal køre med backend
+//TODO: Skal køre rigtigt videre til de rigtige sider
+//TODO: Skal ikke hardcode tabellen (måske tage størrelse af tabel fra reportsfetcheren
+//TODO: Error codes
+
 function ReportsOverview() {
 
     let reportId = 'nan'
@@ -22,7 +29,7 @@ function ReportsOverview() {
      */
     const reports = scores.report.map((reportName,outer) =>
         <tr>
-            {Object.values(reportName).map((value, ) =>
+            {Object.values(reportName).map((value) =>
                 <td>
                     {value}
                 </td>
@@ -35,7 +42,11 @@ function ReportsOverview() {
      * Skabelon for at lave et  table for et objekt
      */
     const myListtable = observable(scores.scoresString.map((Scorename, key) =>
-        <tr> <td>Quiz {key+1} </td> <td> {Scorename} </td> <td onClick={e=> toReport(key)}> Se resultat </td> </tr>))
+        <tr>
+            <td>Quiz {key+1} </td>
+            <td> {Scorename} </td>
+            <td onClick={e=> toReport(key)}> Se resultat </td>
+        </tr>))
 
     const navigate = useNavigate()
 
@@ -75,17 +86,3 @@ function ReportsOverview() {
 }
 
 export default observer(ReportsOverview);
-
-/*
-            <div>
-                {Object.values(report).map((value, index) => {
-                    return (
-                        <div key={index}>
-                            <h2>{value}</h2>
-
-                            <hr />
-                        </div>
-                    );
-                })}
-            </div>
- */
