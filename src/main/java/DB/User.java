@@ -19,6 +19,14 @@ public class User {
     private int id;
     @Column
     private String username;
+    @Column
+    private String firstname;
+    @Column
+    private String lastname;
+    @Column
+    private String institutionName;
+    @Column
+    private int grade;
     @Column @Transient
     private String password;
     @Column @JsonIgnore
