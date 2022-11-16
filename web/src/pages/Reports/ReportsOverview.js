@@ -3,6 +3,9 @@ import {React} from "react";
 import {observer} from "mobx-react-lite";
 import {scores} from "./ReportsFetcher";
 import {observable} from "mobx";
+import {tokenStore} from "../../stores/TokenStore";
+import {Form} from "react-bootstrap";
+import Button from "@mui/material/Button";
 
 
 //TODO: Tokens
@@ -74,12 +77,15 @@ function ReportsOverview() {
                         <td>quizrigtige</td>
                         <td>userid</td>
                         <td>quizname</td>
-                        <td>Klik for at se resultater</td>
+                        <td onClick={toReport}>Klik for at se resultater</td>
                     </tr>
                     {reports}
                 </table>
             </div>
 
+            <div>
+                <button onClick={tokenStore.doLogin}> Tryk her </button>
+            </div>
         </div>
     );
 

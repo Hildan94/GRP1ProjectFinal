@@ -15,7 +15,7 @@ class TokenStore {
 
     doLogin() {
         this.state=Loginstates.LOGGING_IN;
-        fetch(baseUrl + "rest/login",{
+        fetch(baseUrl + "api/login",{
             method:"POST",
             body:JSON.stringify(this.logindata),
             headers: {
