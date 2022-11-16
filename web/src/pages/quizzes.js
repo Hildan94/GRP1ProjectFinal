@@ -1,5 +1,6 @@
 import {useNavigate} from "react-router-dom";
 import {React} from "react";
+import { Helmet } from 'react-helmet';
 
 function Quizzes() {
 
@@ -23,6 +24,9 @@ function Quizzes() {
 
     return (
         <div>
+            <Helmet>
+                <title>NEM Læringsplatform | Quiz</title>
+            </Helmet>
             <div>
                 <h1 onClick={toHome}> NEM Læringsplatform </h1>
             </div>

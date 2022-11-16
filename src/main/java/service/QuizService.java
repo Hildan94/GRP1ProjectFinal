@@ -1,40 +1,42 @@
 package service;
 
 import DB.HibernateController;
-import DB.User;
+import DB.Questions;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.criteria.JpaCriteriaQuery;
+
 import java.util.List;
 
+
 @Produces(MediaType.APPLICATION_JSON)
-@Path("users")
-public class UserService {
+@Path("quizzes")
+public class QuizService {
     private static final SessionFactory sessionFactory = new HibernateController("pgtest-db.caprover.grp1.diplomportal.dk:6543/pg").getSessionFactory();
 
     @POST
-    public int createUser(User user){
+    public int createQuestions(Questions questions){
         Session session = sessionFactory.openSession();
-        session.persist(user);
-        return user.getId();
+        session.persist(questions);
+        return questions.getId();
     }
+
     @GET
-    public List<User> getUsers(){
+    public List<Questions> getQuestions(){
         Session session = sessionFactory.openSession();
-        JpaCriteriaQuery<User> query = session.getCriteriaBuilder().createQuery(User.class);
-        query.from(User.class);
-        List<User> data = session.createQuery(query).getResultList();
+        JpaCriteriaQuery<Questions> query = session.getCriteriaBuilder().createQuery(Questions.class);
+        query.from(Questions.class);
+        List<Questions> data = session.createQuery(query).getResultList();
         return data;
     }
 
     @GET
     @Path("query")
-    public List<User> queryUsers(@QueryParam("name") String name) throws NoImplementationException {
+    public List<Questions> queryQuestions(@QueryParam("question") String question) throws NoImplementationException {
         //No implementation yet
-        throw new NoImplementationException("user-queries not implemented yet");
+        throw new NoImplementationException("question-queries not implemented yet");
     }
 }
-
 

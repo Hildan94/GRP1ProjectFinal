@@ -1,5 +1,7 @@
 import {useNavigate} from "react-router-dom";
 import {React} from "react";
+import { Helmet } from 'react-helmet';
+import OutlinedCard from "../Backend/Quiz_card";
 
 function Quiznew() {
 
@@ -15,23 +17,18 @@ function Quiznew() {
 
     return (
         <div>
+            <Helmet>
+                <title>NEM Læringsplatform | Opret quiz</title>
+            </Helmet>
             <div>
                 <h1 onClick={toHome}> NEM Læringsplatform </h1>
             </div>
+
             <div>
                 <h1> VALGT FAG </h1>
-                <h2> Indtast spørgsmål</h2>
+                <OutlinedCard />
             </div>
-            <div>
-                <h3> Spørgsmål 1</h3>
-                <h4> Udfyld data om spm 1</h4>
-                <h3> Spørgsmål 2</h3>
-                <h4> Udfyld data om spm 2</h4>
-                <h3> Spørgsmål 3</h3>
-                <h4> Udfyld data om spm 3</h4>
-                <h3> Spørgsmål 4</h3>
-                <h4> Udfyld data om spm 4</h4>
-            </div>
+
             <div>
                 <button onClick={toQuizzes}>Opret quiz</button>
             </div>
