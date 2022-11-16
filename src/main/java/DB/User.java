@@ -10,9 +10,10 @@ import lombok.*;
 @Setter
 @Builder
 @ToString
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 @AllArgsConstructor
 public class User {
+
 
     @Id @GeneratedValue
     @Column
@@ -24,5 +25,14 @@ public class User {
     @Column @JsonIgnore
     private String hash;
 
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+
+    }
+
+    public User(){
+    }
 }
 

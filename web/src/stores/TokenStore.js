@@ -1,4 +1,4 @@
-import {decorate, observable} from "mobx";
+import {makeAutoObservable} from "mobx";
 const baseUrl = process.env.NODE_ENV === 'development' ?  "http://localhost:8080/":""; //Check if dev
 
 const Loginstates = {LOGGING_IN:"Loading", LOGGEDOUT:"Logout", LOGGED_IN:"LoggedIn"};
@@ -9,6 +9,7 @@ class TokenStore {
 
     constructor() {
         this.token = localStorage.getItem("girafToken")
+        makeAutoObservable(this)
         //Validate if token is still good and keep/discard token and set state
     }
 
@@ -34,12 +35,15 @@ class TokenStore {
     }
 }
 
-
+/*
 decorate(TokenStore,{
     state: observable,
     token: observable,
     logindata:observable
 
 });
+ */
+
+
 
 export const tokenStore = new TokenStore();
