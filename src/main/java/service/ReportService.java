@@ -1,14 +1,14 @@
 package service;
 
 
+import DB.HibernateController;
 import DB.Report;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 @Produces(MediaType.APPLICATION_JSON)
 @Path("reports")
@@ -40,10 +40,24 @@ public class ReportService {
     public List<Report> reports(){
         return reports;
     }
+
     @Path("bla")
     @GET
-    public List<Report> score(){
-        return reports;
+    public List<Report> score() {
+        HibernateController hibernateController =
+                new HibernateController("pgtest-db.caprover.grp1.diplomportal.dk:6543/pg");
+        SessionFactory sessionFactory = hibernateController.getSessionFactory();
+        Session session = sessionFactory.openSession();
+
+        List reports = session.createQuery(" FROM Report ").list();
+
+        for (Iterator iterator = reports.iterator(); iterator.hasNext(); ) {
+            Report report = (Report) iterator.next();
+
+            System.out.println(report);
+
+        }
+            return reports;
     }
 
 }

@@ -15,6 +15,10 @@ import Button from "@mui/material/Button";
 //TODO: Skal ikke hardcode tabellen (måske tage størrelse af tabel fra reportsfetcheren
 //TODO: Error codes
 
+/**
+ * Tror bare at tokens skal have nogle login data og så virker de
+ */
+
 function ReportsOverview() {
 
     let reportId = 'nan'
@@ -77,7 +81,7 @@ function ReportsOverview() {
                         <td>quizrigtige</td>
                         <td>userid</td>
                         <td>quizname</td>
-                        <td onClick={toReport}>Klik for at se resultater</td>
+                        <td>Klik for at se resultater</td>
                     </tr>
                     {reports}
                 </table>

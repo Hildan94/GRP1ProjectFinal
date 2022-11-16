@@ -5,7 +5,8 @@ const Loginstates = {LOGGING_IN:"Loading", LOGGEDOUT:"Logout", LOGGED_IN:"Logged
 class TokenStore {
     state = Loginstates.LOGGEDOUT;
     token = null;
-    logindata = {username:"",password:""};
+    logindata = {username: "", password: ""};
+    states;
 
     constructor() {
         this.token = localStorage.getItem("girafToken")
@@ -14,26 +15,41 @@ class TokenStore {
     }
 
     doLogin() {
-        this.state=Loginstates.LOGGING_IN;
-        fetch(baseUrl + "api/login",{
-            method:"POST",
-            body:JSON.stringify(this.logindata),
+        this.state = Loginstates.LOGGING_IN;
+        fetch(baseUrl + "api/login", {
+            method: "POST",
+            body: JSON.stringify(this.logindata),
             headers: {
                 'Content-Type': 'application/json'
             }
         }).then(
-            (response)=> {
+            (response) => {
                 response.text().then(
-                    (token)=> {
+                    (token) => {
                         console.log("Got Token: " + token)
-                        this.token=token;
-                        localStorage.setItem("girafToken",token);
-                        this.state=Loginstates.LOGGED_IN;}
+                        this.token = token;
+                        localStorage.setItem("girafToken", token);
+                        this.state = Loginstates.LOGGED_IN;
+                    }
+                )
+            }
+        ).catch(() => this.state = Loginstates.LOGGEDOUT)
+    }
 
-                )}
-        ).catch(()=>this.state = Loginstates.LOGGEDOUT )
+    /**
+     * //TODO: Implement
+     */
+    fetchUsers() {
+        const token = this.token;
+        this.loading = this.states.LOADING;
+        fetch(baseUrl + "api/users", {
+            headers: {
+                Authorization: token
+            }
+        }).then(/*....*/)
     }
 }
+
 
 /*
 decorate(TokenStore,{

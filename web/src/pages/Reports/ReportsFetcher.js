@@ -25,7 +25,7 @@ class ReportsFetcher {
     }
 
     fetchReport(){
-        fetch(baseUrl + "api/reports/1").then(
+        fetch(baseUrl + "api/reports/bla").then(
             (response) => response.json().then(
                 (json) => runInAction(() => this.report = json)
             )
