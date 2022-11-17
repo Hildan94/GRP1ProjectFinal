@@ -77,10 +77,10 @@ function ReportsOverview() {
                     <td colSpan={6} align={"center"}>Matematik</td>
                     <tr>
                         <td>quizId</td>
+                        <td>quizname</td>
                         <td>quizresultat</td>
                         <td>quizrigtige</td>
                         <td>userid</td>
-                        <td>quizname</td>
                         <td>Klik for at se resultater</td>
                     </tr>
                     {reports}

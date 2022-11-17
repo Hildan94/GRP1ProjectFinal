@@ -14,6 +14,7 @@ import service.exceptions.NotAuthorizedException;
 @Consumes(MediaType.APPLICATION_JSON)
 public class LoginService {
 
+    //TODO: Needs validate user from DB
     @POST
     public String postLoginData(LoginData login) throws NotAuthorizedException {
 

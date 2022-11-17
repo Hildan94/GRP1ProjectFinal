@@ -9,11 +9,14 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.criteria.JpaCriteriaQuery;
 import service.exceptions.NoImplementationException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Produces(MediaType.APPLICATION_JSON)
 @Path("users")
 public class UserService {
+
+    List<User> users = new ArrayList<>();
     private static final SessionFactory sessionFactory = new HibernateController("pgtest-db.caprover.grp1.diplomportal.dk:6543/pg").getSessionFactory();
 
     @POST
@@ -22,14 +25,31 @@ public class UserService {
         session.persist(user);
         return user.getId();
     }
+
+    //TODO: Finish this
     @GET
-    public List<User> getUsers(){
-        Session session = sessionFactory.openSession();
-        JpaCriteriaQuery<User> query = session.getCriteriaBuilder().createQuery(User.class);
-        query.from(User.class);
-        List<User> data = session.createQuery(query).getResultList();
-        return data;
-    }
+        public List<User> getUsers (@HeaderParam("Authorization") String authHeader){
+            System.out.println(authHeader + " Something");
+            User user = JWTHandler.validate(authHeader);
+            System.out.println("User accessing users: " + user);
+
+            /*
+            Session session = sessionFactory.openSession();
+            JpaCriteriaQuery<User> query = session.getCriteriaBuilder().createQuery(User.class);
+            query.from(User.class);
+            List<User> users = session.createQuery(query).getResultList();
+
+             */
+
+            return users; //TODO implement some users…
+
+
+        }
+
+
+
+
+
 
     @GET
     @Path("query")

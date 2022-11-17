@@ -20,11 +20,11 @@ public class Report {
     @Column
     private int id;
     @Column
-    private String userId;
-    @Column
-    private String quizRightResults;
+    private String quizName;
     @Column
     private String quizResultTotalQuestions;
     @Column
-    private String quizName;
+    private String quizRightResults;
+    @Column
+    private String userId;
 }
