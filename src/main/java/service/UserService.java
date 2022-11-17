@@ -6,7 +6,9 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.query.criteria.JpaCriteriaQuery;
+import org.mindrot.jbcrypt.BCrypt;
 import service.exceptions.NoImplementationException;
 
 import java.util.ArrayList;
@@ -19,10 +21,16 @@ public class UserService {
     List<User> users = new ArrayList<>();
     private static final SessionFactory sessionFactory = new HibernateController("pgtest-db.caprover.grp1.diplomportal.dk:6543/pg").getSessionFactory();
 
+    //TODO: Need to implement password hashing right place
     @POST
     public int createUser(User user){
         Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        String hash = BCrypt.hashpw(user.getPassword(),BCrypt.gensalt());
+        user.setHash(hash);
         session.persist(user);
+        transaction.commit();
+
         return user.getId();
     }
 

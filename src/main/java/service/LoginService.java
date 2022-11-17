@@ -7,6 +7,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
+import org.mindrot.jbcrypt.BCrypt;
 import service.exceptions.NotAuthorizedException;
 
 @Path("login")
@@ -17,6 +18,13 @@ public class LoginService {
     //TODO: Needs validate user from DB
     @POST
     public String postLoginData(LoginData login) throws NotAuthorizedException {
+
+        String hashed = BCrypt.hashpw(login.getPassword(),BCrypt.gensalt());
+
+        if (BCrypt.checkpw(login.getPassword(),hashed)){
+            System.out.println("It matches");
+        }else
+            System.out.println("It doesnt match");
 
 
         if (login != null && "brian".equals(login.getUsername()) && "kodeord".equals(login.getPassword())){
