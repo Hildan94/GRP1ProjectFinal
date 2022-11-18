@@ -60,7 +60,7 @@ class TokenStore {
     }
 
     /**
-     * //TODO: Implement
+     * //TODO: Implement if needed
      */
     fetchUsers() {
         const token = this.token;

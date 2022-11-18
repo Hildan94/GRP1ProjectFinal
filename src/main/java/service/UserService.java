@@ -16,18 +16,20 @@ import java.util.List;
 
 @Produces(MediaType.APPLICATION_JSON)
 @Path("users")
+
+//TODO: Need to handle validation exceptions
+//TODO: Figure out how JWTHandler works
 public class UserService {
 
     List<User> users = new ArrayList<>();
     private static final SessionFactory sessionFactory = new HibernateController("pgtest-db.caprover.grp1.diplomportal.dk:6543/pg").getSessionFactory();
     @POST
-    public int createUser(User user){
+    public int createUser(User user, @HeaderParam("Authorization") String token){
+        User validated = JWTHandler.validate(token);
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        String salt = BCrypt.gensalt();
-        String hash = BCrypt.hashpw(user.getPassword(),salt);
+        String hash = BCrypt.hashpw(user.getPassword(),BCrypt.gensalt());
         user.setHash(hash);
-        user.setSalt(salt);
         session.persist(user);
         transaction.commit();
 
@@ -47,7 +49,6 @@ public class UserService {
             JpaCriteriaQuery<User> query = session.getCriteriaBuilder().createQuery(User.class);
             query.from(User.class);
             List<User> users = session.createQuery(query).getResultList();
-
 
 
             return users; //TODO implement some users…

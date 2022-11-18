@@ -38,7 +38,7 @@ public class ReportService {
     @GET
     public List<Report> reports(@HeaderParam("Authorization") String token){
         User user = JWTHandler.validate(token);
-        System.out.println(user);
+
         HibernateController hibernateController =
                 new HibernateController("pgtest-db.caprover.grp1.diplomportal.dk:6543/pg");
         SessionFactory sessionFactory = hibernateController.getSessionFactory();
@@ -49,7 +49,6 @@ public class ReportService {
         for (Iterator iterator = reports.iterator(); iterator.hasNext(); ) {
 
             Report report = (Report) iterator.next();
-            System.out.println(report);
         }
         return reports;
     }

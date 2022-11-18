@@ -24,8 +24,6 @@ public class User {
     private String password;
     @Column @JsonIgnore
     private String hash;
-    @Column @JsonIgnore
-    private String salt;
 
     public User(String username, String password) {
         this.username = username;

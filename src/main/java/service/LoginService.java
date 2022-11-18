@@ -3,11 +3,14 @@ package service;
 import DB.HibernateController;
 import DB.User;
 import DB.LoginData;
+import com.auth0.jwt.exceptions.JWTDecodeException;
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
+import lombok.extern.java.Log;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.criteria.JpaCriteriaQuery;
@@ -26,7 +29,6 @@ public class LoginService {
 
     @POST
     public String postLoginData(LoginData login) throws NotAuthorizedException {
-
 
         Session session = sessionFactory.openSession();
         JpaCriteriaQuery<User> query = session.getCriteriaBuilder().createQuery(User.class);
