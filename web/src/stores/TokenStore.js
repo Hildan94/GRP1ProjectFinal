@@ -11,7 +11,7 @@ const Loginstates = {LOGGING_IN:"Loading", LOGGEDOUT:"Logout", LOGGED_IN:"Logged
 class TokenStore {
     state = Loginstates.LOGGEDOUT;
     token = null;
-    logindata = {username: "brian", password: "kodeord"};
+    logindata = {username: "Troels", password: "Superkodeord"};
     states;
 
     constructor() {

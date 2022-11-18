@@ -24,8 +24,6 @@ import java.util.Objects;
 public class LoginService {
     private static final SessionFactory sessionFactory = new HibernateController("pgtest-db.caprover.grp1.diplomportal.dk:6543/pg").getSessionFactory();
 
-    //TODO: Needs validate user from DB
-    //TODO: For some reason kan jeg ikke få kodeordene til at matche..
     @POST
     public String postLoginData(LoginData login) throws NotAuthorizedException {
 
@@ -36,17 +34,10 @@ public class LoginService {
         List<User> users = session.createQuery(query).getResultList();
 
         for(User user : users){
-            //TODO: Indsæt check for kodeord og brugernavn her (dette virker ikke)
             if (BCrypt.checkpw(login.getPassword(),user.getHash())){
-                //TODO: Should return token if true
-                System.out.println("A match has been found");
+                return JWTHandler.generateJwtToken(new User(login.getUsername(), ""));
             }
-        }
-
-        if (login != null && "brian".equals(login.getUsername()) && "kodeord".equals(login.getPassword())){
-            return JWTHandler.generateJwtToken(new User(login.getUsername(), ""));
-        }
-        throw new NotAuthorizedException("forkert brugernavn/kodeord");
+        }throw new NotAuthorizedException("forkert brugernavn/kodeord");
     }
 
     @POST

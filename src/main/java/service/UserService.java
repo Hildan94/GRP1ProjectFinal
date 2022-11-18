@@ -20,8 +20,6 @@ public class UserService {
 
     List<User> users = new ArrayList<>();
     private static final SessionFactory sessionFactory = new HibernateController("pgtest-db.caprover.grp1.diplomportal.dk:6543/pg").getSessionFactory();
-
-    //TODO: Need to implement password hashing right place
     @POST
     public int createUser(User user){
         Session session = sessionFactory.openSession();
@@ -56,11 +54,6 @@ public class UserService {
 
 
         }
-
-
-
-
-
 
     @GET
     @Path("query")
