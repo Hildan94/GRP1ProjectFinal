@@ -5,7 +5,7 @@ const Loginstates = {LOGGING_IN:"Loading", LOGGEDOUT:"Logout", LOGGED_IN:"Logged
 class TokenStore {
     state = Loginstates.LOGGEDOUT;
     token = null;
-    logindata = {username: "", password: ""};
+    logindata = {username: "brian", password: "kodeord"};
     states;
 
     constructor() {
@@ -14,10 +14,11 @@ class TokenStore {
         //Validate if token is still good and keep/discard token and set state
     }
 
-    doLogin() {
-        this.state = Loginstates.LOGGING_IN;
-        fetch(baseUrl + "api/login", {
-            method: "POST",
+
+    doLogin= ()=> {
+        this.state =  Loginstates.LOGGING_IN;
+        fetch(baseUrl + 'api/login', {
+            method: 'POST',
             body: JSON.stringify(this.logindata),
             headers: {
                 'Content-Type': 'application/json'

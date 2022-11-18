@@ -14,7 +14,7 @@ import Button from "@mui/material/Button";
 //TODO: Skal køre rigtigt videre til de rigtige sider
 //TODO: Skal ikke hardcode tabellen (måske tage størrelse af tabel fra reportsfetcheren
 //TODO: Error codes
-
+//TODO: Fix error messages
 /**
  * Tror bare at tokens skal have nogle login data og så virker de
  */
@@ -75,20 +75,21 @@ function ReportsOverview() {
             <div>
                 <table>
                     <td colSpan={6} align={"center"}>Matematik</td>
-                    <tr>
+                    <tr></tr>
                         <td>quizId</td>
                         <td>quizname</td>
                         <td>quizresultat</td>
                         <td>quizrigtige</td>
                         <td>userid</td>
                         <td>Klik for at se resultater</td>
-                    </tr>
+
                     {reports}
                 </table>
             </div>
 
             <div>
-                <button onClick={tokenStore.doLogin}> Tryk her </button>
+                <button onClick={tokenStore.doLogin}> {tokenStore.state} </button>
+
             </div>
         </div>
     );
