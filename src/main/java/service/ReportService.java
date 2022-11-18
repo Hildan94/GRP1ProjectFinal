@@ -3,6 +3,7 @@ package service;
 
 import DB.HibernateController;
 import DB.Report;
+import DB.User;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import org.hibernate.Session;
@@ -15,9 +16,7 @@ import java.util.*;
 public class ReportService {
 
     List <String> score = Arrays.asList("36/60", "54/60");
-    static List <Report> reports = new LinkedList<>(Arrays.asList(
-            new Report(40, "Melman", "40","60","Matematik"),
-            new Report(40, "Melman2", "43","60","Matematik")));
+    static List <Report> reports = new LinkedList<>(Arrays.asList());
 
 
     public void addItem(){
@@ -35,11 +34,29 @@ public class ReportService {
         System.out.println(reports);
     }
 
-    @Path("1")
+    @Path("test")
     @GET
-    public List<Report> reports(){
+    public List<Report> reports(@HeaderParam("Authorization") String token){
+        User user = JWTHandler.validate(token);
+        System.out.println(user);
+        HibernateController hibernateController =
+                new HibernateController("pgtest-db.caprover.grp1.diplomportal.dk:6543/pg");
+        SessionFactory sessionFactory = hibernateController.getSessionFactory();
+        Session session = sessionFactory.openSession();
+
+        List reports = session.createQuery("FROM Report").list();
+
+        for (Iterator iterator = reports.iterator(); iterator.hasNext(); ) {
+
+            Report report = (Report) iterator.next();
+            System.out.println(report);
+        }
         return reports;
     }
+
+    /**
+     * Returs Report from db without requiring token
+     */
 
     @Path("bla")
     @GET
@@ -49,7 +66,7 @@ public class ReportService {
         SessionFactory sessionFactory = hibernateController.getSessionFactory();
         Session session = sessionFactory.openSession();
 
-        List reports = session.createQuery(" FROM Report ").list();
+        List reports = session.createQuery("FROM Report").list();
 
         for (Iterator iterator = reports.iterator(); iterator.hasNext(); ) {
             Report report = (Report) iterator.next();

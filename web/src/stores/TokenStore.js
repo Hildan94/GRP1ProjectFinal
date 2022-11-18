@@ -21,7 +21,7 @@ class TokenStore {
     }
 
 
-    doLogin= ()=> {
+    doLogin = ()=> {
         this.state =  Loginstates.LOGGING_IN;
         fetch(baseUrl + 'api/login', {
             method: 'POST',
@@ -41,6 +41,22 @@ class TokenStore {
                 )
             }
         ).catch(() => this.state = Loginstates.LOGGEDOUT)
+    }
+
+
+    /**
+     * Check hvad der skal være i .then
+     */
+    checkToken = ()=> {
+        fetch(baseUrl + 'api/login/tokentest', {
+            method: 'POST',
+            headers: {
+                Authorization : this.token
+            }
+
+        }).then(r => {
+
+        })
     }
 
     /**

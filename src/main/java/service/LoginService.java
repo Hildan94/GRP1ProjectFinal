@@ -35,7 +35,7 @@ public class LoginService {
 
     @POST
     @Path("tokentest")
-    public User postToken(String token){
+    public User postToken(@HeaderParam("Authorization") String token){
         User validate = JWTHandler.validate(token);
         return  validate;
     }

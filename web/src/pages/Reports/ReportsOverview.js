@@ -21,12 +21,16 @@ import Button from "@mui/material/Button";
 
 function ReportsOverview() {
 
-    let reportId = 'nan'
-
     function toReport(key){
-        let temp = key+1
-        reportId = temp.toString()
-        navigate('report/' + key.toString())
+        navigate('report/' + (key+1).toString())
+    }
+
+    function printToken(){
+        console.log(localStorage.getItem('girafToken'))
+    }
+
+    function clearToken(){
+        localStorage.removeItem('girafToken')
     }
 
     /**
@@ -46,7 +50,7 @@ function ReportsOverview() {
     )
 
     /**
-     * Skabelon for at lave et  table for et objekt
+     * Skabelon for at lave et table for et objekt
      */
     const myListtable = observable(scores.scoresString.map((Scorename, key) =>
         <tr>
@@ -60,6 +64,10 @@ function ReportsOverview() {
     const toHome = () => {
         navigate('/home')
     }
+
+    /**
+     * Overflødige knapper skal fjernes
+     */
 
     return (
         <div>
@@ -89,6 +97,9 @@ function ReportsOverview() {
 
             <div>
                 <button onClick={tokenStore.doLogin}> {tokenStore.state} </button>
+                <button onClick={scores.fetchReport}> Tryk for at indlæse værdier </button>
+                <button onClick={printToken}> Print token </button>
+                <button onClick={clearToken}> Ryd token </button>
             </div>
         </div>
     );

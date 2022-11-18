@@ -25,11 +25,18 @@ class ReportsFetcher {
     }
 
     fetchReport(){
-        fetch(baseUrl + "api/reports/bla").then(
+        fetch(baseUrl + "api/reports/test",{
+            method: 'GET',
+            headers :{
+                Authorization : localStorage.getItem('girafToken')
+            }
+        })
+            .then(
             (response) => response.json().then(
                 (json) => runInAction(() => this.report = json)
             )
         )
+
     }
 
     addSomething(something){
