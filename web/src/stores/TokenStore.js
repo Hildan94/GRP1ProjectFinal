@@ -15,7 +15,7 @@ class TokenStore {
     states;
 
     constructor() {
-        this.token = localStorage.getItem("girafToken")
+        this.token = localStorage.getItem("userToken")
         makeAutoObservable(this)
         //Validate if token is still good and keep/discard token and set state
     }
@@ -35,7 +35,7 @@ class TokenStore {
                     (token) => {
                         console.log("Got Token: " + token)
                         this.token = token;
-                        localStorage.setItem("girafToken", token);
+                        localStorage.setItem("userToken", token);
                         this.state = Loginstates.LOGGED_IN;
                     }
                 )

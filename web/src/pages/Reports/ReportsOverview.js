@@ -26,11 +26,11 @@ function ReportsOverview() {
     }
 
     function printToken(){
-        console.log(localStorage.getItem('girafToken'))
+        console.log(localStorage.getItem('userToken'))
     }
 
     function clearToken(){
-        localStorage.removeItem('girafToken')
+        localStorage.removeItem('userToken')
     }
 
     /**

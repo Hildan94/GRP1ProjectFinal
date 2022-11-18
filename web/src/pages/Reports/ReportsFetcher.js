@@ -12,7 +12,7 @@ class ReportsFetcher {
     constructor() {
         makeAutoObservable(this,{},{autoBind:true});
         this.fetchReport();
-        this.fetchReport();
+        this.fetchReports();
     }
 
 
@@ -20,7 +20,7 @@ class ReportsFetcher {
         fetch(baseUrl + "api/reports/test",{
             method: 'GET',
             headers :{
-                Authorization : localStorage.getItem('girafToken')
+                Authorization : localStorage.getItem('userToken')
             }
         })
             .then(
@@ -39,9 +39,8 @@ class ReportsFetcher {
         fetch(baseUrl + "api/reports/" + key,{
             method: 'GET',
             headers :{
-                Authorization : localStorage.getItem('girafToken')
-            },
-            body : JSON.stringify(key)
+                Authorization : localStorage.getItem('userToken')
+            }
         })
             .then(
             (response) => response.json().then(
