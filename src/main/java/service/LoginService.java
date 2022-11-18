@@ -36,7 +36,11 @@ public class LoginService {
         List<User> users = session.createQuery(query).getResultList();
 
         for(User user : users){
-            //TODO: Indsæt check for kodeord og brugernavn her
+            //TODO: Indsæt check for kodeord og brugernavn her (dette virker ikke)
+            if (BCrypt.checkpw(login.getPassword(),user.getHash())){
+                //TODO: Should return token if true
+                System.out.println("A match has been found");
+            }
         }
 
         if (login != null && "brian".equals(login.getUsername()) && "kodeord".equals(login.getPassword())){
