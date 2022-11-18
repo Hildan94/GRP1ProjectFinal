@@ -20,7 +20,7 @@ public class JWTHandler {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             String s = objectMapper.writer().writeValueAsString(user);
-            return JWT.create().withIssuer("GiraffeDeluxe").withClaim("user", s).withExpiresAt(expiry.getTime()).sign(Algorithm.HMAC512(key));
+            return JWT.create().withIssuer("Server").withClaim("user", s).withExpiresAt(expiry.getTime()).sign(Algorithm.HMAC512(key));
         }
         catch (JsonProcessingException e) {
             throw new RuntimeException(e);

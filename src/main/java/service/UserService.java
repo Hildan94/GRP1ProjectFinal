@@ -16,14 +16,16 @@ import java.util.List;
 
 @Produces(MediaType.APPLICATION_JSON)
 @Path("users")
+
+//TODO: Need to handle validation exceptions
+//TODO: Figure out how JWTHandler works
 public class UserService {
 
     List<User> users = new ArrayList<>();
     private static final SessionFactory sessionFactory = new HibernateController("pgtest-db.caprover.grp1.diplomportal.dk:6543/pg").getSessionFactory();
-
-    //TODO: Need to implement password hashing right place
     @POST
-    public int createUser(User user){
+    public int createUser(User user, @HeaderParam("Authorization") String token){
+        User validated = JWTHandler.validate(token);
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         String hash = BCrypt.hashpw(user.getPassword(),BCrypt.gensalt());
@@ -34,6 +36,7 @@ public class UserService {
         return user.getId();
     }
 
+
     //TODO: Finish this
     @GET
         public List<User> getUsers (@HeaderParam("Authorization") String authHeader){
@@ -41,23 +44,17 @@ public class UserService {
             User user = JWTHandler.validate(authHeader);
             System.out.println("User accessing users: " + user);
 
-            /*
+
             Session session = sessionFactory.openSession();
             JpaCriteriaQuery<User> query = session.getCriteriaBuilder().createQuery(User.class);
             query.from(User.class);
             List<User> users = session.createQuery(query).getResultList();
 
-             */
 
             return users; //TODO implement some users…
 
 
         }
-
-
-
-
-
 
     @GET
     @Path("query")

@@ -1,36 +1,45 @@
 package service;
 
+import DB.HibernateController;
 import DB.User;
 import DB.LoginData;
+import com.auth0.jwt.exceptions.JWTDecodeException;
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
+import lombok.extern.java.Log;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.criteria.JpaCriteriaQuery;
 import org.mindrot.jbcrypt.BCrypt;
 import service.exceptions.NotAuthorizedException;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @Path("login")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class LoginService {
+    private static final SessionFactory sessionFactory = new HibernateController("pgtest-db.caprover.grp1.diplomportal.dk:6543/pg").getSessionFactory();
 
-    //TODO: Needs validate user from DB
     @POST
     public String postLoginData(LoginData login) throws NotAuthorizedException {
 
-        String hashed = BCrypt.hashpw(login.getPassword(),BCrypt.gensalt());
+        Session session = sessionFactory.openSession();
+        JpaCriteriaQuery<User> query = session.getCriteriaBuilder().createQuery(User.class);
+        query.from(User.class);
+        List<User> users = session.createQuery(query).getResultList();
 
-        if (BCrypt.checkpw(login.getPassword(),hashed)){
-            System.out.println("It matches");
-        }else
-            System.out.println("It doesnt match");
-
-
-        if (login != null && "brian".equals(login.getUsername()) && "kodeord".equals(login.getPassword())){
-            return JWTHandler.generateJwtToken(new User(login.getUsername(), ""));
-        }
-        throw new NotAuthorizedException("forkert brugernavn/kodeord");
+        for(User user : users){
+            if (login.getUsername().equals(user.getUsername()) && BCrypt.checkpw(login.getPassword(),user.getHash())){
+                return JWTHandler.generateJwtToken(user);
+            }
+        }throw new NotAuthorizedException("forkert brugernavn/kodeord");
     }
 
     @POST

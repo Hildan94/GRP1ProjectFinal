@@ -11,11 +11,11 @@ const Loginstates = {LOGGING_IN:"Loading", LOGGEDOUT:"Logout", LOGGED_IN:"Logged
 class TokenStore {
     state = Loginstates.LOGGEDOUT;
     token = null;
-    logindata = {username: "brian", password: "kodeord"};
+    logindata = {username: "Troels", password: "Superkodeord"};
     states;
 
     constructor() {
-        this.token = localStorage.getItem("girafToken")
+        this.token = localStorage.getItem("userToken")
         makeAutoObservable(this)
         //Validate if token is still good and keep/discard token and set state
     }
@@ -35,7 +35,7 @@ class TokenStore {
                     (token) => {
                         console.log("Got Token: " + token)
                         this.token = token;
-                        localStorage.setItem("girafToken", token);
+                        localStorage.setItem("userToken", token);
                         this.state = Loginstates.LOGGED_IN;
                     }
                 )
@@ -60,7 +60,7 @@ class TokenStore {
     }
 
     /**
-     * //TODO: Implement
+     * //TODO: Implement if needed
      */
     fetchUsers() {
         const token = this.token;
