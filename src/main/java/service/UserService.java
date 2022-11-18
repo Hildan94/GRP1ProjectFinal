@@ -26,13 +26,16 @@ public class UserService {
     public int createUser(User user){
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        String hash = BCrypt.hashpw(user.getPassword(),BCrypt.gensalt());
+        String salt = BCrypt.gensalt();
+        String hash = BCrypt.hashpw(user.getPassword(),salt);
         user.setHash(hash);
+        user.setSalt(salt);
         session.persist(user);
         transaction.commit();
 
         return user.getId();
     }
+
 
     //TODO: Finish this
     @GET
@@ -41,13 +44,13 @@ public class UserService {
             User user = JWTHandler.validate(authHeader);
             System.out.println("User accessing users: " + user);
 
-            /*
+
             Session session = sessionFactory.openSession();
             JpaCriteriaQuery<User> query = session.getCriteriaBuilder().createQuery(User.class);
             query.from(User.class);
             List<User> users = session.createQuery(query).getResultList();
 
-             */
+
 
             return users; //TODO implement some users…
 
