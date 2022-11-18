@@ -36,8 +36,8 @@ public class LoginService {
         List<User> users = session.createQuery(query).getResultList();
 
         for(User user : users){
-            if (BCrypt.checkpw(login.getPassword(),user.getHash())){
-                return JWTHandler.generateJwtToken(new User(login.getUsername(), ""));
+            if (login.getUsername().equals(user.getUsername()) && BCrypt.checkpw(login.getPassword(),user.getHash())){
+                return JWTHandler.generateJwtToken(user);
             }
         }throw new NotAuthorizedException("forkert brugernavn/kodeord");
     }
