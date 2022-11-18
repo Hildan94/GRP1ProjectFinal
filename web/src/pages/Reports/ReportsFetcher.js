@@ -11,7 +11,7 @@ class ReportsFetcher {
 
     constructor() {
         makeAutoObservable(this,{},{autoBind:true});
-        this.fetchReport();
+        //this.fetchReport();
         this.fetchReports();
     }
 
@@ -32,7 +32,7 @@ class ReportsFetcher {
 
     /**
      * Skal gå videre til den rigtige rapport og se resultater
-     * //TODO: Implement this
+     * //TODO: Implement this and FIIIX
      */
 
     fetchReport(key){
