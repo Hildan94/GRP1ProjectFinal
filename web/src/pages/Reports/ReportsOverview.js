@@ -45,19 +45,10 @@ function ReportsOverview() {
                     {value}
                 </td>
         )}
-            <td onClick={e=>toReport(outer)}> Se resultat </td>
+            <td onClick={e=>scores.fetchReport(outer)}> Se resultat </td>
         </tr>
     )
 
-    /**
-     * Skabelon for at lave et table for et objekt
-     */
-    const myListtable = observable(scores.scoresString.map((Scorename, key) =>
-        <tr>
-            <td>Quiz {key+1} </td>
-            <td> {Scorename} </td>
-            <td onClick={e=> toReport(key)}> Se resultat </td>
-        </tr>))
 
     const navigate = useNavigate()
 
@@ -97,7 +88,7 @@ function ReportsOverview() {
 
             <div>
                 <button onClick={tokenStore.doLogin}> {tokenStore.state} </button>
-                <button onClick={scores.fetchReport}> Tryk for at indlæse værdier </button>
+                <button onClick={scores.fetchReports}> Tryk for at indlæse værdier </button>
                 <button onClick={printToken}> Print token </button>
                 <button onClick={clearToken}> Ryd token </button>
             </div>

@@ -11,25 +11,37 @@ class ReportsFetcher {
 
     constructor() {
         makeAutoObservable(this,{},{autoBind:true});
-        this.fetchString();
+        this.fetchReport();
         this.fetchReport();
     }
 
 
-    fetchString() {
-        fetch(baseUrl + "api/reports").then(
-            (response) => response.json().then(
-                (json) => runInAction(() => this.scoresString= json)
-            )
-        )
-    }
-
-    fetchReport(){
+    fetchReports() {
         fetch(baseUrl + "api/reports/test",{
             method: 'GET',
             headers :{
                 Authorization : localStorage.getItem('girafToken')
             }
+        })
+            .then(
+                (response) => response.json().then(
+                    (json) => runInAction(() => this.report = json)
+                )
+            )
+    }
+
+    /**
+     * Skal gå videre til den rigtige rapport og se resultater
+     * //TODO: Implement this
+     */
+
+    fetchReport(key){
+        fetch(baseUrl + "api/reports/" + key,{
+            method: 'GET',
+            headers :{
+                Authorization : localStorage.getItem('girafToken')
+            },
+            body : JSON.stringify(key)
         })
             .then(
             (response) => response.json().then(
