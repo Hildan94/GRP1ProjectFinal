@@ -89,7 +89,6 @@ function ReportsOverview() {
 
             <div>
                 <button onClick={tokenStore.doLogin}> {tokenStore.state} </button>
-
             </div>
         </div>
     );
