@@ -122,8 +122,14 @@ function Quiz() {
     }
 
     const toNextQuestion = () => {
+        if (active1 === active2 === active3 === active4) { // no answer selected, so go no further (or string of answers will break).
+            alert("Please select answer");
+            return;
+        }
+
         paramQuestionId++;
         navigate(currPath.slice(0, -3) + paramQuestionId)
+
         //reset selected question
         setActive1(false);
         setActive2(false);
