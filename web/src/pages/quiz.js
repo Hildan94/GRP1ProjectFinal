@@ -4,7 +4,7 @@ import {Helmet} from 'react-helmet';
 import logo from "./../image/NEM_logo_noBackground2.png";
 import './../Backend/quiz.css';
 import {Checkbox, checkboxClasses} from "@mui/material";
-import { useSearchParams } from "react-router-dom";
+import {useSearchParams} from "react-router-dom";
 import {RadioButtonUnchecked} from "@material-ui/icons";
 import Button from "@mui/material/Button";
 
@@ -129,7 +129,7 @@ function Quiz() {
         setActive4(false);
 
         setAnswers(answers + "1, "); //add answer to state of answers
-
+        console.log("Answers list (one behind!):: " + answers);
         toNextQuestion();
     }
 
@@ -140,7 +140,7 @@ function Quiz() {
         setActive4(false);
 
         setAnswers(answers + "2, ")
-
+        console.log("Answers list (one behind!):: " + answers);
         toNextQuestion();
     }
 
@@ -151,7 +151,7 @@ function Quiz() {
         setActive4(false);
 
         setAnswers(answers + "3, ")
-
+        console.log("Answers list (one behind!):: " + answers);
         toNextQuestion();
     }
     const optionFourClick = () => {
@@ -161,7 +161,7 @@ function Quiz() {
         setActive4(!active4);
 
         setAnswers(answers + "4, ")
-
+        console.log("Answers list (one behind!):: " + answers);
         toNextQuestion();
     }
 
@@ -171,46 +171,46 @@ function Quiz() {
         {
             text: "What is the capital of America?",
             options: [
-                { id: 0, text: "New York City", isCorrect: false },
-                { id: 1, text: "Boston", isCorrect: false },
-                { id: 2, text: "Santa Fe", isCorrect: false },
-                { id: 3, text: "Washington DC", isCorrect: true },
+                {id: 0, text: "New York City", isCorrect: false},
+                {id: 1, text: "Boston", isCorrect: false},
+                {id: 2, text: "Santa Fe", isCorrect: false},
+                {id: 3, text: "Washington DC", isCorrect: true},
             ],
         },
         {
             text: "What year was the Constitution of America written?",
             options: [
-                { id: 0, text: "1787", isCorrect: true },
-                { id: 1, text: "1776", isCorrect: false },
-                { id: 2, text: "1774", isCorrect: false },
-                { id: 3, text: "1826", isCorrect: false },
+                {id: 0, text: "1787", isCorrect: true},
+                {id: 1, text: "1776", isCorrect: false},
+                {id: 2, text: "1774", isCorrect: false},
+                {id: 3, text: "1826", isCorrect: false},
             ],
         },
         {
             text: "Who was the second president of the US?",
             options: [
-                { id: 0, text: "John Adams", isCorrect: true },
-                { id: 1, text: "Paul Revere", isCorrect: false },
-                { id: 2, text: "Thomas Jefferson", isCorrect: false },
-                { id: 3, text: "Benjamin Franklin", isCorrect: false },
+                {id: 0, text: "John Adams", isCorrect: true},
+                {id: 1, text: "Paul Revere", isCorrect: false},
+                {id: 2, text: "Thomas Jefferson", isCorrect: false},
+                {id: 3, text: "Benjamin Franklin", isCorrect: false},
             ],
         },
         {
             text: "What is the largest state in the US?",
             options: [
-                { id: 0, text: "California", isCorrect: false },
-                { id: 1, text: "Alaska", isCorrect: true },
-                { id: 2, text: "Texas", isCorrect: false },
-                { id: 3, text: "Montana", isCorrect: false },
+                {id: 0, text: "California", isCorrect: false},
+                {id: 1, text: "Alaska", isCorrect: true},
+                {id: 2, text: "Texas", isCorrect: false},
+                {id: 3, text: "Montana", isCorrect: false},
             ],
         },
         {
             text: "Which of the following countries DO NOT border the US?",
             options: [
-                { id: 0, text: "Canada", isCorrect: false },
-                { id: 1, text: "Russia", isCorrect: true },
-                { id: 2, text: "Cuba", isCorrect: true },
-                { id: 3, text: "Mexico", isCorrect: false },
+                {id: 0, text: "Canada", isCorrect: false},
+                {id: 1, text: "Russia", isCorrect: true},
+                {id: 2, text: "Cuba", isCorrect: true},
+                {id: 3, text: "Mexico", isCorrect: false},
             ],
         },
     ];
@@ -235,7 +235,6 @@ function Quiz() {
     //LÅNT SLUT
 
 
-
     return (
 
         <div>
@@ -245,30 +244,53 @@ function Quiz() {
 
             <div>
                 <img onClick={toHome} src={logo} alt="logo" className="logo"/>
-                <div className={"right"}>Velkommen {firstName}</div>
+                <div className={"right"}>Velkommen {username}</div>
             </div>
 
             <div className={"center_p"}>
-            <div>
-                <div> <h1>{quizObject.courseName}</h1></div>
-            </div>
-            <div>
-                <h3> 1: {eval(questionFromParam)} </h3>
-                <h5> <Button></Button>{quizObject.answer1}</h5>
-                <h5> <Button></Button>{quizObject.answer2}</h5>
-                <h5> <Button></Button>{quizObject.answer3}</h5>
-            </div>
                 <div>
+                    <div
+                        style={{display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        paddingBottom: "100px"}}
+                    ><h1>{quizObject.courseName}</h1></div>
+                </div>
+                <div>
+                    <h3 style={{display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        paddingBottom: "0px"}} > 1: {eval(questionFromParam)} </h3>
+                    <div>
+                        <ul >
+                            <Button name={"option1"} style={{backgroundColor: active1 ? "lightgray" : ""}}
+                                    onClick={optionOneClick}>{quizObject.answer1}</Button>
+                            <Button name={"option2"} style={{backgroundColor: active2 ? "lightgray" : ""}}
+                                    onClick={optionTwoClick}>{quizObject.answer1}</Button>
+                            <Button name={"option3"} style={{backgroundColor: active3 ? "lightgray" : ""}}
+                                    onClick={optionThreeClick}>{quizObject.answer2}</Button>
+                            <Button name={"option4"} style={{backgroundColor: active4 ? "lightgray" : ""}}
+                                    onClick={optionFourClick}>{quizObject.answer3}</Button>
+
+                        </ul>
+                    </div>
+                </div>
+                {/*<div>
                     <button onClick={toPrevQuestion}>Tilbage</button>
                     <button onClick={toNextQuestion}>Frem</button>
+                </div>*/}
+                <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    paddingTop: "30px",
+                }}>
+                    {/*<button onClick={toQuizzes}>Gem og luk</button> */}
+                    <button onClick={toQuizzes}>Afslut quiz</button>
                 </div>
-            <div>
-                <button onClick={toQuizzes}>Gem og luk</button>
-                <button onClick={toQuizzes}>Afslut quiz</button>
-            </div>
-                <div>
-                    {/* //THIS IS BORROWED FROM, DELETE LATER ONLY FOR TEST  https://github.com/davidrazmadzeExtra/Multiple_Choice_Quiz_ReactJS/blob/main/src/App.js*/}
-                    {/*
+
+                {/* //THIS IS BORROWED FROM, DELETE LATER ONLY FOR TEST  https://github.com/davidrazmadzeExtra/Multiple_Choice_Quiz_ReactJS/blob/main/src/App.js*/}
+                {/*
                 <ul>
                     {questions[currentQuestion].options.map((option) => <label key={option}>
                         <input
@@ -277,15 +299,8 @@ function Quiz() {
                     </label>)})}
                 </ul>
                 */}
-                <ul>
-                    <Button name={"option1"} style={{ backgroundColor: active1 ? "lightgray" : "" }} onClick={optionOneClick}>{quizObject.answer1}</Button>
-                    <Button name={"option2"} style={{ backgroundColor: active2 ? "lightgray" : "" }} onClick={optionTwoClick}>{quizObject.answer1}</Button>
-                    <Button name={"option3"} style={{ backgroundColor: active3 ? "lightgray" : "" }} onClick={optionThreeClick}>{quizObject.answer2}</Button>
-                    <Button name={"option4"} style={{ backgroundColor: active4 ? "lightgray" : "" }} onClick={optionFourClick}>{quizObject.answer3}</Button>
 
-                </ul>
-                </div>
-        </div>
+            </div>
         </div>
     );
 
