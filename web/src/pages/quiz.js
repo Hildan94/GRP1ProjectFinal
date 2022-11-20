@@ -72,6 +72,8 @@ function Quiz() {
     const [active3, setActive3] = useState(false);
     const [active4, setActive4] = useState(false);
 
+    const [answers, setAnswers] = useState(''); //to store all answers. Be aware this is only updated correctly after it has been updated
+
 
     const [searchParams] = useSearchParams();
     const params = new URLSearchParams(window.location.pathname);
@@ -102,6 +104,10 @@ function Quiz() {
         paramQuestionId++;
         navigate(currPath.slice(0, -3) + paramQuestionId)
         //reset selected question
+        setActive1(false);
+        setActive2(false);
+        setActive3(false);
+        setActive4(false);
 
     }
 
@@ -117,112 +123,47 @@ function Quiz() {
     }
 
     const optionOneClick = () => {
-        //selectedAnswer = 1;
-        //console.log(selectedAnswer.toString());
-        //this.changeColor.bind(this);
         setActive1(!active1);
+        setActive2(false);
+        setActive3(false);
+        setActive4(false);
 
+        setAnswers(answers + "1, "); //add answer to state of answers
+
+        toNextQuestion();
     }
 
     const optionTwoClick = () => {
-        //selectedAnswer = 2;
-        //console.log(selectedAnswer.toString());
-        //this.changeColor.bind(this);
+        setActive1(false);
         setActive2(!active2);
+        setActive3(false);
+        setActive4(false);
 
+        setAnswers(answers + "2, ")
+
+        toNextQuestion();
     }
+
     const optionThreeClick = () => {
-        if (active1 === false) {
-            console.log("active1 false her ");
-        }
-        if (active1 === true) {
-            console.log("active1 true her");
-        }
-
-        //selectedAnswer = 3;
-        //console.log(selectedAnswer.toString());
-        //this.changeColor.bind(this);
+        setActive1(false);
+        setActive2(false);
         setActive3(!active3);
+        setActive4(false);
 
+        setAnswers(answers + "3, ")
+
+        toNextQuestion();
     }
     const optionFourClick = () => {
-
         setActive1(false);
         setActive2(false);
         setActive3(false);
         setActive4(!active4);
 
-        /*
-        console.log("START4");
-        console.log(selectedAnswer.toString());
-        switch (selectedAnswer){
-            case 0:
-                console.log("case 0");
-                console.log(selectedAnswer.toString());
-                selectedAnswer = 4;
-                setActive4(!active4);
-                break;
+        setAnswers(answers + "4, ")
 
-            case 1:
-                console.log("case 1");
-                console.log(selectedAnswer.toString());
-                setActive1(!active1);
-                selectedAnswer = 4;
-                setActive4(!active4);
-                break;
-
-            case 2:
-                console.log("case 2");
-                console.log(selectedAnswer.toString());
-                setActive2(!active2);
-                selectedAnswer = 4;
-                setActive4(!active4);
-                break;
-
-            case 3:
-                console.log("case 3");
-                console.log(selectedAnswer.toString());
-                setActive3(!active3);
-                selectedAnswer = 4;
-                setActive4(!active4);
-                break;
-
-            case 4:
-                console.log("case 4");
-                console.log(selectedAnswer.toString());
-                selectedAnswer = 4;
-                setActive4(!active4);
-                break;
-
-            default:
-                console.log("case def");
-                console.log(selectedAnswer.toString());
-                selectedAnswer = 4;
-                setActive4(!active4);
-                console.log("Switch case found error in selected question.");
-                break;
-*/
-
+        toNextQuestion();
     }
-    /*
-            if (selectedAnswer == 0) {
-                selectedAnswer = 4;
-
-                setActive4(!active4);
-            } else { //another option was already selected
-                selectedAnswer = 4;
-                setActive1(!active1);
-                setActive2(!active2);
-                setActive3(!active3);
-
-                setActive4(!active4);
-            }
-
-     */
-
-    //this.changeColor.bind(this);
-
-
 
 
 //THIS IS BORROWED FROM, DELETE LATER ONLY FOR TEST  https://github.com/davidrazmadzeExtra/Multiple_Choice_Quiz_ReactJS/blob/main/src/App.js
@@ -291,9 +232,9 @@ function Quiz() {
             //setShowResults(true);
         }
     };
-
-
     //LÅNT SLUT
+
+
 
     return (
 
@@ -337,10 +278,10 @@ function Quiz() {
                 </ul>
                 */}
                 <ul>
-                    <Button name={"option1"} style={{ backgroundColor: active1 ? "lightgray" : "" }} onClick={optionOneClick}>{"A"}</Button>
-                    <Button name={"option2"} style={{ backgroundColor: active2 ? "lightgray" : "" }} onClick={optionTwoClick}>{"B"}</Button>
-                    <Button name={"option3"} style={{ backgroundColor: active3 ? "lightgray" : "" }} onClick={optionThreeClick}>{"C"}</Button>
-                    <Button name={"option4"} style={{ backgroundColor: active4 ? "lightgray" : "" }} onClick={optionFourClick}>{"D"}</Button>
+                    <Button name={"option1"} style={{ backgroundColor: active1 ? "lightgray" : "" }} onClick={optionOneClick}>{quizObject.answer1}</Button>
+                    <Button name={"option2"} style={{ backgroundColor: active2 ? "lightgray" : "" }} onClick={optionTwoClick}>{quizObject.answer1}</Button>
+                    <Button name={"option3"} style={{ backgroundColor: active3 ? "lightgray" : "" }} onClick={optionThreeClick}>{quizObject.answer2}</Button>
+                    <Button name={"option4"} style={{ backgroundColor: active4 ? "lightgray" : "" }} onClick={optionFourClick}>{quizObject.answer3}</Button>
 
                 </ul>
                 </div>
