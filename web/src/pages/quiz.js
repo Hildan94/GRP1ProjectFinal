@@ -5,9 +5,11 @@ import logo from "./../image/NEM_logo_noBackground2.png";
 import './../Backend/quiz.css';
 import {Checkbox, checkboxClasses} from "@mui/material";
 import { useSearchParams } from "react-router-dom";
+import {RadioButtonUnchecked} from "@material-ui/icons";
+import Button from "@mui/material/Button";
 
 
-var currUserId, courseName, quizId, firstName, questionsCount, quizName, lastName;
+var currUserId, courseName, quizId, firstName, questionsCount, quizName, lastName, username;
 var question1, question2, question3, answer1, answer2, answer3, boolQuestion;
 var questionCounter; //used to keep track of current question no for page no | locally
 //firstName = "Dennis";
@@ -16,6 +18,10 @@ var questionCounter; //used to keep track of current question no for page no | l
 var quizIdParam = 1;
 
 var quizObject = {
+    "id": quizId = 452,
+}
+
+var quizObject = { //old one
     "id": quizId = 10001,
     "courseName": courseName = 'Matematik 5-1',
     "questionsCount": questionsCount = 3,
@@ -28,23 +34,57 @@ var quizObject = {
     "boolQuestion": boolQuestion = false,
 }
 
+var questionsObject = [
+    {
+        questionName: "Hovedstad i DK?",
+        correctAnswer: 0,
+        questionId: 452,
+        answera: "Kbh",
+        answerb: "Not kbh",
+        answerc: "Also not kbh",
+        answerd: "Especially not kbh",
+    },
+    /*
+    {
+        questionName: "Hovedstad i EN?",
+        correctAnswer: 0,
+        questionId: 453,
+        answera: "London",
+        answerb: "Not London",
+        answerc: "Also not London",
+        answerd: "Especially not London",
+    },
+
+     */
+];
+
+
 var userObject = {
     "id": currUserId = 11337,
-    "firstname": firstName = 'Dennis',
-    "lastname": lastName = 'Jensen',
+    "username": username = 'Dennis'
 }
 
 function Quiz() {
 
+    //Use these states to get answers. If active1 === true, then it is chosen, so value 1
+    const [active1, setActive1] = useState(false);
+    const [active2, setActive2] = useState(false);
+    const [active3, setActive3] = useState(false);
+    const [active4, setActive4] = useState(false);
+
+
     const [searchParams] = useSearchParams();
     const params = new URLSearchParams(window.location.pathname);
 
+    let selectedQuestions = 0; //should never exceed 1
+    //let selectedAnswer = 0; //0 is default no answer. 1 is option 1, 2 option 2 etc.
+
     var currPath = window.location.pathname;
     var pathParams = currPath.substring(currPath.indexOf('/') + 6);
-    var paramQuizId = pathParams.slice(0,5);
+    var paramQuizId = pathParams.slice(0, 5);
     var paramQuestionId = pathParams.substring(pathParams.indexOf('/') + 1);
 
-    var questionFromParam = 'quizObject.question' + (paramQuestionId -100 );
+    var questionFromParam = 'quizObject.question' + (paramQuestionId - 100);
     console.log(questionFromParam);
 
 
@@ -59,20 +99,130 @@ function Quiz() {
     }
 
     const toNextQuestion = () => {
-        paramQuestionId ++;
-        navigate(currPath.slice(0,-3) + paramQuestionId)
+        paramQuestionId++;
+        navigate(currPath.slice(0, -3) + paramQuestionId)
+        //reset selected question
+
     }
 
     const toPrevQuestion = () => {
         if (paramQuestionId > 101) {
-            paramQuestionId --;
+            paramQuestionId--;
         }
-        navigate(currPath.slice(0,-3) + paramQuestionId)
+        navigate(currPath.slice(0, -3) + paramQuestionId)
     }
 
     const toQuestion = () => {
         navigate('/home')
     }
+
+    const optionOneClick = () => {
+        //selectedAnswer = 1;
+        //console.log(selectedAnswer.toString());
+        //this.changeColor.bind(this);
+        setActive1(!active1);
+
+    }
+
+    const optionTwoClick = () => {
+        //selectedAnswer = 2;
+        //console.log(selectedAnswer.toString());
+        //this.changeColor.bind(this);
+        setActive2(!active2);
+
+    }
+    const optionThreeClick = () => {
+        if (active1 === false) {
+            console.log("active1 false her ");
+        }
+        if (active1 === true) {
+            console.log("active1 true her");
+        }
+
+        //selectedAnswer = 3;
+        //console.log(selectedAnswer.toString());
+        //this.changeColor.bind(this);
+        setActive3(!active3);
+
+    }
+    const optionFourClick = () => {
+
+        setActive1(false);
+        setActive2(false);
+        setActive3(false);
+        setActive4(!active4);
+
+        /*
+        console.log("START4");
+        console.log(selectedAnswer.toString());
+        switch (selectedAnswer){
+            case 0:
+                console.log("case 0");
+                console.log(selectedAnswer.toString());
+                selectedAnswer = 4;
+                setActive4(!active4);
+                break;
+
+            case 1:
+                console.log("case 1");
+                console.log(selectedAnswer.toString());
+                setActive1(!active1);
+                selectedAnswer = 4;
+                setActive4(!active4);
+                break;
+
+            case 2:
+                console.log("case 2");
+                console.log(selectedAnswer.toString());
+                setActive2(!active2);
+                selectedAnswer = 4;
+                setActive4(!active4);
+                break;
+
+            case 3:
+                console.log("case 3");
+                console.log(selectedAnswer.toString());
+                setActive3(!active3);
+                selectedAnswer = 4;
+                setActive4(!active4);
+                break;
+
+            case 4:
+                console.log("case 4");
+                console.log(selectedAnswer.toString());
+                selectedAnswer = 4;
+                setActive4(!active4);
+                break;
+
+            default:
+                console.log("case def");
+                console.log(selectedAnswer.toString());
+                selectedAnswer = 4;
+                setActive4(!active4);
+                console.log("Switch case found error in selected question.");
+                break;
+*/
+
+    }
+    /*
+            if (selectedAnswer == 0) {
+                selectedAnswer = 4;
+
+                setActive4(!active4);
+            } else { //another option was already selected
+                selectedAnswer = 4;
+                setActive1(!active1);
+                setActive2(!active2);
+                setActive3(!active3);
+
+                setActive4(!active4);
+            }
+
+     */
+
+    //this.changeColor.bind(this);
+
+
 
 
 //THIS IS BORROWED FROM, DELETE LATER ONLY FOR TEST  https://github.com/davidrazmadzeExtra/Multiple_Choice_Quiz_ReactJS/blob/main/src/App.js
@@ -163,9 +313,9 @@ function Quiz() {
             </div>
             <div>
                 <h3> 1: {eval(questionFromParam)} </h3>
-                <h5> <Checkbox></Checkbox>{quizObject.answer1}</h5>
-                <h5> <Checkbox></Checkbox>{quizObject.answer2}</h5>
-                <h5> <Checkbox></Checkbox>{quizObject.answer3}</h5>
+                <h5> <Button></Button>{quizObject.answer1}</h5>
+                <h5> <Button></Button>{quizObject.answer2}</h5>
+                <h5> <Button></Button>{quizObject.answer3}</h5>
             </div>
                 <div>
                     <button onClick={toPrevQuestion}>Tilbage</button>
@@ -177,12 +327,21 @@ function Quiz() {
             </div>
                 <div>
                     {/* //THIS IS BORROWED FROM, DELETE LATER ONLY FOR TEST  https://github.com/davidrazmadzeExtra/Multiple_Choice_Quiz_ReactJS/blob/main/src/App.js*/}
+                    {/*
                 <ul>
                     {questions[currentQuestion].options.map((option) => <label key={option}>
                         <input
                             value={option.id}
                         /> {option.text}
                     </label>)})}
+                </ul>
+                */}
+                <ul>
+                    <Button name={"option1"} style={{ backgroundColor: active1 ? "lightgray" : "" }} onClick={optionOneClick}>{"A"}</Button>
+                    <Button name={"option2"} style={{ backgroundColor: active2 ? "lightgray" : "" }} onClick={optionTwoClick}>{"B"}</Button>
+                    <Button name={"option3"} style={{ backgroundColor: active3 ? "lightgray" : "" }} onClick={optionThreeClick}>{"C"}</Button>
+                    <Button name={"option4"} style={{ backgroundColor: active4 ? "lightgray" : "" }} onClick={optionFourClick}>{"D"}</Button>
+
                 </ul>
                 </div>
         </div>
