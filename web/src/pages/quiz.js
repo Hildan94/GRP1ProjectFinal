@@ -76,6 +76,12 @@ function UpdateAnswer() {
 
 }
 
+//Inspiration:  stackoverflow.com/questions/1431094/how-do-i-replace-a-character-at-a-particular-index-in-javascript
+function setCharAt(str,index,chr) {
+    if(index > str.length-1) return str;
+    return str.substring(0,index) + chr + str.substring(index+1);
+}
+
 function Quiz() {
 
     //Use these states to get answers. If active1 === true, then it is chosen, so value 1
@@ -136,7 +142,7 @@ function Quiz() {
             eval(updateAnswerBox);
         }
 
-
+        console.log("ANSWERS: " + answers.toString());
         //console.log("The selected answer for this question is" + question);
 
     }
@@ -166,7 +172,7 @@ function Quiz() {
             eval(updateAnswerBox);
         }
 
-
+        console.log("ANSWERS: " + answers.toString());
 
 
         /*
@@ -201,18 +207,48 @@ function Quiz() {
         setActive3(false);
         setActive4(false);
 
-        setAnswers(answers + "1, "); //add answer to state of answers
+        //Check if an answer already has been made, and in that case change it.
+        if (answers.length >= UpdateAnswer()*3-3+1) { //if the string of answers are equal to or greater than the index (+1 cause not index but length) where we expect an existing answer
+            console.log("answers.length: " + answers.length.toString());
+            console.log("UpdateAnswer()*3-3+1: " + (UpdateAnswer()*3-3+1).toString());
+
+            var index = UpdateAnswer()*3-3;
+            console.log("Index is:: " + index.toString());
+            console.log(answers);
+            //answers = setCharAt(answers,index,'1');
+            setAnswers(setCharAt(answers,index,'1') )
+            console.log(answers);
+
+        } else {
+            setAnswers(answers + "1, "); //add answer to state of answers
+        }
         console.log("Answers list (one behind!):: " + answers);
+
         //toNextQuestion();
     }
 
     const optionTwoClick = () => {
+
         setActive1(false);
         setActive2(!active2);
         setActive3(false);
         setActive4(false);
 
-        setAnswers(answers + "2, ")
+        //Check if an answer already has been made, and in that case change it.
+        if (answers.length >= UpdateAnswer()*3-3+1) { //if the string of answers are equal to or greater than the index (+1 cause not index but length) where we expect an existing answer
+            console.log("answers.length: " + answers.length.toString());
+            console.log("UpdateAnswer()*3-3+1: " + (UpdateAnswer()*3-3+1).toString());
+
+            var index = UpdateAnswer()*3-3;
+            console.log("Index is:: " + index.toString());
+            console.log(answers);
+            //answers = setCharAt(answers,index,'2');
+            setAnswers(setCharAt(answers,index,'2') )
+            console.log(answers);
+
+        } else {
+            setAnswers(answers + "2, "); //add answer to state of answers
+        }
         console.log("Answers list (one behind!):: " + answers);
         //toNextQuestion();
     }
@@ -223,7 +259,21 @@ function Quiz() {
         setActive3(!active3);
         setActive4(false);
 
-        setAnswers(answers + "3, ")
+        //Check if an answer already has been made, and in that case change it.
+        if (answers.length >= UpdateAnswer()*3-3+1) { //if the string of answers are equal to or greater than the index (+1 cause not index but length) where we expect an existing answer
+            console.log("answers.length: " + answers.length.toString());
+            console.log("UpdateAnswer()*3-3+1: " + (UpdateAnswer()*3-3+1).toString());
+
+            var index = UpdateAnswer()*3-3;
+            console.log("Index is:: " + index.toString());
+            console.log(answers);
+            //answers = setCharAt(answers,index,'3');
+            setAnswers(setCharAt(answers,index,'3') )
+            console.log(answers);
+
+        } else {
+            setAnswers(answers + "3, "); //add answer to state of answers
+        }
         console.log("Answers list (one behind!):: " + answers);
         //toNextQuestion();
     }
@@ -233,7 +283,21 @@ function Quiz() {
         setActive3(false);
         setActive4(!active4);
 
-        setAnswers(answers + "4, ")
+        //Check if an answer already has been made, and in that case change it.
+        if (answers.length >= UpdateAnswer()*3-3+1) { //if the string of answers are equal to or greater than the index (+1 cause not index but length) where we expect an existing answer
+            console.log("answers.length: " + answers.length.toString());
+            console.log("UpdateAnswer()*3-3+1: " + (UpdateAnswer()*3-3+1).toString());
+
+            var index = UpdateAnswer()*3-3;
+            console.log("Index is:: " + index.toString());
+            console.log(answers);
+            //answers = setCharAt(answers,index,'4');
+            setAnswers(setCharAt(answers,index,'4') )
+            console.log(answers);
+
+        } else {
+            setAnswers(answers + "4, "); //add answer to state of answers
+        }
         console.log("Answers list (one behind!):: " + answers);
         //toNextQuestion();
     }
