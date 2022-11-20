@@ -5,7 +5,7 @@ import logo from "./../image/NEM_logo_noBackground2.png";
 import './../Backend/quiz.css';
 import {Checkbox, checkboxClasses} from "@mui/material";
 import {useSearchParams} from "react-router-dom";
-import {RadioButtonUnchecked} from "@material-ui/icons";
+import {RadioButtonUnchecked, Update} from "@material-ui/icons";
 import Button from "@mui/material/Button";
 
 
@@ -64,6 +64,18 @@ var userObject = {
     "username": username = 'Dennis'
 }
 
+function UpdateAnswer() {
+
+    //Get the correct current question number without unncessary re renders
+    var currPath = window.location.pathname;
+    var pathParams = currPath.substring(currPath.indexOf('/') + 6);
+    var paramQuestionId = pathParams.substring(pathParams.indexOf('/') + 1);
+    var questionFromParamNumber = paramQuestionId - 100;
+    console.log("UpdateAnswer says current question is: )" + questionFromParamNumber.toString());
+    return questionFromParamNumber;
+
+}
+
 function Quiz() {
 
     //Use these states to get answers. If active1 === true, then it is chosen, so value 1
@@ -71,6 +83,8 @@ function Quiz() {
     const [active2, setActive2] = useState(false);
     const [active3, setActive3] = useState(false);
     const [active4, setActive4] = useState(false);
+
+    //const [questionNav, setQuestionNav] = useState(1); //for navigation purposes attempt
 
     const [answers, setAnswers] = useState(''); //to store all answers. Be aware this is only updated correctly after it has been updated
 
@@ -87,6 +101,7 @@ function Quiz() {
     var paramQuestionId = pathParams.substring(pathParams.indexOf('/') + 1);
 
     var questionFromParam = 'quizObject.question' + (paramQuestionId - 100);
+    let questionFromParamNumber = paramQuestionId - 100;
     console.log(questionFromParam);
 
 
@@ -109,6 +124,21 @@ function Quiz() {
         setActive3(false);
         setActive4(false);
 
+        if (answers.length === 0) {
+            //At 1st question and it has not been answered. Leave all options unchecked
+        } else {
+            let answerOfQuestionIndex = UpdateAnswer()*3-3//answers.charAt(0); //should return answer of the first question
+            console.log("answerOfQuestionIndex: " + answerOfQuestionIndex.toString());
+            let answerOfQuestion = answers.charAt(answerOfQuestionIndex);
+            console.log("answerOfQuestion: " + answerOfQuestion.toString());
+            let updateAnswerBox = 'setActive' + answerOfQuestion + '(true)'
+            console.log("updateAnswerBox: " + updateAnswerBox.toString());
+            eval(updateAnswerBox);
+        }
+
+
+        //console.log("The selected answer for this question is" + question);
+
     }
 
     const toPrevQuestion = () => {
@@ -116,6 +146,49 @@ function Quiz() {
             paramQuestionId--;
         }
         navigate(currPath.slice(0, -3) + paramQuestionId)
+
+        //Determine which question this is, and what answer it has saved (if any!, primarily used if this question has already been visited and answered
+
+        setActive1(false);
+        setActive2(false);
+        setActive3(false);
+        setActive4(false);
+
+        if (answers.length === 0) {
+            //At 1st question and it has not been answered. Leave all options unchecked
+        } else {
+            let answerOfQuestionIndex = UpdateAnswer()*3-3//answers.charAt(0); //should return answer of the first question
+            console.log("answerOfQuestionIndex: " + answerOfQuestionIndex.toString());
+            let answerOfQuestion = answers.charAt(answerOfQuestionIndex);
+            console.log("answerOfQuestion: " + answerOfQuestion.toString());
+            let updateAnswerBox = 'setActive' + answerOfQuestion + '(true)'
+            console.log("updateAnswerBox: " + updateAnswerBox.toString());
+            eval(updateAnswerBox);
+        }
+
+
+
+
+        /*
+        if (UpdateAnswer() === 1) {
+            if (answers.length === 0) {
+                //At 1st question and it has not been answered. Leave all options unchecked
+            } else {
+                let temp = answers.charAt(0); //should return answer of the first question
+                let temp2 = 'setActive' + temp + '(true)'
+                eval(temp2);
+            }
+        } else if (UpdateAnswer() > 1) {
+            let temp = UpdateAnswer() * 3 -1; //The index value of the answer we want. Found by: Question number * 3 - 3, example question 2 is 2*3-3= index 3
+            console.log("why this run");
+        } else {
+            console.log("UpdateAnswer sent unexpected value of answer to a question");
+        }
+
+         */
+
+
+
     }
 
     const toQuestion = () => {
@@ -130,7 +203,7 @@ function Quiz() {
 
         setAnswers(answers + "1, "); //add answer to state of answers
         console.log("Answers list (one behind!):: " + answers);
-        toNextQuestion();
+        //toNextQuestion();
     }
 
     const optionTwoClick = () => {
@@ -141,7 +214,7 @@ function Quiz() {
 
         setAnswers(answers + "2, ")
         console.log("Answers list (one behind!):: " + answers);
-        toNextQuestion();
+        //toNextQuestion();
     }
 
     const optionThreeClick = () => {
@@ -152,7 +225,7 @@ function Quiz() {
 
         setAnswers(answers + "3, ")
         console.log("Answers list (one behind!):: " + answers);
-        toNextQuestion();
+        //toNextQuestion();
     }
     const optionFourClick = () => {
         setActive1(false);
@@ -162,7 +235,7 @@ function Quiz() {
 
         setAnswers(answers + "4, ")
         console.log("Answers list (one behind!):: " + answers);
-        toNextQuestion();
+        //toNextQuestion();
     }
 
 
@@ -275,10 +348,10 @@ function Quiz() {
                         </ul>
                     </div>
                 </div>
-                {/*<div>
+                {/**/}<div>
                     <button onClick={toPrevQuestion}>Tilbage</button>
                     <button onClick={toNextQuestion}>Frem</button>
-                </div>*/}
+                </div>
                 <div style={{
                     display: 'flex',
                     alignItems: 'center',
