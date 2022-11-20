@@ -5,6 +5,7 @@ import pass from "./../image/pass.png";
 import {useNavigate} from "react-router-dom";
 import {Helmet} from "react-helmet";
 
+import {tokenStore} from "../stores/TokenStore";
 
 function Frontpage() {
 
@@ -40,6 +41,7 @@ function Frontpage() {
                             </div>
                             <div className="login-button">
                                 <button onClick={toHome}>Log ind</button>
+                                <button onClick={()=>tokenStore.doLogin()}>Log ind</button>
                             </div>
 
                             <p className="link">
