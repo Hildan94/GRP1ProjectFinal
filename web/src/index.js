@@ -8,7 +8,7 @@ import Signup from "./pages/signup";
 import Home from "./pages/home";
 import Quizzes from "./pages/quizzes";
 import Quiz from "./pages/quiz";
-import Quiznew from "./pages/quiznew";
+import Quiznew from "./pages/Quiz/quiznew";
 import Reports from "./pages/reports";
 import Notfound from "./pages/notFound";
 

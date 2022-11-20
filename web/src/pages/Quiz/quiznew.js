@@ -1,7 +1,7 @@
 import {useNavigate} from "react-router-dom";
 import {React} from "react";
 import { Helmet } from 'react-helmet';
-import OutlinedCard from "../Backend/Quiz_card";
+import OutlinedCard from "./Quiz_card";
 
 function Quiznew() {
 
