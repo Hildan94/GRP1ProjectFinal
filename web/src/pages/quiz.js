@@ -177,6 +177,8 @@ function Quiz() {
     const [active3, setActive3] = useState(false);
     const [active4, setActive4] = useState(false);
 
+    const [end, setEnd] = useState(false); //is quiz ended
+
     const [questionNav, setQuestionNav] = useState(1); //for navigation purposes attempt
     const [answers, setAnswers] = useState(''); //to store all answers. Be aware this is only updated correctly after it has been updated
 
@@ -309,6 +311,24 @@ function Quiz() {
         navigate('/home')
     }
 
+    const endQuiz_finished = () => {
+
+        //check if all questions have been answered
+        if (active1 === active2 === active3 === active4) {  //current (last) question has not been answered
+            alert ("This last question has not been answered");
+            return;
+        } else if  (answers.includes("0")) { //previous question has not been answered
+            alert ("One or more earlier questions have not been answered");
+            return;
+        }
+        alert("full");
+        setEnd(true); //end quiz
+    }
+
+    const endQuiz_notFinished = () => {
+        navigate('/home')
+    }
+
     const toNextQuestion = () => {
         if (active1 === active2 === active3 === active4) { // no answer selected insert answer 0
             if (answers.length >= UpdateAnswer()*3-3+1) {
@@ -324,6 +344,11 @@ function Quiz() {
             } else {
                 setAnswers(answers + "0, "); //add answer to state of answers
             }
+        }
+
+        if (paramQuestionId - 100 === dbquestions.length){ //there are no more questions, end quiz
+            endQuiz_finished();
+            return;
         }
 
         paramQuestionId++;
@@ -581,7 +606,7 @@ function Quiz() {
     };
     //LÅNT SLUT
 
-
+    if (!end) {
     return (
 
         <div onLoad={quizInit()}>
@@ -607,7 +632,7 @@ function Quiz() {
                     <h3 style={{display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        paddingBottom: "0px"}} > 1: {dbquestions[paramQuestionId-101].questionName }{/*{eval(questionFromParam)*/} </h3>
+                        paddingBottom: "0px"}} > {paramQuestionId-100}: {dbquestions[paramQuestionId-101].questionName }{/*{eval(questionFromParam)*/} </h3>
                     <div>
                         <ul >
                             <Button name={"option1"} style={{backgroundColor: active1 ? "lightgray" : ""}}
@@ -650,7 +675,14 @@ function Quiz() {
             </div>
         </div>
     );
-
+    }
+    else {
+        return (
+            <div>
+                Quiz has ended
+            </div>
+        )
+    }
 }
 
 export default Quiz;
