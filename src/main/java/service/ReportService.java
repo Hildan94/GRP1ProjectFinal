@@ -18,19 +18,7 @@ import java.util.*;
 @Produces(MediaType.APPLICATION_JSON)
 @Path("reports")
 public class ReportService {
-
     private static final SessionFactory sessionFactory = new HibernateController("pgtest-db.caprover.grp1.diplomportal.dk:6543/pg").getSessionFactory();
-    List <String> score = Arrays.asList("36/60", "54/60");
-    static List <Report> reports = new LinkedList<>(Arrays.asList());
-
-
-    public void addItem(){
-        reports.add(new Report(55, "Marius", "60","60","Matematik"));
-    }
-    @GET
-    public List<String> Score() {
-        return score;
-    }
 
     @POST
     public void createReport(Report report, @HeaderParam("Authorization") String token){
@@ -42,7 +30,6 @@ public class ReportService {
 
     }
 
-    @Path("test")
     @GET
     public List<Report> reports(@HeaderParam("Authorization") String token){
         User user = JWTHandler.validate(token);
@@ -61,27 +48,12 @@ public class ReportService {
         return reports;
     }
 
-    /**
-     * Returs Report from db without requiring token
-     */
-
-    @Path("bla")
+    @Path("report")
     @GET
-    public List<Report> score() {
-        HibernateController hibernateController =
-                new HibernateController("pgtest-db.caprover.grp1.diplomportal.dk:6543/pg");
-        SessionFactory sessionFactory = hibernateController.getSessionFactory();
-        Session session = sessionFactory.openSession();
-
-        List reports = session.createQuery("FROM Report").list();
-
-        for (Iterator iterator = reports.iterator(); iterator.hasNext(); ) {
-            Report report = (Report) iterator.next();
-
-            System.out.println(report);
-
-        }
-            return reports;
+    public Report report (@QueryParam("id") int Id){
+        Report report = new Report();
+        System.out.println(Id);
+        return report;
     }
 
 }
