@@ -495,18 +495,6 @@ function Quiz() {
                         {/*<button onClick={toQuizzes}>Gem og luk</button> */}
                         <button onClick={toQuizzes}>Afslut quiz</button>
                     </div>
-
-                    {/* //THIS IS BORROWED FROM, DELETE LATER ONLY FOR TEST  https://github.com/davidrazmadzeExtra/Multiple_Choice_Quiz_ReactJS/blob/main/src/App.js*/}
-                    {/*
-                <ul>
-                    {questions[currentQuestion].options.map((option) => <label key={option}>
-                        <input
-                            value={option.id}
-                        /> {option.text}
-                    </label>)})}
-                </ul>
-                */}
-
                 </div>
             </div>
         );
