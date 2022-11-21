@@ -12,6 +12,7 @@ import java.util.List;
 
 public class TestReportService {
 
+    //TODO: Finish this
     @Test
     public void testCreateReport(){
         HibernateController hibernateController =
@@ -66,6 +67,5 @@ public class TestReportService {
             System.out.println(report);
         }
     }
-
 
 }

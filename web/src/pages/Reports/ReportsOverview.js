@@ -78,7 +78,7 @@ function ReportsOverview() {
                         <td>quizId</td>
                         <td>quizname</td>
                         <td>quizresultat</td>
-                        <td>quizrigtige</td>
+                        <td>quizspørgsmål</td>
                         <td>userid</td>
                         <td>Klik for at se resultater</td>
 

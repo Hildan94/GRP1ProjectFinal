@@ -1,13 +1,17 @@
 package service;
 
 
+//TODO: Skal kunne generere en rapport når en quiz er gennemført
+
 import DB.HibernateController;
 import DB.Report;
 import DB.User;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import org.apache.catalina.filters.ExpiresFilter;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import java.util.*;
 
@@ -15,6 +19,7 @@ import java.util.*;
 @Path("reports")
 public class ReportService {
 
+    private static final SessionFactory sessionFactory = new HibernateController("pgtest-db.caprover.grp1.diplomportal.dk:6543/pg").getSessionFactory();
     List <String> score = Arrays.asList("36/60", "54/60");
     static List <Report> reports = new LinkedList<>(Arrays.asList());
 
@@ -28,10 +33,13 @@ public class ReportService {
     }
 
     @POST
-    public void createReport(){
-        System.out.println(reports);
-        addItem();
-        System.out.println(reports);
+    public void createReport(Report report, @HeaderParam("Authorization") String token){
+        User validated = JWTHandler.validate(token);
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        session.persist(report);
+        transaction.commit();
+
     }
 
     @Path("test")
