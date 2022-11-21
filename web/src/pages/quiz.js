@@ -21,7 +21,35 @@ var quizObject = {
     "id": quizId = 452,
 }
 
-var quizObject = { //old one
+var db_quiz_questionsObject = [
+    {
+        quiz_id: "452",
+        questionslist_id: "452",
+    },
+
+    {
+        quiz_id: "452",
+        questionslist_id: "453",
+    },
+
+    {
+        quiz_id: "502",
+        questionslist_id: "502",
+    },
+
+    {
+        quiz_id: "502",
+        questionslist_id: "503",
+    },
+
+    {
+        quiz_id: "552",
+        questionslist_id: "552",
+    },
+
+];
+
+var quizObject_old = { //old one
     "id": quizId = 10001,
     "courseName": courseName = 'Matematik 5-1',
     "questionsCount": questionsCount = 3,
@@ -34,7 +62,66 @@ var quizObject = { //old one
     "boolQuestion": boolQuestion = false,
 }
 
+//This needs to be all the questions to the currently selected quiz. Mutate the format from db to this format.
+var questionNumber = 0;
 var questionsObject = [
+    {
+        questionName: "Hovedstad i DK?452",
+        correctAnswer: 0,
+        questionId: 452,
+        questionNo: questionNumber++,
+        answera: "Kbh",
+        answerb: "Not kbh",
+        answerc: "Also not kbh",
+        answerd: "Especially not kbh",
+    },
+
+    {
+        questionName: "Hovedstad i EN?453",
+        correctAnswer: 0,
+        questionId: 453,
+        questionNo: questionNumber++,
+        answera: "London",
+        answerb: "Not London",
+        answerc: "Also not London",
+        answerd: "Especially not London",
+    },
+
+    {
+        questionName: "Hovedstad i EN?502",
+        correctAnswer: 0,
+        questionId: 502,
+        questionNo: questionNumber++,
+        answera: "London",
+        answerb: "Not London",
+        answerc: "Also not London",
+        answerd: "Especially not London",
+    },
+
+    {
+        questionName: "Hovedstad i EN?503",
+        correctAnswer: 0,
+        questionId: 503,
+        questionNo: questionNumber++,
+        answera: "London",
+        answerb: "Not London",
+        answerc: "Also not London",
+        answerd: "Especially not London",
+    },
+
+    {
+        questionName: "Hovedstad i EN?552",
+        correctAnswer: 0,
+        questionId: 552,
+        questionNo: questionNumber++,
+        answera: "London",
+        answerb: "Not London",
+        answerc: "Also not London",
+        answerd: "Especially not London",
+    },
+];
+
+var questionsObject_old = [
     {
         questionName: "Hovedstad i DK?",
         correctAnswer: 0,
@@ -44,7 +131,7 @@ var questionsObject = [
         answerc: "Also not kbh",
         answerd: "Especially not kbh",
     },
-    /*
+
     {
         questionName: "Hovedstad i EN?",
         correctAnswer: 0,
@@ -55,7 +142,7 @@ var questionsObject = [
         answerd: "Especially not London",
     },
 
-     */
+
 ];
 
 
@@ -94,6 +181,8 @@ function Quiz() {
 
     const [answers, setAnswers] = useState(''); //to store all answers. Be aware this is only updated correctly after it has been updated
 
+    const [dbquestionsNo, setdbQuestionsNo] = useState([]) //save the question id's for the currently selected quiz
+    const [dbquestions, setdbQuestions] = useState([]); //save all the questions for currently selected quiz
 
     const [searchParams] = useSearchParams();
     const params = new URLSearchParams(window.location.pathname);
@@ -106,12 +195,99 @@ function Quiz() {
     var paramQuizId = pathParams.slice(0, 5);
     var paramQuestionId = pathParams.substring(pathParams.indexOf('/') + 1);
 
-    var questionFromParam = 'quizObject.question' + (paramQuestionId - 100);
+    var questionFromParam = 'quizObject_old.question' + (paramQuestionId - 100);
     let questionFromParamNumber = paramQuestionId - 100;
     console.log(questionFromParam);
 
 
     const navigate = useNavigate()
+
+
+    const quizInit = () => {
+        getDataFromDb();
+        getQuestionNumbers();
+        getQuestions();
+    }
+
+    const getDataFromDb = () => {
+        //TODO: NOT YET IMPLEMENTED. Get user, questions and quiz/question table data
+    }
+
+
+    //Saves list of id's of the questions of current quiz to dbQuestionsNo state
+    const getQuestionNumbers = () => {
+        const testQuizId = 452;
+
+        for (let i = 0; i < db_quiz_questionsObject.length; i++) {
+            if (db_quiz_questionsObject[i].quiz_id === testQuizId.toString()) {
+                console.log(db_quiz_questionsObject[i].questionslist_id.toString())
+                console.log("<<< INDEX " + i.toString() + " TRUE");
+                dbquestionsNo.push({
+                    id: db_quiz_questionsObject[i].questionslist_id,
+                });
+                console.log("Mit arrays værdi er " + dbquestionsNo[i].id);
+                console.log(dbquestionsNo);
+            }
+        }
+    }
+
+    //Saves the array of questions to be taken
+    const getQuestions = () => {
+
+        for (let i = 0; i < questionsObject.length; i++) {
+            for (let j = 0; j < dbquestionsNo.length; j++) { //only search for the indexes where we expect to have questions. Fx 2 questions, dont look at 3
+                if (questionsObject[i].questionId.toString() === dbquestionsNo[j].id.toString()) {
+                    //console.log("QUIZSPØRGSMÅLETS ID: " + questionsObject[i].questionId.toString())
+                    //console.log("SPM ID FRA LISTE: " + dbquestionsNo[j].id.toString())
+
+                    if (!dbquestions.includes(questionsObject[i].questionId)){ //only add if not already added
+                        dbquestions.push({ // add question to dbquestions state
+                            questionName: questionsObject[i].questionName,
+                            correctAnswer: questionsObject[i].correctAnswer,
+                            questionId: questionsObject[i].questionId,
+                            questionNo: questionsObject[i].questionNo,
+                            answera: questionsObject[i].answera,
+                            answerb: questionsObject[i].answerb,
+                            answerc: questionsObject[i].answerc,
+                            answerd: questionsObject[i].answerd,
+                        });
+                    }
+                    //console.log("Mit Questions arrays værdi er " + dbquestions[j].questionId);
+                    //console.log(dbquestions);
+                }
+            }
+        }
+
+
+
+        /*
+        for (let i = 0; i < questionsObject.length; i++) {
+            if (questionsObject[i].questionId === dbquestionsNo[i].quiz_id) {
+                console.log("QUIZSPØRGSMÅLETS ID: " + questionsObject[i].questionId.toString())
+                console.log("SPM ID FRA LISTE: " + dbquestionsNo[i].quiz_id.toString())
+                //console.log("<<< INDEX " + i.toString() + " TRUE");
+                dbquestions.push({
+                    questionName: questionsObject[i].questionName,
+                    correctAnswer: questionsObject[i].correctAnswer,
+                    questionId: questionsObject[i].questionId,
+                    questionNo: questionsObject[i].questionNo,
+                    answera: questionsObject[i].answera,
+                    answerb: questionsObject[i].answerb,
+                    answerc: questionsObject[i].answerc,
+                    answerd: questionsObject[i].answerd,
+                });
+                console.log("Mit Questions arrays værdi er " + dbquestions[i].questionId);
+                console.log(dbquestions);
+
+            }
+        }
+
+         */
+
+
+
+    }
+
 
     const toQuizzes = () => {
         navigate('/quizzes')
@@ -220,6 +396,8 @@ function Quiz() {
     const toQuestion = () => {
         navigate('/home')
     }
+
+
 
     const optionOneClick = () => {
         setActive1(!active1);
@@ -394,7 +572,7 @@ function Quiz() {
 
     return (
 
-        <div>
+        <div onLoad={quizInit()}>
             <Helmet>
                 <title>NEM Læringsplatform | Quiz</title>
             </Helmet>
@@ -411,23 +589,24 @@ function Quiz() {
                         alignItems: 'center',
                         justifyContent: 'center',
                         paddingBottom: "100px"}}
-                    ><h1>{quizObject.courseName}</h1></div>
+                    ><h1>{quizObject_old.courseName}</h1></div>
                 </div>
                 <div>
                     <h3 style={{display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
                         paddingBottom: "0px"}} > 1: {eval(questionFromParam)} </h3>
+                    <h3>{questionsObject[1].questionName}</h3>
                     <div>
                         <ul >
                             <Button name={"option1"} style={{backgroundColor: active1 ? "lightgray" : ""}}
-                                    onClick={optionOneClick}>{quizObject.answer1}</Button>
+                                    onClick={optionOneClick}>{quizObject_old.answer1}</Button>
                             <Button name={"option2"} style={{backgroundColor: active2 ? "lightgray" : ""}}
-                                    onClick={optionTwoClick}>{quizObject.answer1}</Button>
+                                    onClick={optionTwoClick}>{quizObject_old.answer1}</Button>
                             <Button name={"option3"} style={{backgroundColor: active3 ? "lightgray" : ""}}
-                                    onClick={optionThreeClick}>{quizObject.answer2}</Button>
+                                    onClick={optionThreeClick}>{quizObject_old.answer2}</Button>
                             <Button name={"option4"} style={{backgroundColor: active4 ? "lightgray" : ""}}
-                                    onClick={optionFourClick}>{quizObject.answer3}</Button>
+                                    onClick={optionFourClick}>{quizObject_old.answer3}</Button>
 
                         </ul>
                     </div>
