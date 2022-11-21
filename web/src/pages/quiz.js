@@ -12,8 +12,6 @@ import Button from "@mui/material/Button";
 var currUserId, courseName, quizId, firstName, questionsCount, quizName, lastName, username;
 var question1, question2, question3, answer1, answer2, answer3, boolQuestion;
 var questionCounter; //used to keep track of current question no for page no | locally
-//firstName = "Dennis";
-//quizName = "Matematik 5-1"
 
 var quizIdParam = 1;
 
@@ -48,19 +46,6 @@ var db_quiz_questionsObject = [
     },
 
 ];
-
-var quizObject_old = { //old one
-    "id": quizId = 10001,
-    "courseName": courseName = 'Matematik 5-1',
-    "questionsCount": questionsCount = 3,
-    "question1": question1 = "Hvad er 1",
-    "question2": question2 = "Hvad er 2",
-    "question3": question3 = "Hvad er 3",
-    "answer1": answer1 = "Det er 1",
-    "answer2": answer2 = "Det er 2",
-    "answer3": answer3 = "Det er 3",
-    "boolQuestion": boolQuestion = false,
-}
 
 //This needs to be all the questions to the currently selected quiz. Mutate the format from db to this format.
 var questionNumber = 0;
@@ -121,31 +106,6 @@ var questionsObject = [
     },
 ];
 
-var questionsObject_old = [
-    {
-        questionName: "Hovedstad i DK?",
-        correctAnswer: 0,
-        questionId: 452,
-        answera: "Kbh",
-        answerb: "Not kbh",
-        answerc: "Also not kbh",
-        answerd: "Especially not kbh",
-    },
-
-    {
-        questionName: "Hovedstad i EN?",
-        correctAnswer: 0,
-        questionId: 453,
-        answera: "London",
-        answerb: "Not London",
-        answerc: "Also not London",
-        answerd: "Especially not London",
-    },
-
-
-];
-
-
 var userObject = {
     "id": currUserId = 11337,
     "username": username = 'Dennis'
@@ -153,7 +113,7 @@ var userObject = {
 
 function UpdateAnswer() {
 
-    //Get the correct current question number without unncessary re renders
+    //Get the correct current question number without unnecessary re-renders
     var currPath = window.location.pathname;
     var pathParams = currPath.substring(currPath.indexOf('/') + 6);
     var paramQuestionId = pathParams.substring(pathParams.indexOf('/') + 1);
@@ -179,7 +139,7 @@ function Quiz() {
 
     const [end, setEnd] = useState(false); //is quiz ended
 
-    const [questionNav, setQuestionNav] = useState(1); //for navigation purposes attempt
+    //const [questionNav, setQuestionNav] = useState(1); //for navigation purposes attempt
     const [answers, setAnswers] = useState(''); //to store all answers. Be aware this is only updated correctly after it has been updated
 
     const [dbquestionsNo, setdbQuestionsNo] = useState([]) //save the question id's for the currently selected quiz
@@ -264,44 +224,7 @@ function Quiz() {
             }
         }
 
-
-
-        /*
-        for (let i = 0; i < questionsObject.length; i++) {
-            if (questionsObject[i].questionId === dbquestionsNo[i].quiz_id) {
-                console.log("QUIZSPØRGSMÅLETS ID: " + questionsObject[i].questionId.toString())
-                console.log("SPM ID FRA LISTE: " + dbquestionsNo[i].quiz_id.toString())
-                //console.log("<<< INDEX " + i.toString() + " TRUE");
-                dbquestions.push({
-                    questionName: questionsObject[i].questionName,
-                    correctAnswer: questionsObject[i].correctAnswer,
-                    questionId: questionsObject[i].questionId,
-                    questionNo: questionsObject[i].questionNo,
-                    answera: questionsObject[i].answera,
-                    answerb: questionsObject[i].answerb,
-                    answerc: questionsObject[i].answerc,
-                    answerd: questionsObject[i].answerd,
-                });
-                console.log("Mit Questions arrays værdi er " + dbquestions[i].questionId);
-                console.log(dbquestions);
-
-            }
-        }
-
-         */
-
-
-
     }
-
-    const test = () => {
-        var something = dbquestions[paramQuestionId-101].answerb; //-100 because of the way i set my navigation up for, and 1 because index
-        //dbquestions[paramQuestionId-100].answerb
-        console.log("this " + paramQuestionId);
-        console.log("TESTER SUB" + something.toString());
-        return "this";
-    }
-
 
     const toQuizzes = () => {
         navigate('/quizzes')
@@ -312,7 +235,6 @@ function Quiz() {
     }
 
     const endQuiz_finished = () => {
-
         //check if all questions have been answered
         if (active1 === active2 === active3 === active4) {  //current (last) question has not been answered
             alert ("This last question has not been answered");
@@ -407,34 +329,11 @@ function Quiz() {
 
         console.log("ANSWERS: " + answers.toString());
 
-
-        /*
-        if (UpdateAnswer() === 1) {
-            if (answers.length === 0) {
-                //At 1st question and it has not been answered. Leave all options unchecked
-            } else {
-                let temp = answers.charAt(0); //should return answer of the first question
-                let temp2 = 'setActive' + temp + '(true)'
-                eval(temp2);
-            }
-        } else if (UpdateAnswer() > 1) {
-            let temp = UpdateAnswer() * 3 -1; //The index value of the answer we want. Found by: Question number * 3 - 3, example question 2 is 2*3-3= index 3
-            console.log("why this run");
-        } else {
-            console.log("UpdateAnswer sent unexpected value of answer to a question");
-        }
-
-         */
-
-
-
     }
 
     const toQuestion = () => {
         navigate('/home')
     }
-
-
 
     const optionOneClick = () => {
         setActive1(!active1);
