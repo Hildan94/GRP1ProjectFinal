@@ -5,7 +5,16 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import {FormControl, Input, InputLabel, MenuItem, Select} from "@mui/material";
+import {useState} from "react";
 
+const Quiz = () => {
+    const [question, setQuestion] = useState('');
+}
+
+//make function for saving content
+const handleClick = event => {
+
+}
 
 const card = (
     <>
@@ -51,7 +60,7 @@ const card = (
       </CardContent>
 
       <CardActions>
-        <Button size="small" variant={"contained"} >Gem spørgsmål</Button>
+        <Button size="small" variant={"contained"} onClick={} >Gem spørgsmål</Button>
       </CardActions>
     </>
 );
@@ -63,3 +72,5 @@ export default function OutlinedCard() {
       </Box>
   );
 }
+
+export default Quiz;
