@@ -177,8 +177,7 @@ function Quiz() {
     const [active3, setActive3] = useState(false);
     const [active4, setActive4] = useState(false);
 
-    //const [questionNav, setQuestionNav] = useState(1); //for navigation purposes attempt
-
+    const [questionNav, setQuestionNav] = useState(1); //for navigation purposes attempt
     const [answers, setAnswers] = useState(''); //to store all answers. Be aware this is only updated correctly after it has been updated
 
     const [dbquestionsNo, setdbQuestionsNo] = useState([]) //save the question id's for the currently selected quiz
@@ -204,9 +203,11 @@ function Quiz() {
 
 
     const quizInit = () => {
+        if (dbquestions.length === 0) { //only do this once
         getDataFromDb();
         getQuestionNumbers();
         getQuestions();
+        }
     }
 
     const getDataFromDb = () => {
@@ -229,6 +230,7 @@ function Quiz() {
                 console.log(dbquestionsNo);
             }
         }
+
     }
 
     //Saves the array of questions to be taken
@@ -241,6 +243,8 @@ function Quiz() {
                     //console.log("SPM ID FRA LISTE: " + dbquestionsNo[j].id.toString())
 
                     if (!dbquestions.includes(questionsObject[i].questionId)){ //only add if not already added
+                        console.log("new question added")
+                        console.log(dbquestions);
                         dbquestions.push({ // add question to dbquestions state
                             questionName: questionsObject[i].questionName,
                             correctAnswer: questionsObject[i].correctAnswer,
@@ -286,6 +290,14 @@ function Quiz() {
 
 
 
+    }
+
+    const test = () => {
+        var something = dbquestions[paramQuestionId-101].answerb; //-100 because of the way i set my navigation up for, and 1 because index
+        //dbquestions[paramQuestionId-100].answerb
+        console.log("this " + paramQuestionId);
+        console.log("TESTER SUB" + something.toString());
+        return "this";
     }
 
 
@@ -589,24 +601,23 @@ function Quiz() {
                         alignItems: 'center',
                         justifyContent: 'center',
                         paddingBottom: "100px"}}
-                    ><h1>{quizObject_old.courseName}</h1></div>
+                    ><h1>{"Matematik 5-1_HARDCODE"}</h1></div>
                 </div>
                 <div>
                     <h3 style={{display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        paddingBottom: "0px"}} > 1: {eval(questionFromParam)} </h3>
-                    <h3>{questionsObject[1].questionName}</h3>
+                        paddingBottom: "0px"}} > 1: {dbquestions[paramQuestionId-101].questionName }{/*{eval(questionFromParam)*/} </h3>
                     <div>
                         <ul >
                             <Button name={"option1"} style={{backgroundColor: active1 ? "lightgray" : ""}}
-                                    onClick={optionOneClick}>{quizObject_old.answer1}</Button>
+                                    onClick={optionOneClick}>{dbquestions[paramQuestionId-101].answera}</Button>
                             <Button name={"option2"} style={{backgroundColor: active2 ? "lightgray" : ""}}
-                                    onClick={optionTwoClick}>{quizObject_old.answer1}</Button>
+                                    onClick={optionTwoClick}>{dbquestions[paramQuestionId-101].answerb}</Button>
                             <Button name={"option3"} style={{backgroundColor: active3 ? "lightgray" : ""}}
-                                    onClick={optionThreeClick}>{quizObject_old.answer2}</Button>
+                                    onClick={optionThreeClick}>{dbquestions[paramQuestionId-101].answerc}</Button>
                             <Button name={"option4"} style={{backgroundColor: active4 ? "lightgray" : ""}}
-                                    onClick={optionFourClick}>{quizObject_old.answer3}</Button>
+                                    onClick={optionFourClick}>{dbquestions[paramQuestionId-101].answerd}</Button>
 
                         </ul>
                     </div>
