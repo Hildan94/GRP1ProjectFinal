@@ -52,7 +52,7 @@ var questionNumber = 0;
 var questionsObject = [
     {
         questionName: "Hovedstad i DK?452",
-        correctAnswer: 0,
+        correctAnswer: 1,
         questionId: 452,
         questionNo: questionNumber++,
         answera: "Kbh",
@@ -63,7 +63,7 @@ var questionsObject = [
 
     {
         questionName: "Hovedstad i EN?453",
-        correctAnswer: 0,
+        correctAnswer: 2,
         questionId: 453,
         questionNo: questionNumber++,
         answera: "London",
@@ -141,6 +141,8 @@ function Quiz() {
 
     //const [questionNav, setQuestionNav] = useState(1); //for navigation purposes attempt
     const [answers, setAnswers] = useState(''); //to store all answers. Be aware this is only updated correctly after it has been updated
+    const [answersArr, setAnswersArr] = useState([]); //to store all answers. TEST to be used in viewing answers when done.
+
 
     const [dbquestionsNo, setdbQuestionsNo] = useState([]) //save the question id's for the currently selected quiz
     const [dbquestions, setdbQuestions] = useState([]); //save all the questions for currently selected quiz
@@ -243,6 +245,23 @@ function Quiz() {
             alert("One or more earlier questions have not been answered");
             return;
         }
+
+        //TEST MED ANSWER ARRAY TIL VISNING
+
+        answersArr.push({
+            id: answers.charAt(0),
+        });
+
+        answersArr.push({
+            id: answers.charAt(3),
+        });
+
+        console.log(answersArr);
+
+        //TEST MED ANSWER ARRAY SLUT
+
+
+
         alert("full");
         setEnd(true); //end quiz
     }
@@ -269,6 +288,8 @@ function Quiz() {
         }
 
         if (paramQuestionId - 100 === dbquestions.length) { //there are no more questions, end quiz
+            console.log("<<<<<<<>>>>>>");
+            console.log(answers);
             endQuiz_finished();
             return;
         }
@@ -436,7 +457,7 @@ function Quiz() {
         //toNextQuestion();
     }
 
-    if (!end) {
+    if (!end) { //!
         return (
 
             <div onLoad={quizInit()}>
@@ -500,9 +521,17 @@ function Quiz() {
         );
     } else {
         return (
+
             <div>
-                Quiz has ended
+                {dbquestions.map(function(d, idx){
+                    return (<li key={idx}>{d.questionName + ", " + d.correctAnswer + " VALGTSVAR " + answersArr[idx].id}</li>)
+                    {/*return (<li key={idx}>{d.questionName + ", " + d.correctAnswer + answers.charAt(idx*3-3)}</li>)*/}
+                    {/* LØST
+                    Answers er her : "2, 4,"
+                    */}
+                })}
             </div>
+
         )
     }
 }
