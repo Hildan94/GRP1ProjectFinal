@@ -7,6 +7,8 @@
     "@emotion/styled": "^11.10.4",
     "@fontsource/roboto": "^4.5.8",
     "@mui/material": "^5.10.8",
+    "@sentry/react": "^7.20.1",
+    "@sentry/tracing": "^7.20.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/user-event": "^13.5.0",
     "animejs": "^3.2.1",
