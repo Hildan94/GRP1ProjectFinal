@@ -124,9 +124,9 @@ function UpdateAnswer() {
 }
 
 //Inspiration:  stackoverflow.com/questions/1431094/how-do-i-replace-a-character-at-a-particular-index-in-javascript
-function setCharAt(str,index,chr) {
-    if(index > str.length-1) return str;
-    return str.substring(0,index) + chr + str.substring(index+1);
+function setCharAt(str, index, chr) {
+    if (index > str.length - 1) return str;
+    return str.substring(0, index) + chr + str.substring(index + 1);
 }
 
 function Quiz() {
@@ -166,9 +166,9 @@ function Quiz() {
 
     const quizInit = () => {
         if (dbquestions.length === 0) { //only do this once
-        getDataFromDb();
-        getQuestionNumbers();
-        getQuestions();
+            getDataFromDb();
+            getQuestionNumbers();
+            getQuestions();
         }
     }
 
@@ -204,7 +204,7 @@ function Quiz() {
                     //console.log("QUIZSPØRGSMÅLETS ID: " + questionsObject[i].questionId.toString())
                     //console.log("SPM ID FRA LISTE: " + dbquestionsNo[j].id.toString())
 
-                    if (!dbquestions.includes(questionsObject[i].questionId)){ //only add if not already added
+                    if (!dbquestions.includes(questionsObject[i].questionId)) { //only add if not already added
                         console.log("new question added")
                         console.log(dbquestions);
                         dbquestions.push({ // add question to dbquestions state
@@ -237,10 +237,10 @@ function Quiz() {
     const endQuiz_finished = () => {
         //check if all questions have been answered
         if (active1 === active2 === active3 === active4) {  //current (last) question has not been answered
-            alert ("This last question has not been answered");
+            alert("This last question has not been answered");
             return;
-        } else if  (answers.includes("0")) { //previous question has not been answered
-            alert ("One or more earlier questions have not been answered");
+        } else if (answers.includes("0")) { //previous question has not been answered
+            alert("One or more earlier questions have not been answered");
             return;
         }
         alert("full");
@@ -253,22 +253,22 @@ function Quiz() {
 
     const toNextQuestion = () => {
         if (active1 === active2 === active3 === active4) { // no answer selected insert answer 0
-            if (answers.length >= UpdateAnswer()*3-3+1) {
+            if (answers.length >= UpdateAnswer() * 3 - 3 + 1) {
                 console.log("answers.length: " + answers.length.toString());
-                console.log("UpdateAnswer()*3-3+1: " + (UpdateAnswer()*3-3+1).toString());
+                console.log("UpdateAnswer()*3-3+1: " + (UpdateAnswer() * 3 - 3 + 1).toString());
 
-                var index = UpdateAnswer()*3-3;
+                var index = UpdateAnswer() * 3 - 3;
                 console.log("Index is:: " + index.toString());
                 console.log(answers);
                 //answers = setCharAt(answers,index,'0');
-                setAnswers(setCharAt(answers,index,'0') )
+                setAnswers(setCharAt(answers, index, '0'))
                 console.log(answers);
             } else {
                 setAnswers(answers + "0, "); //add answer to state of answers
             }
         }
 
-        if (paramQuestionId - 100 === dbquestions.length){ //there are no more questions, end quiz
+        if (paramQuestionId - 100 === dbquestions.length) { //there are no more questions, end quiz
             endQuiz_finished();
             return;
         }
@@ -285,11 +285,11 @@ function Quiz() {
         if (answers.length === 0) {
             //At 1st question and it has not been answered. Leave all options unchecked
         } else {
-            let answerOfQuestionIndex = UpdateAnswer()*3-3//answers.charAt(0); //should return answer of the first question
+            let answerOfQuestionIndex = UpdateAnswer() * 3 - 3//answers.charAt(0); //should return answer of the first question
             console.log("answerOfQuestionIndex: " + answerOfQuestionIndex.toString());
             let answerOfQuestion = answers.charAt(answerOfQuestionIndex);
             console.log("answerOfQuestion: " + answerOfQuestion.toString());
-            if (answerOfQuestion.toString() !== "0"){ //have no active0 state so dont run this if it is 0
+            if (answerOfQuestion.toString() !== "0") { //have no active0 state so dont run this if it is 0
                 let updateAnswerBox = 'setActive' + answerOfQuestion + '(true)'
                 console.log("updateAnswerBox: " + updateAnswerBox.toString());
                 eval(updateAnswerBox);
@@ -318,7 +318,7 @@ function Quiz() {
         if (answers.length === 0) {
             //At 1st question and it has not been answered. Leave all options unchecked
         } else {
-            let answerOfQuestionIndex = UpdateAnswer()*3-3//answers.charAt(0); //should return answer of the first question
+            let answerOfQuestionIndex = UpdateAnswer() * 3 - 3//answers.charAt(0); //should return answer of the first question
             console.log("answerOfQuestionIndex: " + answerOfQuestionIndex.toString());
             let answerOfQuestion = answers.charAt(answerOfQuestionIndex);
             console.log("answerOfQuestion: " + answerOfQuestion.toString());
@@ -342,15 +342,15 @@ function Quiz() {
         setActive4(false);
 
         //Check if an answer already has been made, and in that case change it.
-        if (answers.length >= UpdateAnswer()*3-3+1) { //if the string of answers are equal to or greater than the index (+1 cause not index but length) where we expect an existing answer
+        if (answers.length >= UpdateAnswer() * 3 - 3 + 1) { //if the string of answers are equal to or greater than the index (+1 cause not index but length) where we expect an existing answer
             console.log("answers.length: " + answers.length.toString());
-            console.log("UpdateAnswer()*3-3+1: " + (UpdateAnswer()*3-3+1).toString());
+            console.log("UpdateAnswer()*3-3+1: " + (UpdateAnswer() * 3 - 3 + 1).toString());
 
-            var index = UpdateAnswer()*3-3;
+            var index = UpdateAnswer() * 3 - 3;
             console.log("Index is:: " + index.toString());
             console.log(answers);
             //answers = setCharAt(answers,index,'1');
-            setAnswers(setCharAt(answers,index,'1') )
+            setAnswers(setCharAt(answers, index, '1'))
             console.log(answers);
 
         } else {
@@ -369,15 +369,15 @@ function Quiz() {
         setActive4(false);
 
         //Check if an answer already has been made, and in that case change it.
-        if (answers.length >= UpdateAnswer()*3-3+1) { //if the string of answers are equal to or greater than the index (+1 cause not index but length) where we expect an existing answer
+        if (answers.length >= UpdateAnswer() * 3 - 3 + 1) { //if the string of answers are equal to or greater than the index (+1 cause not index but length) where we expect an existing answer
             console.log("answers.length: " + answers.length.toString());
-            console.log("UpdateAnswer()*3-3+1: " + (UpdateAnswer()*3-3+1).toString());
+            console.log("UpdateAnswer()*3-3+1: " + (UpdateAnswer() * 3 - 3 + 1).toString());
 
-            var index = UpdateAnswer()*3-3;
+            var index = UpdateAnswer() * 3 - 3;
             console.log("Index is:: " + index.toString());
             console.log(answers);
             //answers = setCharAt(answers,index,'2');
-            setAnswers(setCharAt(answers,index,'2') )
+            setAnswers(setCharAt(answers, index, '2'))
             console.log(answers);
 
         } else {
@@ -394,15 +394,15 @@ function Quiz() {
         setActive4(false);
 
         //Check if an answer already has been made, and in that case change it.
-        if (answers.length >= UpdateAnswer()*3-3+1) { //if the string of answers are equal to or greater than the index (+1 cause not index but length) where we expect an existing answer
+        if (answers.length >= UpdateAnswer() * 3 - 3 + 1) { //if the string of answers are equal to or greater than the index (+1 cause not index but length) where we expect an existing answer
             console.log("answers.length: " + answers.length.toString());
-            console.log("UpdateAnswer()*3-3+1: " + (UpdateAnswer()*3-3+1).toString());
+            console.log("UpdateAnswer()*3-3+1: " + (UpdateAnswer() * 3 - 3 + 1).toString());
 
-            var index = UpdateAnswer()*3-3;
+            var index = UpdateAnswer() * 3 - 3;
             console.log("Index is:: " + index.toString());
             console.log(answers);
             //answers = setCharAt(answers,index,'3');
-            setAnswers(setCharAt(answers,index,'3') )
+            setAnswers(setCharAt(answers, index, '3'))
             console.log(answers);
 
         } else {
@@ -418,15 +418,15 @@ function Quiz() {
         setActive4(!active4);
 
         //Check if an answer already has been made, and in that case change it.
-        if (answers.length >= UpdateAnswer()*3-3+1) { //if the string of answers are equal to or greater than the index (+1 cause not index but length) where we expect an existing answer
+        if (answers.length >= UpdateAnswer() * 3 - 3 + 1) { //if the string of answers are equal to or greater than the index (+1 cause not index but length) where we expect an existing answer
             console.log("answers.length: " + answers.length.toString());
-            console.log("UpdateAnswer()*3-3+1: " + (UpdateAnswer()*3-3+1).toString());
+            console.log("UpdateAnswer()*3-3+1: " + (UpdateAnswer() * 3 - 3 + 1).toString());
 
-            var index = UpdateAnswer()*3-3;
+            var index = UpdateAnswer() * 3 - 3;
             console.log("Index is:: " + index.toString());
             console.log(answers);
             //answers = setCharAt(answers,index,'4');
-            setAnswers(setCharAt(answers,index,'4') )
+            setAnswers(setCharAt(answers, index, '4'))
             console.log(answers);
 
         } else {
@@ -437,62 +437,67 @@ function Quiz() {
     }
 
     if (!end) {
-    return (
+        return (
 
-        <div onLoad={quizInit()}>
-            <Helmet>
-                <title>NEM Læringsplatform | Quiz</title>
-            </Helmet>
+            <div onLoad={quizInit()}>
+                <Helmet>
+                    <title>NEM Læringsplatform | Quiz</title>
+                </Helmet>
 
-            <div>
-                <img onClick={toHome} src={logo} alt="logo" className="logo"/>
-                <div className={"right"}>Velkommen {username}</div>
-            </div>
-
-            <div className={"center_p"}>
                 <div>
-                    <div
-                        style={{display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        paddingBottom: "100px"}}
-                    ><h1>{"Matematik 5-1_HARDCODE"}</h1></div>
+                    <img onClick={toHome} src={logo} alt="logo" className="logo"/>
+                    <div className={"right"}>Velkommen {username}</div>
                 </div>
-                <div>
-                    <h3 style={{display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        paddingBottom: "0px"}} > {paramQuestionId-100}: {dbquestions[paramQuestionId-101].questionName }{/*{eval(questionFromParam)*/} </h3>
+
+                <div className={"center_p"}>
                     <div>
-                        <ul >
-                            <Button name={"option1"} style={{backgroundColor: active1 ? "lightgray" : ""}}
-                                    onClick={optionOneClick}>{dbquestions[paramQuestionId-101].answera}</Button>
-                            <Button name={"option2"} style={{backgroundColor: active2 ? "lightgray" : ""}}
-                                    onClick={optionTwoClick}>{dbquestions[paramQuestionId-101].answerb}</Button>
-                            <Button name={"option3"} style={{backgroundColor: active3 ? "lightgray" : ""}}
-                                    onClick={optionThreeClick}>{dbquestions[paramQuestionId-101].answerc}</Button>
-                            <Button name={"option4"} style={{backgroundColor: active4 ? "lightgray" : ""}}
-                                    onClick={optionFourClick}>{dbquestions[paramQuestionId-101].answerd}</Button>
-
-                        </ul>
+                        <div
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                paddingBottom: "100px"
+                            }}
+                        ><h1>{"Matematik 5-1_HARDCODE"}</h1></div>
                     </div>
-                </div>
-                {/**/}<div>
-                    <button onClick={toPrevQuestion}>Tilbage</button>
-                    <button onClick={toNextQuestion}>Frem</button>
-                </div>
-                <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    paddingTop: "30px",
-                }}>
-                    {/*<button onClick={toQuizzes}>Gem og luk</button> */}
-                    <button onClick={toQuizzes}>Afslut quiz</button>
-                </div>
+                    <div>
+                        <h3 style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            paddingBottom: "0px"
+                        }}> {paramQuestionId - 100}: {dbquestions[paramQuestionId - 101].questionName}{/*{eval(questionFromParam)*/} </h3>
+                        <div>
+                            <ul>
+                                <Button name={"option1"} style={{backgroundColor: active1 ? "lightgray" : ""}}
+                                        onClick={optionOneClick}>{dbquestions[paramQuestionId - 101].answera}</Button>
+                                <Button name={"option2"} style={{backgroundColor: active2 ? "lightgray" : ""}}
+                                        onClick={optionTwoClick}>{dbquestions[paramQuestionId - 101].answerb}</Button>
+                                <Button name={"option3"} style={{backgroundColor: active3 ? "lightgray" : ""}}
+                                        onClick={optionThreeClick}>{dbquestions[paramQuestionId - 101].answerc}</Button>
+                                <Button name={"option4"} style={{backgroundColor: active4 ? "lightgray" : ""}}
+                                        onClick={optionFourClick}>{dbquestions[paramQuestionId - 101].answerd}</Button>
 
-                {/* //THIS IS BORROWED FROM, DELETE LATER ONLY FOR TEST  https://github.com/davidrazmadzeExtra/Multiple_Choice_Quiz_ReactJS/blob/main/src/App.js*/}
-                {/*
+                            </ul>
+                        </div>
+                    </div>
+                    {/**/}
+                    <div>
+                        <button onClick={toPrevQuestion}>Tilbage</button>
+                        <button onClick={toNextQuestion}>Frem</button>
+                    </div>
+                    <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        paddingTop: "30px",
+                    }}>
+                        {/*<button onClick={toQuizzes}>Gem og luk</button> */}
+                        <button onClick={toQuizzes}>Afslut quiz</button>
+                    </div>
+
+                    {/* //THIS IS BORROWED FROM, DELETE LATER ONLY FOR TEST  https://github.com/davidrazmadzeExtra/Multiple_Choice_Quiz_ReactJS/blob/main/src/App.js*/}
+                    {/*
                 <ul>
                     {questions[currentQuestion].options.map((option) => <label key={option}>
                         <input
@@ -502,11 +507,10 @@ function Quiz() {
                 </ul>
                 */}
 
+                </div>
             </div>
-        </div>
-    );
-    }
-    else {
+        );
+    } else {
         return (
             <div>
                 Quiz has ended
