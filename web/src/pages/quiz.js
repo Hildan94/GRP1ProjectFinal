@@ -122,9 +122,20 @@ function Quiz() {
     }
 
     const toNextQuestion = () => {
-        if (active1 === active2 === active3 === active4) { // no answer selected, so go no further (or string of answers will break).
-            alert("Please select answer");
-            return;
+        if (active1 === active2 === active3 === active4) { // no answer selected insert answer 0
+            if (answers.length >= UpdateAnswer()*3-3+1) {
+                console.log("answers.length: " + answers.length.toString());
+                console.log("UpdateAnswer()*3-3+1: " + (UpdateAnswer()*3-3+1).toString());
+
+                var index = UpdateAnswer()*3-3;
+                console.log("Index is:: " + index.toString());
+                console.log(answers);
+                //answers = setCharAt(answers,index,'0');
+                setAnswers(setCharAt(answers,index,'0') )
+                console.log(answers);
+            } else {
+                setAnswers(answers + "0, "); //add answer to state of answers
+            }
         }
 
         paramQuestionId++;
@@ -143,9 +154,12 @@ function Quiz() {
             console.log("answerOfQuestionIndex: " + answerOfQuestionIndex.toString());
             let answerOfQuestion = answers.charAt(answerOfQuestionIndex);
             console.log("answerOfQuestion: " + answerOfQuestion.toString());
-            let updateAnswerBox = 'setActive' + answerOfQuestion + '(true)'
-            console.log("updateAnswerBox: " + updateAnswerBox.toString());
-            eval(updateAnswerBox);
+            if (answerOfQuestion.toString() !== "0"){ //have no active0 state so dont run this if it is 0
+                let updateAnswerBox = 'setActive' + answerOfQuestion + '(true)'
+                console.log("updateAnswerBox: " + updateAnswerBox.toString());
+                eval(updateAnswerBox);
+            }
+
         }
 
         console.log("ANSWERS: " + answers.toString());
