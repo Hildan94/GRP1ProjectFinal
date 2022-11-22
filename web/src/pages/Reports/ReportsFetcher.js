@@ -17,7 +17,7 @@ class ReportsFetcher {
 
 
     fetchReports() {
-        fetch(baseUrl + "api/reports/test",{
+        fetch(baseUrl + "api/reports/",{
             method: 'GET',
             headers :{
                 Authorization : localStorage.getItem('userToken')
