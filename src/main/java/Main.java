@@ -22,7 +22,7 @@ public class Main {
             options.setDebug(true);
         });
 
-        System.err.println("Hiberte " + System.getenv("devopse22user") + "hibernate.connection.password" + System.getenv("devopse22pass"));
+        System.err.println("Hiberte " + System.getenv("devopse22user") + " hibernate.connection.password" + System.getenv("devopse22pass"));
         Tomcat tomcat = new Tomcat();
         tomcat.setBaseDir("temp");
         String port = System.getenv("DevOpsPort");
