@@ -180,6 +180,12 @@ function Quiz() {
         //TODO: NOT YET IMPLEMENTED. Get user, questions and quiz/question table data
     }
 
+    const saveQuizToDb = () => {
+        //TODO: NOT YET IMPLEMENTED.
+
+        navigate('/quizzes') //when data is saved navigate back to quizzes
+    }
+
 
     //Saves list of id's of the questions of current quiz to dbQuestionsNo state
     const getQuestionNumbers = () => {
@@ -459,7 +465,7 @@ function Quiz() {
         //toNextQuestion();
     }
 
-    if (!end) { //!
+    if (!end) { // Quiz ongoing
         return (
 
             <div onLoad={quizInit()}>
@@ -479,7 +485,7 @@ function Quiz() {
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                paddingBottom: "100px"
+                                paddingBottom: "70px"
                             }}
                         ><h1>{"Matematik 5-1_HARDCODE"}</h1></div>
                     </div>
@@ -490,7 +496,9 @@ function Quiz() {
                             justifyContent: 'center',
                             paddingBottom: "0px"
                         }}> {paramQuestionId - 100}: {dbquestions[paramQuestionId - 101].questionName}{/*{eval(questionFromParam)*/} </h3>
-                        <div>
+                        <div style={{
+                            textAlign: 'center'
+                        }}>
                             <ul>
                                 <Button name={"option1"} style={{backgroundColor: active1 ? "lightgray" : ""}}
                                         onClick={optionOneClick}>{dbquestions[paramQuestionId - 101].answera}</Button>
@@ -505,7 +513,9 @@ function Quiz() {
                         </div>
                     </div>
                     {/**/}
-                    <div>
+                    <div style={{
+                        textAlign: 'center'
+                    }}>
                         <button onClick={toPrevQuestion}>Tilbage</button>
                         <button onClick={toNextQuestion}>Frem</button>
                     </div>
@@ -516,22 +526,57 @@ function Quiz() {
                         paddingTop: "30px",
                     }}>
                         {/*<button onClick={toQuizzes}>Gem og luk</button> */}
-                        <button onClick={toQuizzes}>Afslut quiz</button>
+                        <button style={{
+                            textAlign: 'center'
+                        }} onClick={toQuizzes}>Afslut quiz</button>
                     </div>
                 </div>
             </div>
         );
-    } else {
+    } else { // Quiz end
         return (
 
             <div>
+                <div>
+                    <img onClick={toHome} src={logo} alt="logo" className="logo"/>
+                    <div className={"right"}>Velkommen {username}</div>
+                </div>
+
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <div style={{
+                    textAlign: 'center',
+                }}>
+                    <h1>Kanon godt gået!</h1>
+                    <h3> Se nedenfor hvordan det er gået</h3>
+                    <button style={{
+                        textAlign: 'center'
+                    }} onClick={saveQuizToDb}>Gem og luk</button>
+                </div>
+                <div style={{
+                    textAlign: 'center',
+                    listStylePosition: 'inside',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    paddingTop: "30px",
+                    paddingBottom: '20px',
+                }}>
                 {dbquestions.map(function(d, idx){
-                    return (<li key={idx}>{d.questionName + ", " + d.correctAnswer + " VALGTSVAR " + answersArr[idx].id}</li>)
+                    return (<ul key={idx}>Spørgsmål: {idx+1 + ": " + d.questionName } <br/>
+                        Dit svar: {answersArr[idx].id} | Korrekt svar: {d.correctAnswer}
+                        <li>Mulighed 1: {d.answera} <br/></li>
+                        <li>Mulighed 2: {d.answerb} <br/></li>
+                        <li>Mulighed 3: {d.answerc} <br/></li>
+                        <li>Mulighed 4: {d.answerd} <br/></li> </ul>)
                     {/*return (<li key={idx}>{d.questionName + ", " + d.correctAnswer + answers.charAt(idx*3-3)}</li>)*/}
                     {/* LØST
                     Answers er her : "2, 4,"
                     */}
                 })}
+                </div>
             </div>
 
         )
