@@ -42,8 +42,8 @@ public class ReportService {
         List reports = session.createQuery("FROM Report").list();
 
         for (Iterator iterator = reports.iterator(); iterator.hasNext(); ) {
-
             Report report = (Report) iterator.next();
+            System.out.println(report);
         }
         return reports;
     }

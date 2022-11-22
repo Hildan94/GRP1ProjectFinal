@@ -40,7 +40,7 @@ function ReportsOverview() {
      * /TODO : Skal vise rigtigt videre
      *
      */
-    const reports = scores.report.map((reportName,outer) =>
+     const reports = scores.report.map((reportName,outer) =>
         <tr>
             {Object.values(reportName).map((value) =>
                 <td>

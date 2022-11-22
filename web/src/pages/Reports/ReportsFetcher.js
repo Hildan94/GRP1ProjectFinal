@@ -3,7 +3,7 @@ import Report from "./Report";
 
 
 const baseUrl = process.env.NODE_ENV === 'development' ?
-    "http://localhost:8080/":""; //Check if dev environment
+    "https://localhost:8080/":""; //Check if dev environment
 
 class ReportsFetcher {
     report = ["Loadin"];
