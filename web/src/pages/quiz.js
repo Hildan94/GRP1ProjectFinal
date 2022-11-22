@@ -114,7 +114,8 @@ var userObject = {
 function UpdateAnswer() {
 
     //Get the correct current question number without unnecessary re-renders
-    var currPath = window.location.pathname;
+    var currPathHash = window.location.hash.toString(); //COULD WORK BY REMOVING THE FIRST #
+    var currPath = currPathHash.slice(1);
     var pathParams = currPath.substring(currPath.indexOf('/') + 6);
     var paramQuestionId = pathParams.substring(pathParams.indexOf('/') + 1);
     var questionFromParamNumber = paramQuestionId - 100;
@@ -148,12 +149,13 @@ function Quiz() {
     const [dbquestions, setdbQuestions] = useState([]); //save all the questions for currently selected quiz
 
     const [searchParams] = useSearchParams();
-    const params = new URLSearchParams(window.location.pathname);
+    var currPathHash = window.location.hash.toString(); //COULD WORK BY REMOVING THE FIRST #
+    var currPath = currPathHash.slice(1);
+    const params = new URLSearchParams(currPath);
 
     let selectedQuestions = 0; //should never exceed 1
     //let selectedAnswer = 0; //0 is default no answer. 1 is option 1, 2 option 2 etc.
 
-    var currPath = window.location.pathname;
     var pathParams = currPath.substring(currPath.indexOf('/') + 6);
     var paramQuizId = pathParams.slice(0, 5);
     var paramQuestionId = pathParams.substring(pathParams.indexOf('/') + 1);
