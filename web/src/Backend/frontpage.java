@@ -6,7 +6,21 @@ package Backend
 @Path ("users")
 public class frontpage {
 
+    /* Snakket med Mikkel. Dette er de linjer der gør at man går
+    * ind i databasen og kigger på userne */
+    Public static void GetUser() {
+        Transaction readTransaction = session.beginTransaction();
+        User readUser = session.get(User.class, user.getId());
+        System.out.println("Read user back: " + readUser.toString());
+        readTransaction.commit();
+    }
 
+// Test af hentning af user
+
+
+
+
+/*
 
     @GET
     @Path("query")
@@ -16,7 +30,7 @@ public class frontpage {
         throw new NoImplementationException("user-queries not implemented, yes");
     }
 
-    /* Bruges en ny exception */
+    /* Bruges en ny exception *//*
     public class NoImplementationException extends Exception {
         public NoImplementationException(String s) {
             super(s);
@@ -33,7 +47,7 @@ public class frontpage {
                             build();
         }
     }
-
+*/
 }
 
 

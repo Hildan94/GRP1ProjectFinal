@@ -70,13 +70,13 @@
         <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
             <artifactId>jersey-container-servlet</artifactId>
-            <version>3.0.8</version>
+            <version>3.0.6</version>
         </dependency>
         <!-- Injection Manager -->
         <dependency>
             <groupId>org.glassfish.jersey.inject</groupId>
             <artifactId>jersey-hk2</artifactId>
-            <version>3.0.8</version>
+            <version>3.0.6</version>
         </dependency>
         <!-- JSON Serializer -->
         <dependency>
@@ -97,7 +97,6 @@
             <version>6.1.4.Final</version>
         </dependency>
         <!-- connection pool -->
-        <dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
