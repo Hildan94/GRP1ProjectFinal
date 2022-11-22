@@ -8,8 +8,11 @@ import {React, useState} from "react";
  *
  * Confirm pw validation from:
  * https://www.cluemediator.com/password-and-confirm-password-validation-in-react#daf
+ *
+ * https://reactjs.org/docs/forms.html
  * */
-
+{/* validateInput is used when the input field is out of focus, and when passwords aren't matchin*/}
+{/* src.java.service.UserService. createUser() */}
 function Signup() {
 
     const navigate = useNavigate()
@@ -47,7 +50,6 @@ function Signup() {
         validateInput(e);
     }
 
-    /* validateInput is used when the input field is out of focus, and when passwords aren't matchin*/
     const validateInput = e => {
         let { name, value } = e.target;
         setError(prev => {
@@ -108,7 +110,6 @@ function Signup() {
             <div className={"sub-main"}>
                 <form>
                     <h1>Opret ny bruger</h1>
-
 
                         <input type="text"
                                name="firstname"
