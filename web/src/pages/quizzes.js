@@ -1,6 +1,21 @@
 import {useNavigate} from "react-router-dom";
 import {React} from "react";
-import { Helmet } from 'react-helmet';
+import {Helmet} from 'react-helmet';
+
+var db_quiz_Object = [
+    {
+        quiz_id: "752",
+        category: "Geografi",
+    },
+
+    {
+        quiz_id: "802",
+        category: "Matematik",
+    },
+];
+
+var quizId, questionId;
+
 
 function Quizzes() {
 
@@ -10,8 +25,12 @@ function Quizzes() {
         navigate('/quiznew')
     }
 
-    const toQuiz = () => {
-        navigate('/quiz')
+    const toQuiz = (e) => {
+        console.log("Selected quiz id: " + e)
+        quizId = e //10001;
+        questionId = 101; //default to 101 atm
+        navigate('/quiz/' + quizId + '/' + questionId)
+
     }
 
     const toReports = () => {
@@ -35,14 +54,16 @@ function Quizzes() {
                 <h2> Vælg den ønskede quiz, opret ny eller generer rapport</h2>
             </div>
             <div>
-                <h3 onClick={toQuiz}> Quiz 1 blok</h3>
-                <h3 onClick={toQuiz}> Quiz 2 blok</h3>
-                <h3 onClick={toQuiz}> Quiz 3 blok</h3>
-                <h3 onClick={toQuiz}> Quiz 4 blok</h3>
+                {db_quiz_Object.map(function (d, idx) {
+                    return (
+                        <ul onClick={() => toQuiz(d.quiz_id)} key={idx}><h3>* Quiz {idx + 1 + ": " + d.category} </h3>
+                        </ul>)
+                })}
             </div>
             <div>
                 <button onClick={toQuiznew}>Opret ny</button>
             </div>
+            <br/>
             <div>
                 <button onClick={toReports}>Generer rapport</button>
             </div>
