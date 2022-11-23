@@ -571,10 +571,6 @@ function Quiz() {
                         <li>Mulighed 2: {d.answerb} <br/></li>
                         <li>Mulighed 3: {d.answerc} <br/></li>
                         <li>Mulighed 4: {d.answerd} <br/></li> </ul>)
-                    {/*return (<li key={idx}>{d.questionName + ", " + d.correctAnswer + answers.charAt(idx*3-3)}</li>)*/}
-                    {/* LØST
-                    Answers er her : "2, 4,"
-                    */}
                 })}
                 </div>
             </div>
