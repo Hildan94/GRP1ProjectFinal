@@ -2,6 +2,30 @@ import {useNavigate} from "react-router-dom";
 import {React} from "react";
 import { Helmet } from 'react-helmet';
 
+var db_quiz_Object = [
+    {
+        quiz_id: "752",
+        category: "Geografi",
+    },
+
+    {
+        quiz_id: "802",
+        questionslist_id: "Matematik",
+    },
+];
+
+var quizId, questionId;
+
+function toQuizParam(quizId, quizName){
+    //const navigate = useNavigate()
+    console.log("THIS");
+    console.log(quizId)
+    var id = quizId
+    //navigate('/quiz/' + id + '/' + questionId)
+}
+
+
+
 function Quizzes() {
 
     const navigate = useNavigate()
@@ -10,8 +34,20 @@ function Quizzes() {
         navigate('/quiznew')
     }
 
-    const toQuiz = () => {
-        navigate('/quiz')
+    // Handler for user first name change event
+    const toQuiz = (e) => {
+        console.log("Selected quiz id: " + e)
+        quizId = e //10001;
+        questionId = 101; //default to 101 atm
+        navigate('/quiz/' + quizId + '/' + questionId)
+
+    }
+
+    const toQuiz_old = () => {
+        //quizId = 10001;//Fix quiz id here
+        questionId = 101; //default to 101 atm
+        //navigate('/quiz/?quizid=' + quizId + '&questionid=' + questionId)
+        navigate('/quiz/' + quizId + '/' + questionId)
     }
 
     const toReports = () => {
@@ -34,12 +70,11 @@ function Quizzes() {
                 <h1> VALGT FAG </h1>
                 <h2> Vælg den ønskede quiz, opret ny eller generer rapport</h2>
             </div>
-            <div>
-                <h3 onClick={toQuiz}> Quiz 1 blok</h3>
-                <h3 onClick={toQuiz}> Quiz 2 blok</h3>
-                <h3 onClick={toQuiz}> Quiz 3 blok</h3>
-                <h3 onClick={toQuiz}> Quiz 4 blok</h3>
-            </div>
+            <div class="bold">
+                {db_quiz_Object.map(function(d, idx){
+                    return (<ul onClick={() => toQuiz(d.quiz_id)} key={idx}>Quiz {idx+1 + ": " + d.category } </ul>)
+                })}
+            </div> {/* onClick={() => toQuizParam(d.quiz_id)}*/}
             <div>
                 <button onClick={toQuiznew}>Opret ny</button>
             </div>
