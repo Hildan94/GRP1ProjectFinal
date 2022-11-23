@@ -1,6 +1,6 @@
 import {useNavigate} from "react-router-dom";
 import {React} from "react";
-import { Helmet } from 'react-helmet';
+import {Helmet} from 'react-helmet';
 
 var db_quiz_Object = [
     {
@@ -54,13 +54,16 @@ function Quizzes() {
                 <h2> Vælg den ønskede quiz, opret ny eller generer rapport</h2>
             </div>
             <div>
-                {db_quiz_Object.map(function(d, idx){
-                    return (<ul onClick={() => toQuiz(d.quiz_id)} key={idx}>Quiz {idx+1 + ": " + d.category } </ul>)
+                {db_quiz_Object.map(function (d, idx) {
+                    return (
+                        <ul onClick={() => toQuiz(d.quiz_id)} key={idx}><h3>* Quiz {idx + 1 + ": " + d.category} </h3>
+                        </ul>)
                 })}
             </div>
             <div>
                 <button onClick={toQuiznew}>Opret ny</button>
             </div>
+            <br/>
             <div>
                 <button onClick={toReports}>Generer rapport</button>
             </div>
