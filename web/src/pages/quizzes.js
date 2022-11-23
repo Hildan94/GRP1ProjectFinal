@@ -10,7 +10,7 @@ var db_quiz_Object = [
 
     {
         quiz_id: "802",
-        questionslist_id: "Matematik",
+        category: "Matematik",
     },
 ];
 
