@@ -3,41 +3,40 @@ import {React, useState} from "react";
 import {Helmet} from 'react-helmet';
 import logo from "./../image/NEM_logo_noBackground2.png";
 import './../Backend/quiz.css';
-import {Checkbox, checkboxClasses} from "@mui/material";
 import {useSearchParams} from "react-router-dom";
-import {RadioButtonUnchecked, Update} from "@material-ui/icons";
 import Button from "@mui/material/Button";
 
 
-var currUserId, courseName, quizId, username;
+var currUserId, category, quizId, username;
 
 var quizObject = {
-    "id": quizId = 452,
+    "id": quizId = 752,
+    "category": category = "Matematik",
 }
 
 var db_quiz_questionsObject = [
     {
-        quiz_id: "452",
+        quiz_id: "752",
         questionslist_id: "452",
     },
 
     {
-        quiz_id: "452",
+        quiz_id: "752",
         questionslist_id: "453",
     },
 
     {
-        quiz_id: "502",
+        quiz_id: "802",
         questionslist_id: "502",
     },
 
     {
-        quiz_id: "502",
+        quiz_id: "802",
         questionslist_id: "503",
     },
 
     {
-        quiz_id: "552",
+        quiz_id: "802",
         questionslist_id: "552",
     },
 
@@ -70,7 +69,7 @@ var questionsObject = [
 
     {
         questionName: "Hovedstad i EN?502",
-        correctAnswer: 0,
+        correctAnswer: 1,
         questionId: 502,
         questionNo: questionNumber++,
         answera: "London",
@@ -81,7 +80,7 @@ var questionsObject = [
 
     {
         questionName: "Hovedstad i EN?503",
-        correctAnswer: 0,
+        correctAnswer: 2,
         questionId: 503,
         questionNo: questionNumber++,
         answera: "London",
@@ -92,7 +91,7 @@ var questionsObject = [
 
     {
         questionName: "Hovedstad i EN?552",
-        correctAnswer: 0,
+        correctAnswer: 3,
         questionId: 552,
         questionNo: questionNumber++,
         answera: "London",
@@ -110,7 +109,7 @@ var userObject = {
 function UpdateAnswer() {
 
     //Get the correct current question number without unnecessary re-renders
-    var currPathHash = window.location.hash.toString(); //COULD WORK BY REMOVING THE FIRST #
+    var currPathHash = window.location.hash.toString();
     var currPath = currPathHash.slice(1);
     var pathParams = currPath.substring(currPath.indexOf('/') + 6);
     var paramQuestionId = pathParams.substring(pathParams.indexOf('/') + 1);
@@ -145,12 +144,12 @@ function Quiz() {
     const [dbquestions, setdbQuestions] = useState([]); //save all the questions for currently selected quiz
 
     const [searchParams] = useSearchParams();
-    var currPathHash = window.location.hash.toString(); //COULD WORK BY REMOVING THE FIRST #
+    var currPathHash = window.location.hash.toString();
     var currPath = currPathHash.slice(1);
     const params = new URLSearchParams(currPath);
 
     var pathParams = currPath.substring(currPath.indexOf('/') + 6);
-    var paramQuizId = pathParams.slice(0, 5);
+    var paramQuizId = pathParams.slice(0, 3); //can only be used if quizid is a fixed length, which it may not
     var paramQuestionId = pathParams.substring(pathParams.indexOf('/') + 1);
 
     var questionFromParam = 'quizObject_old.question' + (paramQuestionId - 100);
@@ -180,7 +179,27 @@ function Quiz() {
 
     //Saves list of id's of the questions of current quiz to dbQuestionsNo state
     const getQuestionNumbers = () => {
-        const testQuizId = 452;
+        const testQuizId = paramQuizId;//paramQuizId; //452;
+
+        /*
+
+        //BUG: Does only load is testQuizId = 752?
+        //TODO: Fix
+        // Console here
+
+        console.log("<<<<<<<<<<<START OF MY ERROR CHECKS ")
+        console.log(db_quiz_questionsObject.length) //5 ved 752, kører kun 1 gang || 5 ved 802 men viser intet dog kører dette 2 gange
+        console.log(db_quiz_questionsObject[0].quiz_id) // 752 ved 752 kun 1 gang ||
+        console.log(testQuizId.toString())
+        console.log(db_quiz_questionsObject[0].questionslist_id.toString())
+        //console.log(dbquestionsNo[0].id) THIS BREAKS THE LAST QUIZ!!!
+        console.log(dbquestionsNo)
+        console.log("<<<<<<<<<<<END OF MY ERROR CHECKS ")
+
+
+
+         */
+
 
         for (let i = 0; i < db_quiz_questionsObject.length; i++) {
             if (db_quiz_questionsObject[i].quiz_id === testQuizId.toString()) {
@@ -189,7 +208,7 @@ function Quiz() {
                 dbquestionsNo.push({
                     id: db_quiz_questionsObject[i].questionslist_id,
                 });
-                console.log("Mit arrays værdi er " + dbquestionsNo[i].id);
+                //console.log("Mit arrays værdi er " + dbquestionsNo[i].id); //this breaks the last quiz
                 console.log(dbquestionsNo);
             }
         }
