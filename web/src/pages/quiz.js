@@ -243,9 +243,9 @@ function Quiz() {
         }
 
         //get all your answers in an array
-        for (let i = 1; i < dbquestionsNo.length+1; i++) {
+        for (let i = 1; i < dbquestionsNo.length + 1; i++) {
             answersArr.push({
-                id: answers.charAt(i*3-3),
+                id: answers.charAt(i * 3 - 3),
             });
         }
         console.log(answersArr);
@@ -493,7 +493,8 @@ function Quiz() {
                     }}>
                         <button style={{
                             textAlign: 'center'
-                        }} onClick={toQuizzes}>Afslut quiz</button>
+                        }} onClick={toQuizzes}>Afslut quiz
+                        </button>
                     </div>
                 </div>
             </div>
@@ -519,7 +520,8 @@ function Quiz() {
                     <h3> Se nedenfor hvordan det er gået</h3>
                     <button style={{
                         textAlign: 'center'
-                    }} onClick={saveQuizToDb}>Gem og luk</button>
+                    }} onClick={saveQuizToDb}>Gem og luk
+                    </button>
                 </div>
                 <div style={{
                     textAlign: 'center',
@@ -529,14 +531,15 @@ function Quiz() {
                     paddingTop: "30px",
                     paddingBottom: '20px',
                 }}>
-                {dbquestions.map(function(d, idx){
-                    return (<ul key={idx}>Spørgsmål: {idx+1 + ": " + d.questionName } <br/>
-                        Dit svar: {answersArr[idx].id} | Korrekt svar: {d.correctAnswer}
-                        <li>Mulighed 1: {d.answera} <br/></li>
-                        <li>Mulighed 2: {d.answerb} <br/></li>
-                        <li>Mulighed 3: {d.answerc} <br/></li>
-                        <li>Mulighed 4: {d.answerd} <br/></li> </ul>)
-                })}
+                    {dbquestions.map(function (d, idx) {
+                        return (<ul key={idx}>Spørgsmål: {idx + 1 + ": " + d.questionName} <br/>
+                            Dit svar: {answersArr[idx].id} | Korrekt svar: {d.correctAnswer}
+                            <li>Mulighed 1: {d.answera} <br/></li>
+                            <li>Mulighed 2: {d.answerb} <br/></li>
+                            <li>Mulighed 3: {d.answerc} <br/></li>
+                            <li>Mulighed 4: {d.answerd} <br/></li>
+                        </ul>)
+                    })}
                 </div>
             </div>
 
