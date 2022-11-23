@@ -16,15 +16,6 @@ var db_quiz_Object = [
 
 var quizId, questionId;
 
-function toQuizParam(quizId, quizName){
-    //const navigate = useNavigate()
-    console.log("THIS");
-    console.log(quizId)
-    var id = quizId
-    //navigate('/quiz/' + id + '/' + questionId)
-}
-
-
 
 function Quizzes() {
 
@@ -34,20 +25,12 @@ function Quizzes() {
         navigate('/quiznew')
     }
 
-    // Handler for user first name change event
     const toQuiz = (e) => {
         console.log("Selected quiz id: " + e)
         quizId = e //10001;
         questionId = 101; //default to 101 atm
         navigate('/quiz/' + quizId + '/' + questionId)
 
-    }
-
-    const toQuiz_old = () => {
-        //quizId = 10001;//Fix quiz id here
-        questionId = 101; //default to 101 atm
-        //navigate('/quiz/?quizid=' + quizId + '&questionid=' + questionId)
-        navigate('/quiz/' + quizId + '/' + questionId)
     }
 
     const toReports = () => {
@@ -70,11 +53,11 @@ function Quizzes() {
                 <h1> VALGT FAG </h1>
                 <h2> Vælg den ønskede quiz, opret ny eller generer rapport</h2>
             </div>
-            <div class="bold">
+            <div>
                 {db_quiz_Object.map(function(d, idx){
                     return (<ul onClick={() => toQuiz(d.quiz_id)} key={idx}>Quiz {idx+1 + ": " + d.category } </ul>)
                 })}
-            </div> {/* onClick={() => toQuizParam(d.quiz_id)}*/}
+            </div>
             <div>
                 <button onClick={toQuiznew}>Opret ny</button>
             </div>
