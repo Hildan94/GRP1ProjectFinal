@@ -242,8 +242,67 @@ function Quiz() {
             return;
         }
 
-        //TEST MED ANSWER ARRAY TIL VISNING
 
+        //TEST MED ANSWER ARRAY TIL VISNING
+        console.log("længde : " + answers.length.toString())
+
+        /*
+        answersArr.push({
+            id: answers.charAt(0),
+        });
+
+         */
+
+        console.log("DBQUESTIONS" + dbquestionsNo.length)
+
+
+        for (let i = 1; i < dbquestionsNo.length+1; i++) {
+            answersArr.push({
+                id: answers.charAt(i*3-3),
+            });
+            /*
+            if (i === 0) {
+                answersArr.push({
+                    id: answers.charAt(i),
+                });
+            } else {
+                i*3-3
+                0*3-3 = -3
+                1*3-3 = 0
+                2*3-3 = 3
+                3*3-3= 6
+            }
+
+             */
+            /*
+            answersArr.push({
+                id: answers.charAt(i),
+            });
+            console.log(answersArr)
+            console.log(i)
+
+             */
+        }
+
+
+
+
+/*
+        for (let i = 3; i <= answers.length; i+3) {
+            answersArr.push({
+                id: answers.charAt(i),
+            });
+            console.log(answersArr)
+            console.log(i)
+        }
+
+
+ */
+
+
+
+
+/*
         answersArr.push({
             id: answers.charAt(0),
         });
@@ -252,6 +311,11 @@ function Quiz() {
             id: answers.charAt(3),
         });
 
+
+ */
+
+
+        console.log("CHECK THIS OUT");
         console.log(answersArr);
 
         //TEST MED ANSWER ARRAY SLUT
