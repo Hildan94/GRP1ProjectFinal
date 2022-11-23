@@ -179,27 +179,7 @@ function Quiz() {
 
     //Saves list of id's of the questions of current quiz to dbQuestionsNo state
     const getQuestionNumbers = () => {
-        const testQuizId = paramQuizId;//paramQuizId; //452;
-
-        /*
-
-        //BUG: Does only load is testQuizId = 752?
-        //TODO: Fix
-        // Console here
-
-        console.log("<<<<<<<<<<<START OF MY ERROR CHECKS ")
-        console.log(db_quiz_questionsObject.length) //5 ved 752, kører kun 1 gang || 5 ved 802 men viser intet dog kører dette 2 gange
-        console.log(db_quiz_questionsObject[0].quiz_id) // 752 ved 752 kun 1 gang ||
-        console.log(testQuizId.toString())
-        console.log(db_quiz_questionsObject[0].questionslist_id.toString())
-        //console.log(dbquestionsNo[0].id) THIS BREAKS THE LAST QUIZ!!!
-        console.log(dbquestionsNo)
-        console.log("<<<<<<<<<<<END OF MY ERROR CHECKS ")
-
-
-
-         */
-
+        const testQuizId = paramQuizId; //452;
 
         for (let i = 0; i < db_quiz_questionsObject.length; i++) {
             if (db_quiz_questionsObject[i].quiz_id === testQuizId.toString()) {
@@ -472,7 +452,7 @@ function Quiz() {
                                 justifyContent: 'center',
                                 paddingBottom: "70px"
                             }}
-                        ><h1>{"Matematik 5-1_HARDCODE"}</h1></div>
+                        ><h1>{quizObject.category}</h1></div>
                     </div>
                     <div>
                         <h3 style={{
@@ -480,7 +460,7 @@ function Quiz() {
                             alignItems: 'center',
                             justifyContent: 'center',
                             paddingBottom: "0px"
-                        }}> {paramQuestionId - 100}: {dbquestions[paramQuestionId - 101].questionName}{/*{eval(questionFromParam)*/} </h3>
+                        }}> {paramQuestionId - 100}: {dbquestions[paramQuestionId - 101].questionName}</h3>
                         <div style={{
                             textAlign: 'center'
                         }}>
@@ -497,7 +477,6 @@ function Quiz() {
                             </ul>
                         </div>
                     </div>
-                    {/**/}
                     <div style={{
                         textAlign: 'center'
                     }}>
