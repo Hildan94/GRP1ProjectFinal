@@ -9,11 +9,7 @@ import {RadioButtonUnchecked, Update} from "@material-ui/icons";
 import Button from "@mui/material/Button";
 
 
-var currUserId, courseName, quizId, firstName, questionsCount, quizName, lastName, username;
-var question1, question2, question3, answer1, answer2, answer3, boolQuestion;
-var questionCounter; //used to keep track of current question no for page no | locally
-
-var quizIdParam = 1;
+var currUserId, courseName, quizId, username;
 
 var quizObject = {
     "id": quizId = 452,
@@ -153,16 +149,11 @@ function Quiz() {
     var currPath = currPathHash.slice(1);
     const params = new URLSearchParams(currPath);
 
-    let selectedQuestions = 0; //should never exceed 1
-    //let selectedAnswer = 0; //0 is default no answer. 1 is option 1, 2 option 2 etc.
-
     var pathParams = currPath.substring(currPath.indexOf('/') + 6);
     var paramQuizId = pathParams.slice(0, 5);
     var paramQuestionId = pathParams.substring(pathParams.indexOf('/') + 1);
 
     var questionFromParam = 'quizObject_old.question' + (paramQuestionId - 100);
-    let questionFromParamNumber = paramQuestionId - 100;
-    console.log(questionFromParam);
 
 
     const navigate = useNavigate()
@@ -211,8 +202,6 @@ function Quiz() {
         for (let i = 0; i < questionsObject.length; i++) {
             for (let j = 0; j < dbquestionsNo.length; j++) { //only search for the indexes where we expect to have questions. Fx 2 questions, dont look at 3
                 if (questionsObject[i].questionId.toString() === dbquestionsNo[j].id.toString()) {
-                    //console.log("QUIZSPØRGSMÅLETS ID: " + questionsObject[i].questionId.toString())
-                    //console.log("SPM ID FRA LISTE: " + dbquestionsNo[j].id.toString())
 
                     if (!dbquestions.includes(questionsObject[i].questionId)) { //only add if not already added
                         console.log("new question added")
@@ -229,7 +218,6 @@ function Quiz() {
                         });
                     }
                     //console.log("Mit Questions arrays værdi er " + dbquestions[j].questionId);
-                    //console.log(dbquestions);
                 }
             }
         }
@@ -287,7 +275,6 @@ function Quiz() {
                 var index = UpdateAnswer() * 3 - 3;
                 console.log("Index is:: " + index.toString());
                 console.log(answers);
-                //answers = setCharAt(answers,index,'0');
                 setAnswers(setCharAt(answers, index, '0'))
                 console.log(answers);
             } else {
@@ -360,10 +347,6 @@ function Quiz() {
 
     }
 
-    const toQuestion = () => {
-        navigate('/home')
-    }
-
     const optionOneClick = () => {
         setActive1(!active1);
         setActive2(false);
@@ -378,7 +361,6 @@ function Quiz() {
             var index = UpdateAnswer() * 3 - 3;
             console.log("Index is:: " + index.toString());
             console.log(answers);
-            //answers = setCharAt(answers,index,'1');
             setAnswers(setCharAt(answers, index, '1'))
             console.log(answers);
 
@@ -386,8 +368,6 @@ function Quiz() {
             setAnswers(answers + "1, "); //add answer to state of answers
         }
         console.log("Answers list (one behind!):: " + answers);
-
-        //toNextQuestion();
     }
 
     const optionTwoClick = () => {
@@ -405,7 +385,6 @@ function Quiz() {
             var index = UpdateAnswer() * 3 - 3;
             console.log("Index is:: " + index.toString());
             console.log(answers);
-            //answers = setCharAt(answers,index,'2');
             setAnswers(setCharAt(answers, index, '2'))
             console.log(answers);
 
@@ -413,7 +392,6 @@ function Quiz() {
             setAnswers(answers + "2, "); //add answer to state of answers
         }
         console.log("Answers list (one behind!):: " + answers);
-        //toNextQuestion();
     }
 
     const optionThreeClick = () => {
@@ -430,7 +408,6 @@ function Quiz() {
             var index = UpdateAnswer() * 3 - 3;
             console.log("Index is:: " + index.toString());
             console.log(answers);
-            //answers = setCharAt(answers,index,'3');
             setAnswers(setCharAt(answers, index, '3'))
             console.log(answers);
 
@@ -438,7 +415,6 @@ function Quiz() {
             setAnswers(answers + "3, "); //add answer to state of answers
         }
         console.log("Answers list (one behind!):: " + answers);
-        //toNextQuestion();
     }
     const optionFourClick = () => {
         setActive1(false);
@@ -454,7 +430,6 @@ function Quiz() {
             var index = UpdateAnswer() * 3 - 3;
             console.log("Index is:: " + index.toString());
             console.log(answers);
-            //answers = setCharAt(answers,index,'4');
             setAnswers(setCharAt(answers, index, '4'))
             console.log(answers);
 
@@ -462,7 +437,6 @@ function Quiz() {
             setAnswers(answers + "4, "); //add answer to state of answers
         }
         console.log("Answers list (one behind!):: " + answers);
-        //toNextQuestion();
     }
 
     if (!end) { // Quiz ongoing
@@ -525,7 +499,6 @@ function Quiz() {
                         justifyContent: 'center',
                         paddingTop: "30px",
                     }}>
-                        {/*<button onClick={toQuizzes}>Gem og luk</button> */}
                         <button style={{
                             textAlign: 'center'
                         }} onClick={toQuizzes}>Afslut quiz</button>
