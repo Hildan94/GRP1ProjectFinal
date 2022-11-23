@@ -6,6 +6,7 @@ import {observable} from "mobx";
 import {tokenStore} from "../../stores/TokenStore";
 import {Form} from "react-bootstrap";
 import Button from "@mui/material/Button";
+import reportObject from "./ReportObject";
 
 
 //TODO: Tokens
@@ -93,6 +94,9 @@ function ReportsOverview() {
                 <button onClick={scores.fetchReports}> Tryk for at indlæse værdier </button>
                 <button onClick={printToken}> Print token </button>
                 <button onClick={clearToken}> Ryd token </button>
+            </div>
+            <div>
+                <button onClick={scores.reqeustCreateReport}> Lav rapport </button>
             </div>
         </div>
     );

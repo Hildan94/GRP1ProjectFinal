@@ -10,6 +10,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.testng.annotations.Test;
 import service.JWTHandler;
+import service.ReportService;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -21,8 +22,21 @@ import java.net.http.HttpRequest;
 import java.util.Iterator;
 import java.util.List;
 
+import static org.testng.Assert.assertEquals;
+
 public class TestReportService {
     private static final SessionFactory sessionFactory = new HibernateController("pgtest-db.caprover.grp1.diplomportal.dk:6543/pg").getSessionFactory();
+
+
+    @Test
+    public void backendReportTest(){
+        Report report = new Report();
+        report.setId(1415);
+        report.setUserId("Melman");
+
+        ReportService service = new ReportService();
+        service.createReporttest(report);
+    }
 
 
     /**
@@ -38,7 +52,6 @@ public class TestReportService {
         JWTHandler.validate(token);
 
         System.out.println(JWTHandler.validate(token));
-
     }
 
 

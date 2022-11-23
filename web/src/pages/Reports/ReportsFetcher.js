@@ -1,12 +1,15 @@
 import {makeAutoObservable, runInAction} from "mobx";
 import Report from "./Report";
+import ReportObject from "./ReportObject";
 
 
 const baseUrl = process.env.NODE_ENV === 'development' ?
-    "https://localhost:8080/":""; //Check if dev environment
+    "http://localhost:8080/":""; //Check if dev environment
 
 class ReportsFetcher {
-    report = ["Loadin"];
+    report = ["     "];
+
+    report1 = ReportObject;
 
     constructor() {
         makeAutoObservable(this,{},{autoBind:true});
@@ -48,6 +51,19 @@ class ReportsFetcher {
             )
         )
 
+    }
+
+    reqeustCreateReport(){
+        this.report1.idUser = 'haha'
+        this.report1.quizResultTotalQuestion = '2'
+        this.report1.quizRightResult = '1'
+        fetch(baseUrl + 'api/reports/test', {
+            method: 'POST',
+            body:JSON.stringify(this.report1),
+            headers :{
+                'Content-Type' : 'application/json'
+            }
+        }).then()
     }
 }
 

@@ -30,6 +30,15 @@ public class ReportService {
 
     }
 
+    @Path("test")
+    @POST
+    public void createReporttest(Report report){
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        session.persist(report);
+        transaction.commit();
+    }
+
     @GET
     public List<Report> reports(@HeaderParam("Authorization") String token){
         User user = JWTHandler.validate(token);
