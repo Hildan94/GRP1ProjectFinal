@@ -27,16 +27,8 @@ public class ReportService {
         Transaction transaction = session.beginTransaction();
         session.persist(report);
         transaction.commit();
+        session.close();
 
-    }
-
-    @Path("test")
-    @POST
-    public void createReporttest(Report report){
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        session.persist(report);
-        transaction.commit();
     }
 
     @GET

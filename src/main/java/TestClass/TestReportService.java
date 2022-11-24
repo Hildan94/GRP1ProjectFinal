@@ -12,58 +12,27 @@ import org.testng.annotations.Test;
 import service.JWTHandler;
 import service.ReportService;
 
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLParameters;
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
+import java.net.*;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.time.Duration;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
 
 import static org.testng.Assert.assertEquals;
 
 public class TestReportService {
     private static final SessionFactory sessionFactory = new HibernateController("pgtest-db.caprover.grp1.diplomportal.dk:6543/pg").getSessionFactory();
 
-
-    @Test
-    public void backendReportTest(){
-        Report report = new Report();
-        report.setId(1415);
-        report.setUserId("Melman");
-
-        ReportService service = new ReportService();
-        service.createReporttest(report);
-    }
-
-
-    /**
-     * Doesnt work
-     * TODO: FIX
-     */
-    @Test
-    public void testCreateReportHTTP(){
-        Transaction transaction = sessionFactory.openSession().beginTransaction();
-        User user = new User();
-        String token = JWTHandler.generateJwtToken(user);
-        System.out.println(token);
-        JWTHandler.validate(token);
-
-        System.out.println(JWTHandler.validate(token));
-    }
-
-
-    //TODO: Finish this
     @Test
     public void testCreateReport(){
-        /*
-        HibernateController hibernateController =
-
-                new HibernateController("pgtest-db.caprover.grp1.diplomportal.dk:6543/pg");
-        SessionFactory sessionFactory = hibernateController.getSessionFactory();
-        */
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         Report report = new Report();

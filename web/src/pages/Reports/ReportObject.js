@@ -1,12 +1,12 @@
 
-let idUser, quizName, quizResultTotalQuestion, quizRightResult, idReport;
+let id, quizName, quizResultTotalQuestions, quizRightResults, userId;
 
 const reportObject ={
-    idReport,
+    id,
     quizName,
-    quizResultTotalQuestion,
-    quizRightResult,
-    idUser
+    quizResultTotalQuestions,
+    quizRightResults,
+    userId
 }
 
 export default reportObject

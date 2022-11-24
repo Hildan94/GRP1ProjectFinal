@@ -54,14 +54,16 @@ class ReportsFetcher {
     }
 
     reqeustCreateReport(){
-        this.report1.idUser = 'haha'
-        this.report1.quizResultTotalQuestion = '2'
-        this.report1.quizRightResult = '1'
-        fetch(baseUrl + 'api/reports/test', {
+        this.report1.userId = 'haha'
+        this.report1.quizResultTotalQuestions = '2'
+        this.report1.quizRightResults = '1'
+        this.report1.quizName = 'dansk'
+        fetch(baseUrl + 'api/reports', {
             method: 'POST',
             body:JSON.stringify(this.report1),
             headers :{
-                'Content-Type' : 'application/json'
+                'Content-Type' : 'application/json',
+                'Authorization' : localStorage.getItem('userToken')
             }
         }).then()
     }
