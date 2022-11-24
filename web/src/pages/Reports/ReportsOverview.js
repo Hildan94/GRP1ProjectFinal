@@ -6,6 +6,7 @@ import {observable} from "mobx";
 import {tokenStore} from "../../stores/TokenStore";
 import {Form} from "react-bootstrap";
 import Button from "@mui/material/Button";
+import reportObject from "./ReportObject";
 
 
 //TODO: Tokens
@@ -15,6 +16,8 @@ import Button from "@mui/material/Button";
 //TODO: Skal ikke hardcode tabellen (måske tage størrelse af tabel fra reportsfetcheren
 //TODO: Error codes
 //TODO: Fix error messages
+//TODO: Tilføj knapper så der kan sorteres
+//TODO: Skal kun hente for den bruger der spørger?
 /**
  * Tror bare at tokens skal have nogle login data og så virker de
  */
@@ -78,7 +81,7 @@ function ReportsOverview() {
                         <td>quizId</td>
                         <td>quizname</td>
                         <td>quizresultat</td>
-                        <td>quizrigtige</td>
+                        <td>quizspørgsmål</td>
                         <td>userid</td>
                         <td>Klik for at se resultater</td>
 
@@ -91,6 +94,9 @@ function ReportsOverview() {
                 <button onClick={scores.fetchReports}> Tryk for at indlæse værdier </button>
                 <button onClick={printToken}> Print token </button>
                 <button onClick={clearToken}> Ryd token </button>
+            </div>
+            <div>
+                <button onClick={scores.reqeustCreateReport}> Lav rapport </button>
             </div>
         </div>
     );
