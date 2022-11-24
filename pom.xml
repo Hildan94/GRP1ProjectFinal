@@ -162,5 +162,12 @@
             <artifactId>sentry</artifactId>
             <version>6.8.0</version>
         </dependency>
+        <!-- HTTP client -->
+        <dependency>
+            <groupId>com.konghq</groupId>
+            <artifactId>unirest-java</artifactId>
+            <version>3.13.11</version>
+        </dependency>
+
     </dependencies>
 </project>
