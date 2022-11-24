@@ -9,7 +9,9 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriBuilder;
 import kong.unirest.Unirest;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 @Path("campusnet")
 public class CampusNetLogin {
 
@@ -29,12 +31,23 @@ public class CampusNetLogin {
                 .asString()
                 .getBody();
 
-        //TODO Should create user og check if they exist
         if (body.contains("yes")) {
+            User user = new User();
+            user.setUsername(extractUserName(body));
+            UserService service = new UserService();
+
+            if(!service.userInDB(user.getUsername())){
+                service.createInternalUser(user);
+            }
             String tokenString = JWTHandler.generateJwtToken(new User());
             return tokenString;
         }
         throw new NotAuthorizedException("Login failed");
+    }
+
+    private String extractUserName(String response) {
+        String[] responseSplit = response.split("\\r?\\n");
+        return responseSplit[responseSplit.length - 1];
     }
 }
 
