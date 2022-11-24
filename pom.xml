@@ -84,6 +84,17 @@
             <artifactId>jersey-media-json-jackson</artifactId>
             <version>3.0.6</version>
         </dependency>
+        <!-- Forsøger at redde det her projekt! -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>2.0.4</version>
+        </dependency>
         <!-- JaxB XML api to shut up tomcat -->
         <dependency>
             <groupId>javax.xml.bind</groupId>

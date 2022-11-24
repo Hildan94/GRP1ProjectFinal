@@ -1,23 +1,41 @@
 package service;
 
+import DB.HibernateController;
 import DB.User;
 import com.fasterxml.jackson.annotation.JacksonInject;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.engine.spi.SessionDelegatorBaseImpl;
+import org.hibernate.query.Query;
+
+import java.util.List;
 
 /* Backend for login*/
 public class Login {
 
     public void GetUser() {
-        /* Snakket med Mikkel. Dette er de linjer der gør at man går
-         * ind i databasen og kigger på userne */
+        HibernateController hibernateController =
+                new HibernateController("pgtest-db.caprover.grp1.diplomportal.dk:6543/pg");
+        SessionFactory sessionFactory = hibernateController.getSessionFactory();
+        Session session = sessionFactory.openSession();
 
-        SessionDelegatorBaseImpl session = null;
-        JacksonInject.Value user = null;
+        JacksonInject.Value user;
 
         Transaction readTransaction = session.beginTransaction();
-        User readUser = session.get(User.class, user.getId());
-        System.out.println("Read user back: " + readUser.toString());
-        readTransaction.commit();
+
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaQuery<User> cr = cb.createQuery(User.class);
+        Root<User> root = cr.from(User.class);
+        cr.select(root);
+        /* Skriv hvilken user der skal findes */
+        String usertoFind = "";
+        cr.select(root).where(cb.like(root.get("username"), usertoFind));
+
+        Query<User> query = session.createQuery(cr);
+        List<User> results = query.getResultList();
     }
 }

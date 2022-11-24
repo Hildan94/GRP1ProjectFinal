@@ -3,6 +3,7 @@ package DB;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import lombok.extern.slf4j.Slf4j;
 
 public class HibernateController {//Should be a singleton…
     private final SessionFactory sessionFactory;
