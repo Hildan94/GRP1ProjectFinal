@@ -33,11 +33,6 @@ public class ReportService {
 
     @GET
     public List<Report> reports(@HeaderParam("Authorization") String token){
-        User user = JWTHandler.validate(token);
-
-        HibernateController hibernateController =
-                new HibernateController("pgtest-db.caprover.grp1.diplomportal.dk:6543/pg");
-        SessionFactory sessionFactory = hibernateController.getSessionFactory();
         Session session = sessionFactory.openSession();
 
         List reports = session.createQuery("FROM Report").list();
@@ -57,4 +52,10 @@ public class ReportService {
         return report;
     }
 
+    @Path("test")
+    @GET
+    public void test(){
+
+        System.out.println("Der er hul igennem");
+    }
 }
