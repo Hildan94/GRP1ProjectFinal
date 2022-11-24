@@ -48,25 +48,5 @@ public class LoginService {
         User validate = JWTHandler.validate(token);
         return  validate;
     }
-
-    /*
-public class NotAuthorizedException extends Throwable {
-    public NotAuthorizedException(String s) {
-        super((s));
-    }
-}
-
-@Provider
-public class NotAuthorizedExceptionMapper implements ExceptionMapper<NotAuthorizedException> {
-
-    @Override
-    public Response toResponse(NotAuthorizedException e) {
-        return Response.status(Response.Status.UNAUTHORIZED).entity(e.getMessage()).build();
-    }
-}
-
- */
-
-
 }
 
