@@ -21,6 +21,7 @@ public class CampusNetLogin {
         String URI = "https://auth.dtu.dk/dtu/?service=http://localhost:8080/api/campusnet/redirect";
         return Response.seeOther(UriBuilder.fromUri(URI).build()).build();
     }
+    //TODO: Should assign right userId to token when loggin in through campusnet and is existing in DB
     @GET
     @Path("redirect")
     public String callback(@QueryParam("ticket") String cnTicket) throws NotAuthorizedException{
