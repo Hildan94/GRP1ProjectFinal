@@ -63,6 +63,9 @@ public class UserService {
         throw new NoImplementationException("user-queries not implemented yet");
     }
 
+    /**
+     * Should be used with caution!
+     */
     public void createInternalUser(User user){
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
@@ -71,6 +74,9 @@ public class UserService {
         session.close();
     }
 
+    /**
+     * Should be used with caution!
+     */
     public boolean userInDB(String userName){
         Session session = sessionFactory.openSession();
         JpaCriteriaQuery<User> query = session.getCriteriaBuilder().createQuery(User.class);

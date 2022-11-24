@@ -97,6 +97,7 @@ function ReportsOverview() {
             </div>
             <div>
                 <button onClick={scores.reqeustCreateReport}> Lav rapport </button>
+                <button onClick={tokenStore.campusLogin}> Login campusnet </button>
             </div>
         </div>
     );
