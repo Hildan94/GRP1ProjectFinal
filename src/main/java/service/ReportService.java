@@ -56,8 +56,8 @@ public class ReportService {
 
     @Path("test")
     @GET
-    public boolean test(@HeaderParam("Authorization") String token){
+    public boolean test(@HeaderParam("Authorization") String token) throws NoImplementationException {
 
-       return JWTHandler.validated(token);
+       throw new NoImplementationException("Not implemented yet");
     }
 }

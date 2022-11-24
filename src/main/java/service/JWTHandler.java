@@ -10,13 +10,19 @@ import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Calendar;
 
+@Log4j2
 public class JWTHandler {
     private static String key = "hæmli";
     private static final int TOKEN_EXPIRY = 2880; //2 days
     public static String generateJwtToken(User user) {
+
+        log.info(user.getId() + "Is trying to generate a token");
+
         Calendar expiry = Calendar.getInstance();
         expiry.add(Calendar.MINUTE, TOKEN_EXPIRY);
         ObjectMapper objectMapper = new ObjectMapper();
