@@ -15,4 +15,10 @@ WORKDIR /tmp
 COPY --from=MAVEN /tmp/target ./
 COPY --from=REACT /tmp/build ./src/main/webapp/
 EXPOSE 8080
+ARG devopse22user
+ARG devopse22pass
+ENV devopse22user = $devopse22user
+ENV devopse22pass = $devopse22pass
+RUN echo ${devopse22user}
+RUN echo ${devopse22pass}
 CMD ["java","-Xmx1024m", "-jar", "/tmp/devops-fatjar.jar"]

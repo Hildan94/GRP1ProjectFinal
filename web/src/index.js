@@ -3,19 +3,21 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import {HashRouter as Router, Route, Routes} from 'react-router-dom';
 import Signup from "./pages/signup";
 import Home from "./pages/home";
 import Quizzes from "./pages/quizzes";
 import Quiz from "./pages/quiz";
 import Quiznew from "./pages/quiznew";
-import Reports from "./pages/reports";
+import ReportsOverview from "./pages/Reports/ReportsOverview";
+import Notfound from "./pages/notFound";
 
 //<---------- Roboto font ---------->
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
+import Report from "./pages/Reports/Report";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -25,9 +27,11 @@ root.render(
             <Route path="/signup" element={<Signup/>}/>
             <Route path="/home" element={<Home/>}/>
             <Route path="/quizzes" element={<Quizzes/>}/>
-            <Route path="/quiz" element={<Quiz/>}/>
+            <Route exact path="/quiz/:quizid/:questionid" element={<Quiz/>}/>
             <Route path="/quiznew" element={<Quiznew/>}/>
-            <Route path="/reports" element={<Reports/>}/>
+            <Route path="/reportsoverview" element={<ReportsOverview/>}/>
+            <Route path="/reportsoverview/report" element={<Report/>}/>
+            <Route path="*" element={<Notfound/>}/>
         </Routes>
     </Router>
 );
