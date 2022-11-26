@@ -119,7 +119,12 @@ var userObject = {
 function db_getQuiz_old() {
     var retryCount = 0;
 
-    tokenizedAxios.get(`/api/quizresult/quiz`).then((response) => {quizObject = response.data;  console.log(response.data); console.log("HERE");  console.log(quizObject)}).catch(function (error) { //if error retry due to current bug
+    tokenizedAxios.get(`/api/quizresult/quiz`).then((response) => {
+        quizObject = response.data;
+        console.log(response.data);
+        console.log("HERE");
+        console.log(quizObject)
+    }).catch(function (error) { //if error retry due to current bug
         if (error.response) {
             console.log("Error in first iteration of api/quizresult/quiz call");
             retryCount++;
@@ -128,7 +133,11 @@ function db_getQuiz_old() {
                 console.log(error.response.status);
                 console.log(error.response.data);
             } else {
-                tokenizedAxios.get(`/api/quizresult/quiz`).then((response) => {quizObject = response.data; console.log(response.data); console.log(quizObject)}).catch(function (error) {
+                tokenizedAxios.get(`/api/quizresult/quiz`).then((response) => {
+                    quizObject = response.data;
+                    console.log(response.data);
+                    console.log(quizObject)
+                }).catch(function (error) {
                     if (error.response) { //if error, print info
                         console.log(error.response.data.title);
                         console.log(error.response.status);
@@ -202,7 +211,13 @@ function Quiz() {
     const db_getQuiz = () => {
         var retryCount = 0;
 
-        tokenizedAxios.get(`/api/quizresult/quiz`).then((response) => {quizObject = response.data;  console.log(response.data); console.log("1 DOES THIS RUN FIRST OR "); setgetQuizAPI(true); console.log(quizObject)}).catch(function (error) { //if error retry due to current bug
+        tokenizedAxios.get(`/api/quizresult/quiz`).then((response) => {
+            quizObject = response.data;
+            console.log(response.data);
+            console.log("1 DOES THIS RUN FIRST OR ");
+            setgetQuizAPI(true);
+            console.log(quizObject)
+        }).catch(function (error) { //if error retry due to current bug
             if (error.response) {
                 console.log("Error in first iteration of api/quizresult/quiz call");
                 retryCount++;
@@ -211,7 +226,13 @@ function Quiz() {
                     console.log(error.response.status);
                     console.log(error.response.data);
                 } else {
-                    tokenizedAxios.get(`/api/quizresult/quiz`).then((response) => {quizObject = response.data;  console.log(response.data); console.log("1 DOES THIS RUN FIRST OR "); setgetQuizAPI(true); console.log(quizObject)}).catch(function (error) {
+                    tokenizedAxios.get(`/api/quizresult/quiz`).then((response) => {
+                        quizObject = response.data;
+                        console.log(response.data);
+                        console.log("1 DOES THIS RUN FIRST OR ");
+                        setgetQuizAPI(true);
+                        console.log(quizObject)
+                    }).catch(function (error) {
                         if (error.response) { //if error, print info
                             console.log(error.response.data.title);
                             console.log(error.response.status);
@@ -225,11 +246,16 @@ function Quiz() {
     }
 
 
-
     const db_getQuestions = () => { //local object: questionsObject
         var retryCount = 0;
 
-        tokenizedAxios.get(`/api/quizresult/questions`).then((response) => {questionsObject = response.data;  console.log(response.data); console.log("1 DOES THIS RUN FIRST OR "); setgetQuestionsAPI(true); console.log(questionsObject)}).catch(function (error) { //if error retry due to current bug
+        tokenizedAxios.get(`/api/quizresult/questions`).then((response) => {
+            questionsObject = response.data;
+            console.log(response.data);
+            console.log("1 DOES THIS RUN FIRST OR ");
+            setgetQuestionsAPI(true);
+            console.log(questionsObject)
+        }).catch(function (error) { //if error retry due to current bug
             if (error.response) {
                 console.log("Error in first iteration of api/quizresult/questions call");
                 retryCount++;
@@ -238,7 +264,13 @@ function Quiz() {
                     console.log(error.response.status);
                     console.log(error.response.data);
                 } else {
-                    tokenizedAxios.get(`/api/quizresult/questions`).then((response) => {questionsObject = response.data;  console.log(response.data); console.log("1 DOES THIS RUN FIRST OR "); setgetQuestionsAPI(true); console.log(questionsObject)}).catch(function (error) {
+                    tokenizedAxios.get(`/api/quizresult/questions`).then((response) => {
+                        questionsObject = response.data;
+                        console.log(response.data);
+                        console.log("1 DOES THIS RUN FIRST OR ");
+                        setgetQuestionsAPI(true);
+                        console.log(questionsObject)
+                    }).catch(function (error) {
                         if (error.response) { //if error, print info
                             console.log(error.response.data.title);
                             console.log(error.response.status);
@@ -253,7 +285,13 @@ function Quiz() {
     const db_getQuiz_Questions = () => { //local object: db_quiz_questionsObject
         var retryCount = 0;
 
-        tokenizedAxios.get(`/api/quizresult/quizquestions`).then((response) => {db_quiz_questionsObject = response.data;  console.log(response.data); console.log("1 DOES THIS RUN FIRST OR "); setgetQuizQuestionsAPI(true); console.log(db_quiz_questionsObject)}).catch(function (error) { //if error retry due to current bug
+        tokenizedAxios.get(`/api/quizresult/quizquestions`).then((response) => {
+            db_quiz_questionsObject = response.data;
+            console.log(response.data);
+            console.log("1 DOES THIS RUN FIRST OR ");
+            setgetQuizQuestionsAPI(true);
+            console.log(db_quiz_questionsObject)
+        }).catch(function (error) { //if error retry due to current bug
             if (error.response) {
                 console.log("Error in first iteration of api/quizresult/quizquestions call");
                 retryCount++;
@@ -262,7 +300,13 @@ function Quiz() {
                     console.log(error.response.status);
                     console.log(error.response.data);
                 } else {
-                    tokenizedAxios.get(`/api/quizresult/quizquestions`).then((response) => {db_quiz_questionsObject = response.data;  console.log(response.data); console.log("1 DOES THIS RUN FIRST OR "); setgetQuizQuestionsAPI(true); console.log(db_quiz_questionsObject)}).catch(function (error) {
+                    tokenizedAxios.get(`/api/quizresult/quizquestions`).then((response) => {
+                        db_quiz_questionsObject = response.data;
+                        console.log(response.data);
+                        console.log("1 DOES THIS RUN FIRST OR ");
+                        setgetQuizQuestionsAPI(true);
+                        console.log(db_quiz_questionsObject)
+                    }).catch(function (error) {
                         if (error.response) { //if error, print info
                             console.log(error.response.data.title);
                             console.log(error.response.status);
@@ -413,7 +457,7 @@ function Quiz() {
                         console.log(dbquestions);
                         dbquestions.push({ // add question to dbquestions state
                             questionName: questionsObject[i].questionName,
-                            correctanswer: questionsObject[i].correctanswer +1 , //BE AWARE IN THIS DB TABLE CORRECT ANSWERS ARE INDEXED FROM 0-3, AND NOT 1-4. caps or no caps?
+                            correctanswer: questionsObject[i].correctanswer + 1, //BE AWARE IN THIS DB TABLE CORRECT ANSWERS ARE INDEXED FROM 0-3, AND NOT 1-4. caps or no caps?
                             id: questionsObject[i].id,
                             answerA: questionsObject[i].answerA,
                             answerB: questionsObject[i].answerB,
@@ -463,7 +507,6 @@ function Quiz() {
     const endQuiz_notFinished = () => {
         navigate('/home')
     }
-
 
 
     const toNextQuestion = () => {
@@ -655,7 +698,7 @@ function Quiz() {
     else if (!end) { // Quiz ongoing
         return (
 
-            <div onLoad={quizInit()} >
+            <div onLoad={quizInit()}>
                 <Helmet>
                     <title>NEM Læringsplatform | Quiz</title>
                 </Helmet>
