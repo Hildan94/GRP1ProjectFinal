@@ -35,11 +35,12 @@ function UpdateAnswer() {
     var pathParams = currPath.substring(currPath.indexOf('/') + 6);
     var paramQuestionId = pathParams.substring(pathParams.indexOf('/') + 1);
     var questionFromParamNumber = paramQuestionId - 100;
-    console.log("UpdateAnswer says current question is: )" + questionFromParamNumber.toString());
+    console.log("UpdateAnswer says current question is: " + questionFromParamNumber.toString());
     return questionFromParamNumber;
 
 }
 
+//Replaces a character at a specific index.
 //Inspiration:  stackoverflow.com/questions/1431094/how-do-i-replace-a-character-at-a-particular-index-in-javascript
 function setCharAt(str, index, chr) {
     if (index > str.length - 1) return str;
@@ -56,7 +57,6 @@ function Quiz() {
 
     const [end, setEnd] = useState(false); //is quiz ended
 
-    //to be used in api data
     const [getQuizAPI, setgetQuizAPI] = useState(false); //is the API call done
     const [getQuestionsAPI, setgetQuestionsAPI] = useState(false); //is the API call done
     const [getQuizQuestionsAPI, setgetQuizQuestionsAPI] = useState(false); //is the API call done
