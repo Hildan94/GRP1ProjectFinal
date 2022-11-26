@@ -17,12 +17,12 @@ const tokenizedAxios = axios.create({
     }
 })
 
-var currUserId, username;
-var quizObject = [];
-var db_quiz_questionsObject = [];
-var questionsObject = [];
+var currUserId, username; //userId and userName from currently logged in user
+var quizObject = []; //array for quiz objects
+var db_quiz_questionsObject = []; //array for quiz_questions objects
+var questionsObject = []; //array for questions objects
 
-var userObject = {
+var userObject = { //hardcoded user object
     "id": currUserId = 11337,
     "username": username = 'Dennis'
 }
