@@ -46,6 +46,10 @@ function setCharAt(str, index, chr) {
     return str.substring(0, index) + chr + str.substring(index + 1);
 }
 
+function updatePage(){ //updates the page view, in case the automatic load fails
+    window.location.reload();
+}
+
 function Quiz() {
 
     //Use these states to get answers. If active1 === true, then it is chosen, so value 1
@@ -511,7 +515,7 @@ function Quiz() {
         return (
             <div onLoad={getDataFromDb()}>
                 <h1>Quiz loader.. </h1>
-                <button onClick={window.location.reload}>KLik her hvis ikke du føres automatisk videre</button>
+                <button onClick={updatePage}>Klik her for at komme videre</button>
             </div>
         );
     } else if (!end) { // Quiz ongoing
