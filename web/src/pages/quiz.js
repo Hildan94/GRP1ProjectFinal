@@ -99,17 +99,18 @@ function Quiz() {
                         setgetQuizAPI(true);
                         console.log(quizObject)
                     }).catch(function (error) {
-                        if (true) { tokenizedAxios.get(`/api/quizresult/quiz`).then((response) => {
-                            quizObject = response.data;
-                            setgetQuizAPI(true);
-                            console.log(quizObject)
-                        }).catch(function (error) {
-                            if (error.response) { //if error, print info
-                                console.log(error.response.data.title);
-                                console.log(error.response.status);
-                                console.log(error.response.data);
-                            }
-                        })
+                        if (true) {
+                            tokenizedAxios.get(`/api/quizresult/quiz`).then((response) => {
+                                quizObject = response.data;
+                                setgetQuizAPI(true);
+                                console.log(quizObject)
+                            }).catch(function (error) {
+                                if (error.response) { //if error, print info
+                                    console.log(error.response.data.title);
+                                    console.log(error.response.status);
+                                    console.log(error.response.data);
+                                }
+                            })
                         }
                     })
                 }
@@ -236,7 +237,7 @@ function Quiz() {
         })
     }
 
-    //Initializes questionnumbers, questions and quiz name to be loaded
+    //Initializes questionNumbers, questions and quiz name to be loaded
     const quizInit = () => {
         if (dbquestions.length === 0) { //only do this once
             //getDataFromDb();
@@ -246,12 +247,12 @@ function Quiz() {
         }
     }
 
+    //Update quizName state
     const updateQuizName = () => {
-        //console.log("Paramquizid: " + paramQuizId + ". .")
         var quiznumberFromParam = parseInt(paramQuizId); // 752;
         var quizCategory = quizObject.find(x => x.id === quiznumberFromParam)
         //console.log(quizCategory); //entire object
-        console.log("This is : " + quizCategory.category);
+        //console.log("Quiz name is: " + quizCategory.category);
 
         quizName.push({ // add quizname to state array
             category: quizCategory.category,
@@ -259,81 +260,51 @@ function Quiz() {
 
     }
 
+    //Function to call the database update functions
     const getDataFromDb = () => {
-        console.log("<><><><><><>POINT 1")
         db_getQuiz();
-        console.log(quizObject)
-
-        console.log("<><><><><><>POINT 2")
         db_getQuestions();
-        console.log("<><><><><><>POINT 3")
         db_getQuiz_Questions();
-        console.log("<><><><><><>POINT 4")
 
     }
 
-    const saveQuizToDb = () => {
-        navigate('/quizzes') //when data is saved navigate back to quizzes
+    const endQuiz = () => {
+        navigate('/quizzes') //navigate back to quizzes
     }
 
 
     //Saves list of id's of the questions of current quiz to dbQuestionsNo state
-    const getQuestionNumbers = () => { //works as intended || After API Work
-        const testQuizId = paramQuizId; //452;
-
-        console.log("getQuestionNumbers debugging0 : ");
-        console.log(db_quiz_questionsObject);
-        console.log("getQuestionNumbers debugging1 : " + db_quiz_questionsObject.length);
-        console.log("getQuestionNumbers debugging2 : " + db_quiz_questionsObject[0].quiz_id);
-        console.log("getQuestionNumbers debugging3 : " + testQuizId.toString());
-        console.log("getQuestionNumbers debugging4 : " + db_quiz_questionsObject[0].questionslist_id.toString())
-        console.log(dbquestionsNo)
+    const getQuestionNumbers = () => {
+        const testQuizId = paramQuizId;
 
         for (let i = 0; i < db_quiz_questionsObject.length; i++) {
-            console.log("Value I is: " + i.toString())
             if (db_quiz_questionsObject[i].quiz_id.toString() === testQuizId.toString()) {
-                console.log("DO I EVER GO HERE?");
                 console.log(db_quiz_questionsObject[i].questionslist_id.toString())
-                console.log("<<< INDEX " + i.toString() + " TRUE");
+                //console.log("Index: " + i.toString());
 
                 dbquestionsNo.push({
                     id: db_quiz_questionsObject[i].questionslist_id.toString(),
                 });
 
-
-                //console.log("Mit arrays værdi er " + dbquestionsNo[i].id); //this breaks the last quiz
-                console.log("Never get here right?");
+                //console.log("Mit arrays værdi er " + dbquestionsNo[i].id); //breaks the last quiz
                 console.log(dbquestionsNo);
             }
-
-            /*if (i++ === db_quiz_questionsObject.length) { //should not run anymore
-                console.log("JOE does this happen?");
-                getQuestions();
-            }
-
-             */
         }
-
     }
 
     //Saves the array of questions to be taken
     const getQuestions = () => {
 
-        console.log("QUESTIONS METHOD NOW");
-        console.log(questionsObject.length)
-        console.log("QUestions 1: " + questionsObject[0].id.toString())
-        console.log(dbquestionsNo[0].id.toString())
-
         for (let i = 0; i < questionsObject.length; i++) {
-            for (let j = 0; j < dbquestionsNo.length; j++) { //only search for the indexes where we expect to have questions. Fx 2 questions, dont look at 3
+            for (let j = 0; j < dbquestionsNo.length; j++) { //only search for the indexes where we expect to have questions. E.g. 2 questions, don't look at 3
                 if (questionsObject[i].id.toString() === dbquestionsNo[j].id.toString()) {
 
                     if (!dbquestions.includes(questionsObject[i].id)) { //only add if not already added
-                        console.log("new question added")
+                        console.log("New question added")
                         console.log(dbquestions);
                         dbquestions.push({ // add question to dbquestions state
                             questionName: questionsObject[i].questionName,
-                            correctanswer: questionsObject[i].correctanswer + 1, //BE AWARE IN THIS DB TABLE CORRECT ANSWERS ARE INDEXED FROM 0-3, AND NOT 1-4. caps or no caps?
+                            correctanswer: questionsObject[i].correctanswer + 1, //In db table the correct answers are indexed from 0-3 and not 1-4. Therefore, we increment +1.
                             id: questionsObject[i].id,
                             answerA: questionsObject[i].answerA,
                             answerB: questionsObject[i].answerB,
@@ -341,42 +312,37 @@ function Quiz() {
                             answerD: questionsObject[i].answerD,
                         });
                     }
-                    //console.log("Mit Questions arrays værdi er " + dbquestions[j].questionId);
                 }
             }
-            console.log("THIS IS DBQUESTIONS");
             console.log(dbquestions);
         }
-
     }
 
-    const toQuizzes = () => {
+    const toQuizzes = () => { //navigate to path
         navigate('/quizzes')
     }
 
-    const toHome = () => {
+    const toHome = () => { //navigate to path
         navigate('/home')
     }
 
     const endQuiz_finished = () => {
         //check if all questions have been answered
         if (active1 === active2 === active3 === active4) {  //current (last) question has not been answered
-            alert("This last question has not been answered");
+            alert("Det sidste spørgsmål er ikke besvaret");
             return;
         } else if (answers.includes("0")) { //previous question has not been answered
-            alert("One or more earlier questions have not been answered");
+            alert("Et eller flere tidligere spørgsmål er ikke besvaret");
             return;
         }
 
-        //get all your answers in an array
-        for (let i = 1; i < dbquestionsNo.length + 1; i++) {
+        for (let i = 1; i < dbquestionsNo.length + 1; i++) { //get all your answers in an array
             answersArr.push({
                 id: answers.charAt(i * 3 - 3),
             });
         }
         console.log(answersArr);
 
-        //alert("full");
         setEnd(true); //end quiz
     }
 
@@ -384,33 +350,30 @@ function Quiz() {
         navigate('/home')
     }
 
-
-    const toNextQuestion = () => {
+    const toNextQuestion = () => { //Go to next question function
         if (active1 === active2 === active3 === active4) { // no answer selected insert answer 0
-            if (answers.length >= UpdateAnswer() * 3 - 3 + 1) {
+            if (answers.length >= UpdateAnswer() * 3 - 3 + 1) { //add answer to state of answers
                 console.log("answers.length: " + answers.length.toString());
                 console.log("UpdateAnswer()*3-3+1: " + (UpdateAnswer() * 3 - 3 + 1).toString());
 
                 var index = UpdateAnswer() * 3 - 3;
-                console.log("Index is:: " + index.toString());
-                console.log(answers);
+                console.log("Index is: " + index.toString());
                 setAnswers(setCharAt(answers, index, '0'))
                 console.log(answers);
             } else {
-                setAnswers(answers + "0, "); //add answer to state of answers
+                setAnswers(answers + "0, "); //add no answer represented by "0" to state of answers
             }
         }
 
         if (paramQuestionId - 100 === dbquestions.length) { //there are no more questions, end quiz
-            db_postQuizResults(); //send quiz info to db
-            console.log("<<<<<<<>>>>>>");
             console.log(answers);
             endQuiz_finished();
+            db_postQuizResults(); //send quiz info to db
             return;
         }
 
-        paramQuestionId++;
-        navigate(currPath.slice(0, -3) + paramQuestionId)
+        paramQuestionId++; //increment variable for next question
+        navigate(currPath.slice(0, -3) + paramQuestionId) //navigate to next question
 
         //reset selected question
         setActive1(false);
@@ -420,32 +383,28 @@ function Quiz() {
 
         if (answers.length === 0) {
             //At 1st question and it has not been answered. Leave all options unchecked
-        } else {
-            let answerOfQuestionIndex = UpdateAnswer() * 3 - 3//answers.charAt(0); //should return answer of the first question
+        } else { //update answer box if newly navigated question already has an answer
+            let answerOfQuestionIndex = UpdateAnswer() * 3 - 3 //should return answer of the first question
             console.log("answerOfQuestionIndex: " + answerOfQuestionIndex.toString());
             let answerOfQuestion = answers.charAt(answerOfQuestionIndex);
             console.log("answerOfQuestion: " + answerOfQuestion.toString());
-            if (answerOfQuestion.toString() !== "0") { //have no active0 state so dont run this if it is 0
+            if (answerOfQuestion.toString() !== "0") { //have no active0 state so don't run this if it is 0
                 let updateAnswerBox = 'setActive' + answerOfQuestion + '(true)'
                 console.log("updateAnswerBox: " + updateAnswerBox.toString());
                 eval(updateAnswerBox);
             }
-
         }
-
         console.log("ANSWERS: " + answers.toString());
         //console.log("The selected answer for this question is" + question);
-
     }
 
-    const toPrevQuestion = () => {
-        if (paramQuestionId > 101) {
+    const toPrevQuestion = () => { //Go to previous question function
+        if (paramQuestionId > 101) { //cannot go further back than the 1st question
             paramQuestionId--;
         }
-        navigate(currPath.slice(0, -3) + paramQuestionId)
+        navigate(currPath.slice(0, -3) + paramQuestionId) //navigate to question
 
-        //Determine which question this is, and what answer it has saved (if any!, primarily used if this question has already been visited and answered
-
+        //reset selected question
         setActive1(false);
         setActive2(false);
         setActive3(false);
@@ -453,8 +412,8 @@ function Quiz() {
 
         if (answers.length === 0) {
             //At 1st question and it has not been answered. Leave all options unchecked
-        } else {
-            let answerOfQuestionIndex = UpdateAnswer() * 3 - 3//answers.charAt(0); //should return answer of the first question
+        } else { //update answer box if newly navigated question already has an answer
+            let answerOfQuestionIndex = UpdateAnswer() * 3 - 3 //should return answer of the first question
             console.log("answerOfQuestionIndex: " + answerOfQuestionIndex.toString());
             let answerOfQuestion = answers.charAt(answerOfQuestionIndex);
             console.log("answerOfQuestion: " + answerOfQuestion.toString());
@@ -462,38 +421,35 @@ function Quiz() {
             console.log("updateAnswerBox: " + updateAnswerBox.toString());
             eval(updateAnswerBox);
         }
-
         console.log("ANSWERS: " + answers.toString());
-
     }
 
-    const optionOneClick = () => {
-        setActive1(!active1);
+    const optionOneClick = () => { //button click answer option 1
+        setActive1(!active1); //alternate clicked state on button
         setActive2(false);
         setActive3(false);
         setActive4(false);
 
-        //Check if an answer already has been made, and in that case change it.
+        //Check if an answer already has been made, and in that case change it
         if (answers.length >= UpdateAnswer() * 3 - 3 + 1) { //if the string of answers are equal to or greater than the index (+1 cause not index but length) where we expect an existing answer
             console.log("answers.length: " + answers.length.toString());
             console.log("UpdateAnswer()*3-3+1: " + (UpdateAnswer() * 3 - 3 + 1).toString());
 
             var index = UpdateAnswer() * 3 - 3;
             console.log("Index is:: " + index.toString());
-            console.log(answers);
-            setAnswers(setCharAt(answers, index, '1'))
+            setAnswers(setCharAt(answers, index, '1')) //replace previous answer
             console.log(answers);
 
         } else {
             setAnswers(answers + "1, "); //add answer to state of answers
         }
-        console.log("Answers list (one behind!):: " + answers);
+        console.log("Answers list (one behind!): " + answers);
     }
 
-    const optionTwoClick = () => {
+    const optionTwoClick = () => { //button click answer option 2
 
         setActive1(false);
-        setActive2(!active2);
+        setActive2(!active2); //alternate clicked state on button
         setActive3(false);
         setActive4(false);
 
@@ -504,20 +460,19 @@ function Quiz() {
 
             var index = UpdateAnswer() * 3 - 3;
             console.log("Index is:: " + index.toString());
-            console.log(answers);
-            setAnswers(setCharAt(answers, index, '2'))
+            setAnswers(setCharAt(answers, index, '2')) //replace previous answer
             console.log(answers);
 
         } else {
             setAnswers(answers + "2, "); //add answer to state of answers
         }
-        console.log("Answers list (one behind!):: " + answers);
+        console.log("Answers list (one behind!): " + answers);
     }
 
-    const optionThreeClick = () => {
+    const optionThreeClick = () => { //button click answer option 3
         setActive1(false);
         setActive2(false);
-        setActive3(!active3);
+        setActive3(!active3); //alternate clicked state on button
         setActive4(false);
 
         //Check if an answer already has been made, and in that case change it.
@@ -527,20 +482,19 @@ function Quiz() {
 
             var index = UpdateAnswer() * 3 - 3;
             console.log("Index is:: " + index.toString());
-            console.log(answers);
-            setAnswers(setCharAt(answers, index, '3'))
+            setAnswers(setCharAt(answers, index, '3')) //replace previous answer
             console.log(answers);
 
         } else {
             setAnswers(answers + "3, "); //add answer to state of answers
         }
-        console.log("Answers list (one behind!):: " + answers);
+        console.log("Answers list (one behind!): " + answers);
     }
-    const optionFourClick = () => {
+    const optionFourClick = () => { //button click answer option 4
         setActive1(false);
         setActive2(false);
         setActive3(false);
-        setActive4(!active4);
+        setActive4(!active4); //alternate clicked state on button
 
         //Check if an answer already has been made, and in that case change it.
         if (answers.length >= UpdateAnswer() * 3 - 3 + 1) { //if the string of answers are equal to or greater than the index (+1 cause not index but length) where we expect an existing answer
@@ -549,29 +503,24 @@ function Quiz() {
 
             var index = UpdateAnswer() * 3 - 3;
             console.log("Index is:: " + index.toString());
-            console.log(answers);
-            setAnswers(setCharAt(answers, index, '4'))
+            setAnswers(setCharAt(answers, index, '4')) //replace previous answer
             console.log(answers);
 
         } else {
             setAnswers(answers + "4, "); //add answer to state of answers
         }
-        console.log("Answers list (one behind!):: " + answers);
+        console.log("Answers list (one behind!): " + answers);
     }
-    if (!getQuizAPI || !getQuestionsAPI || !getQuizQuestionsAPI) { // {
-        console.log("This sad part gets loaded cause not all states are changed");
+
+    //UI starts here
+    if (!getQuizAPI || !getQuestionsAPI || !getQuizQuestionsAPI) { // If data has not been loaded from database show load screen
         return (
             <div onLoad={getDataFromDb()}>
                 <h1>Quiz loader.. </h1>
-                <button onClick={getDataFromDb()}>KLik her hvis ikke du føres automatisk videre</button>
+                <button onClick={window.location.reload()}>KLik her hvis ikke du føres automatisk videre</button>
             </div>
         );
-    } /*else if (!updateData) {
-
-    }
-    */
-
-    else if (!end) { // Quiz ongoing
+    } else if (!end) { // Quiz ongoing
         return (
 
             <div onLoad={quizInit()}>
@@ -582,7 +531,6 @@ function Quiz() {
                 <div>
                     <img onClick={toHome} src={logo} alt="logo" className="logo"/>
                     <div className={"right"}>Velkommen {username}</div>
-                    <h1>{}</h1>
                 </div>
 
                 <div className={"center_p"}>
@@ -594,7 +542,7 @@ function Quiz() {
                                 justifyContent: 'center',
                                 paddingBottom: "70px"
                             }}
-                        ><h1>{quizName[0].category/*quizObject.category*/}</h1></div>
+                        ><h1>{quizName[0].category}</h1></div>
                     </div>
                     <div>
                         <h3 style={{
@@ -660,7 +608,7 @@ function Quiz() {
                     <h3> Se nedenfor hvordan det er gået</h3>
                     <button style={{
                         textAlign: 'center'
-                    }} onClick={saveQuizToDb}>Gem og luk
+                    }} onClick={endQuiz}>Gem og luk
                     </button>
                 </div>
                 <div style={{
