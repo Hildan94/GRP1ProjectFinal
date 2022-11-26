@@ -27,40 +27,6 @@ var userObject = { //hardcoded user object
     "username": username = 'Dennis'
 }
 
-function db_getQuiz_old() {
-    var retryCount = 0;
-
-    tokenizedAxios.get(`/api/quizresult/quiz`).then((response) => {
-        quizObject = response.data;
-        console.log(response.data);
-        console.log("HERE");
-        console.log(quizObject)
-    }).catch(function (error) { //if error retry due to current bug
-        if (error.response) {
-            console.log("Error in first iteration of api/quizresult/quiz call");
-            retryCount++;
-            if (retryCount > 1) {
-                console.log(error.response.data.title);
-                console.log(error.response.status);
-                console.log(error.response.data);
-            } else {
-                tokenizedAxios.get(`/api/quizresult/quiz`).then((response) => {
-                    quizObject = response.data;
-                    console.log(response.data);
-                    console.log(quizObject)
-                }).catch(function (error) {
-                    if (error.response) { //if error, print info
-                        console.log(error.response.data.title);
-                        console.log(error.response.status);
-                        console.log(error.response.data);
-                    }
-                })
-            }
-        }
-    })
-}
-
-
 function UpdateAnswer() {
 
     //Get the correct current question number without unnecessary re-renders
