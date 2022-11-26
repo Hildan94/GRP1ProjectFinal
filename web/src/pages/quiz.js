@@ -3,7 +3,6 @@ import {React, useState} from "react";
 import {Helmet} from 'react-helmet';
 import logo from "./../image/NEM_logo_noBackground2.png";
 import './../Backend/quiz.css';
-import {useSearchParams} from "react-router-dom";
 import Button from "@mui/material/Button";
 import axios from 'axios';
 
