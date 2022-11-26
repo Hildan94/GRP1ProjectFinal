@@ -60,9 +60,7 @@ function Quiz() {
     const [getQuizAPI, setgetQuizAPI] = useState(false); //is the API call done
     const [getQuestionsAPI, setgetQuestionsAPI] = useState(false); //is the API call done
     const [getQuizQuestionsAPI, setgetQuizQuestionsAPI] = useState(false); //is the API call done
-    const [updateData, setUpdateData] = useState(false); //not api, but updates internally used states once api's are loaded
 
-    //const [questionNav, setQuestionNav] = useState(1); //for navigation purposes attempt
     const [answers, setAnswers] = useState(''); //to store all answers. Be aware this is only updated correctly after it has been updated
     const [answersArr, setAnswersArr] = useState([]); //to store all answers. TEST to be used in viewing answers when done.
     const [quizName, setQuizName] = useState([]); //used to get quiz name
@@ -70,16 +68,12 @@ function Quiz() {
     const [dbquestionsNo, setdbQuestionsNo] = useState([]) //save the question id's for the currently selected quiz
     const [dbquestions, setdbQuestions] = useState([]); //save all the questions for currently selected quiz
 
-    const [searchParams] = useSearchParams();
     var currPathHash = window.location.hash.toString();
     var currPath = currPathHash.slice(1);
-    const params = new URLSearchParams(currPath);
 
     var pathParams = currPath.substring(currPath.indexOf('/') + 6);
     var paramQuizId = pathParams.slice(0, 3); //can only be used if quizid is a fixed length, which it may not
     var paramQuestionId = pathParams.substring(pathParams.indexOf('/') + 1);
-
-    var questionFromParam = 'quizObject_old.question' + (paramQuestionId - 100);
 
 
     const navigate = useNavigate()
