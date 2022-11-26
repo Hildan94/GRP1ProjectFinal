@@ -17,99 +17,10 @@ const tokenizedAxios = axios.create({
     }
 })
 
-var currUserId, category, quizId, username;
-
-var quizObject = []; /*{
-    "id": quizId = 752,
-    "category": category = "Matematik",
-}*/
-
-var db_quiz_questionsObject = []; /*[
-    {
-        quiz_id: "752",
-        questionslist_id: "452",
-    },
-
-    {
-        quiz_id: "752",
-        questionslist_id: "453",
-    },
-
-    {
-        quiz_id: "802",
-        questionslist_id: "502",
-    },
-
-    {
-        quiz_id: "802",
-        questionslist_id: "503",
-    },
-
-    {
-        quiz_id: "802",
-        questionslist_id: "552",
-    },
-
-];
-*/
-
-var questionsObject = []; /*[
-    {
-        questionName: "Hovedstad i DK?452",
-        correctAnswer: 1,
-        questionId: 452,
-        questionNo: questionNumber++,
-        answera: "Kbh",
-        answerb: "Not kbh",
-        answerc: "Also not kbh",
-        answerd: "Especially not kbh",
-    },
-
-    {
-        questionName: "Hovedstad i EN?453",
-        correctAnswer: 2,
-        questionId: 453,
-        questionNo: questionNumber++,
-        answera: "London",
-        answerb: "Not London",
-        answerc: "Also not London",
-        answerd: "Especially not London",
-    },
-
-    {
-        questionName: "Hovedstad i EN?502",
-        correctAnswer: 1,
-        questionId: 502,
-        questionNo: questionNumber++,
-        answera: "London",
-        answerb: "Not London",
-        answerc: "Also not London",
-        answerd: "Especially not London",
-    },
-
-    {
-        questionName: "Hovedstad i EN?503",
-        correctAnswer: 2,
-        questionId: 503,
-        questionNo: questionNumber++,
-        answera: "London",
-        answerb: "Not London",
-        answerc: "Also not London",
-        answerd: "Especially not London",
-    },
-
-    {
-        questionName: "Hovedstad i EN?552",
-        correctAnswer: 3,
-        questionId: 552,
-        questionNo: questionNumber++,
-        answera: "London",
-        answerb: "Not London",
-        answerc: "Also not London",
-        answerd: "Especially not London",
-    },
-];
-*/
+var currUserId, username;
+var quizObject = [];
+var db_quiz_questionsObject = [];
+var questionsObject = [];
 
 var userObject = {
     "id": currUserId = 11337,
