@@ -22,7 +22,7 @@ public class TestQuizClass {
         questions.setAnswerB("Oslo");
         questions.setAnswerC("København");
         questions.setAnswerD("London");
-        questions.setAnswerNr(3);
+        questions.setCorrectanswer(3);
         session.persist(questions);
         transaction.commit();
         System.out.println("QuestionID after commit: " + questions.getId());

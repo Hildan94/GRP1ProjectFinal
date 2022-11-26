@@ -27,7 +27,7 @@ public class Questions {
     @Column
     private String answerD;
     @Column
-    private int answerNr;
+    private int correctanswer;
 
 
 }
