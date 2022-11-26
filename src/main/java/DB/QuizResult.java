@@ -21,5 +21,6 @@ public class QuizResult {
     private String selectedAnswers;
     @Column
     private int quizid;
-
+    @Column
+    private int userid;
 }
