@@ -68,13 +68,11 @@ function Quiz() {
     const [dbquestionsNo, setdbQuestionsNo] = useState([]) //save the question id's for the currently selected quiz
     const [dbquestions, setdbQuestions] = useState([]); //save all the questions for currently selected quiz
 
-    var currPathHash = window.location.hash.toString();
-    var currPath = currPathHash.slice(1);
-
-    var pathParams = currPath.substring(currPath.indexOf('/') + 6);
-    var paramQuizId = pathParams.slice(0, 3); //can only be used if quizid is a fixed length, which it may not
-    var paramQuestionId = pathParams.substring(pathParams.indexOf('/') + 1);
-
+    var currPathHash = window.location.hash.toString(); //hash url path, like "#/quiz/802/101"
+    var currPath = currPathHash.slice(1); //hash url path minus hash sign
+    var pathParams = currPath.substring(currPath.indexOf('/') + 6); //url path parameters, like "802/101"
+    var paramQuizId = pathParams.slice(0, 3); //quizId from path parameters, like "802". Requires quizId to be a fixed length of 3.
+    var paramQuestionId = pathParams.substring(pathParams.indexOf('/') + 1); //questionId from path parameters, like "101".
 
     const navigate = useNavigate()
 
