@@ -76,14 +76,13 @@ function Quiz() {
 
     const navigate = useNavigate()
 
-
+// Function to get quiz objects from database
     const db_getQuiz = () => {
         var retryCount = 0;
 
+        //Our API has an error where the first, and sometimes second time you try you get an error. Therefore, it will be attempted 3 times
         tokenizedAxios.get(`/api/quizresult/quiz`).then((response) => {
             quizObject = response.data;
-            console.log(response.data);
-            console.log("1 DOES THIS RUN FIRST OR ");
             setgetQuizAPI(true);
             console.log(quizObject)
         }).catch(function (error) { //if error retry due to current bug
@@ -97,31 +96,34 @@ function Quiz() {
                 } else {
                     tokenizedAxios.get(`/api/quizresult/quiz`).then((response) => {
                         quizObject = response.data;
-                        console.log(response.data);
-                        console.log("1 DOES THIS RUN FIRST OR ");
                         setgetQuizAPI(true);
                         console.log(quizObject)
                     }).catch(function (error) {
-                        if (error.response) { //if error, print info
-                            console.log(error.response.data.title);
-                            console.log(error.response.status);
-                            console.log(error.response.data);
+                        if (true) { tokenizedAxios.get(`/api/quizresult/quiz`).then((response) => {
+                            quizObject = response.data;
+                            setgetQuizAPI(true);
+                            console.log(quizObject)
+                        }).catch(function (error) {
+                            if (error.response) { //if error, print info
+                                console.log(error.response.data.title);
+                                console.log(error.response.status);
+                                console.log(error.response.data);
+                            }
+                        })
                         }
                     })
                 }
             }
         })
-        //console.log("2 DOES THIS RUN FIRST?"); //THIS RUNS CONSIDERABLY EARLIER..
     }
 
-
+//Function to get questions from db
     const db_getQuestions = () => { //local object: questionsObject
         var retryCount = 0;
 
+        //Our API has an error where the first, and sometimes second time you try you get an error. Therefore, it will be attempted 3 times
         tokenizedAxios.get(`/api/quizresult/questions`).then((response) => {
             questionsObject = response.data;
-            console.log(response.data);
-            console.log("1 DOES THIS RUN FIRST OR ");
             setgetQuestionsAPI(true);
             console.log(questionsObject)
         }).catch(function (error) { //if error retry due to current bug
@@ -135,15 +137,21 @@ function Quiz() {
                 } else {
                     tokenizedAxios.get(`/api/quizresult/questions`).then((response) => {
                         questionsObject = response.data;
-                        console.log(response.data);
-                        console.log("1 DOES THIS RUN FIRST OR ");
                         setgetQuestionsAPI(true);
                         console.log(questionsObject)
                     }).catch(function (error) {
-                        if (error.response) { //if error, print info
-                            console.log(error.response.data.title);
-                            console.log(error.response.status);
-                            console.log(error.response.data);
+                        if (true) { //if error, print info
+                            tokenizedAxios.get(`/api/quizresult/questions`).then((response) => {
+                                questionsObject = response.data;
+                                setgetQuestionsAPI(true);
+                                console.log(questionsObject)
+                            }).catch(function (error) {
+                                if (error.response) { //if error, print info
+                                    console.log(error.response.data.title);
+                                    console.log(error.response.status);
+                                    console.log(error.response.data);
+                                }
+                            })
                         }
                     })
                 }
@@ -151,13 +159,13 @@ function Quiz() {
         })
     }
 
+    //Function to get Quiz_questions from db table
     const db_getQuiz_Questions = () => { //local object: db_quiz_questionsObject
         var retryCount = 0;
 
+        //Our API has an error where the first, and sometimes second time you try you get an error. Therefore, it will be attempted 3 times
         tokenizedAxios.get(`/api/quizresult/quizquestions`).then((response) => {
             db_quiz_questionsObject = response.data;
-            console.log(response.data);
-            console.log("1 DOES THIS RUN FIRST OR ");
             setgetQuizQuestionsAPI(true);
             console.log(db_quiz_questionsObject)
         }).catch(function (error) { //if error retry due to current bug
@@ -171,15 +179,21 @@ function Quiz() {
                 } else {
                     tokenizedAxios.get(`/api/quizresult/quizquestions`).then((response) => {
                         db_quiz_questionsObject = response.data;
-                        console.log(response.data);
-                        console.log("1 DOES THIS RUN FIRST OR ");
                         setgetQuizQuestionsAPI(true);
                         console.log(db_quiz_questionsObject)
                     }).catch(function (error) {
-                        if (error.response) { //if error, print info
-                            console.log(error.response.data.title);
-                            console.log(error.response.status);
-                            console.log(error.response.data);
+                        if (true) { //if error, print info
+                            tokenizedAxios.get(`/api/quizresult/quizquestions`).then((response) => {
+                                db_quiz_questionsObject = response.data;
+                                setgetQuizQuestionsAPI(true);
+                                console.log(db_quiz_questionsObject)
+                            }).catch(function (error) {
+                                if (error.response) { //if error, print info
+                                    console.log(error.response.data.title);
+                                    console.log(error.response.status);
+                                    console.log(error.response.data);
+                                }
+                            })
                         }
                     })
                 }
@@ -187,16 +201,17 @@ function Quiz() {
         })
     }
 
-
+//Function to post the results of the quiz to the db
     const db_postQuizResults = () => {
         var retryCount = 0;
 
         var object = {
             "quizid": parseInt(paramQuizId),
             "selectedAnswers": answers,
-            "userid": 1213
+            "userid": 1213 //currently hardcoded userid
         }
 
+        //Our API has an error where the first, and sometimes second time you try you get an error. Therefore, it will be attempted 3 times
         tokenizedAxios.post(`/api/quizresult`, object).then((response) => console.log(response.data)).catch(function (error) { //if error retry due to current bug
             if (error.response) {
                 retryCount++;
@@ -206,10 +221,14 @@ function Quiz() {
                     console.log(error.response.data);
                 } else {
                     tokenizedAxios.post(`/api/quizresult`, object).then((response) => console.log(response.data)).catch(function (error) {
-                        if (error.response) { //if error, print info
-                            console.log(error.response.data.title);
-                            console.log(error.response.status);
-                            console.log(error.response.data);
+                        if (true) { //if error, print info
+                            tokenizedAxios.post(`/api/quizresult`, object).then((response) => console.log(response.data)).catch(function (error) {
+                                if (error.response) { //if error, print info
+                                    console.log(error.response.data.title);
+                                    console.log(error.response.status);
+                                    console.log(error.response.data);
+                                }
+                            })
                         }
                     })
                 }
@@ -217,11 +236,9 @@ function Quiz() {
         })
     }
 
-
+    //Initializes questionnumbers, questions and quiz name to be loaded
     const quizInit = () => {
-        //console.log("quizinit start run");
         if (dbquestions.length === 0) { //only do this once
-            //console.log("quizinit within loop run");
             //getDataFromDb();
             getQuestionNumbers();
             getQuestions();
