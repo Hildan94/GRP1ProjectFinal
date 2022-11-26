@@ -7,6 +7,7 @@ import {tokenStore} from "../../stores/TokenStore";
 import {Form} from "react-bootstrap";
 import Button from "@mui/material/Button";
 import reportObject from "./ReportObject";
+import {Link} from "@mui/material";
 
 
 //TODO: Tokens
@@ -25,8 +26,14 @@ import reportObject from "./ReportObject";
 function ReportsOverview() {
 
     function toReport(key){
-        navigate('report/' + (key+1).toString())
+        navigate('/report/' + (key+1).toString())
     }
+
+    function toCampusLogin(){
+        navigate('/campuslogin')
+    }
+
+
 
     function printToken(){
         console.log(localStorage.getItem('userToken'))
@@ -97,7 +104,8 @@ function ReportsOverview() {
             </div>
             <div>
                 <button onClick={scores.reqeustCreateReport}> Lav rapport </button>
-                <button onClick={tokenStore.campusLogin}> Login campusnet </button>
+                <button onClick={toCampusLogin}> Log ind campusnet </button>
+
             </div>
         </div>
     );

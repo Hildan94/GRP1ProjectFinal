@@ -18,8 +18,11 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import Report from "./pages/Reports/Report";
+import CampusLogin from "./pages/CampusLogin";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+
 root.render(
     <Router>
         <Routes>
@@ -31,6 +34,7 @@ root.render(
             <Route path="/quiznew" element={<Quiznew/>}/>
             <Route path="/reportsoverview" element={<ReportsOverview/>}/>
             <Route path="/reportsoverview/report" element={<Report/>}/>
+            <Route path="/campuslogin" element={<CampusLogin/>}/>
             <Route path="*" element={<Notfound/>}/>
         </Routes>
     </Router>

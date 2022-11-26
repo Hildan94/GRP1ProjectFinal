@@ -24,7 +24,7 @@ public class CampusNetLogin {
     //TODO: Should assign right userId to token when loggin in through campusnet and is existing in DB
     @GET
     @Path("redirect")
-    public String callback(@QueryParam("ticket") String cnTicket) throws NotAuthorizedException{
+    public Response callback(@QueryParam("ticket") String cnTicket) throws NotAuthorizedException{
         System.out.println(cnTicket); //Check if we got something back
         //Tjek ticket mod CampusNet
         String body = Unirest.get( "https://auth.dtu.dk/dtu/validate?service=http://localhost:8080/api/campusnet/redirect&ticket="
@@ -41,7 +41,7 @@ public class CampusNetLogin {
                 service.createInternalUser(user);
             }
             String tokenString = JWTHandler.generateJwtToken(new User());
-            return tokenString;
+            Response.seeOther(UriBuilder.fromUri("http://localhost:3000/?token="+ tokenString).build()).build();
         }
         throw new NotAuthorizedException("Login failed");
     }
