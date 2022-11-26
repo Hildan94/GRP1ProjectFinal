@@ -1,7 +1,6 @@
 package service;
 
-import DB.HibernateController;
-import DB.QuizResult;
+import DB.*;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import org.hibernate.Session;
@@ -45,5 +44,38 @@ public class QuizResultService {
     public List<QuizResult> queryQuizResult(@QueryParam("quizresult") String quizresult) throws NoImplementationException {
         throw new NoImplementationException("quizresult-queries not implemented yet");
     }
+
+    //Null value was assigned to a property [class DB.Questions.answerNr] of primitive type : `DB.Questions.answerNr` (setter)] with root cause
+    @GET
+    @Path("questions")
+    public List<Questions> getQuestions(){
+        Session session = sessionFactory.openSession();
+        JpaCriteriaQuery<Questions> query = session.getCriteriaBuilder().createQuery(Questions.class);
+        query.from(Questions.class);
+        List<Questions> data = session.createQuery(query).getResultList();
+        return data;
+    }
+
+    @GET
+    @Path("quizquestions")
+    public List<Quiz_Questions> getQuiz_Questions(){
+        Session session = sessionFactory.openSession();
+        JpaCriteriaQuery<Quiz_Questions> query = session.getCriteriaBuilder().createQuery(Quiz_Questions.class);
+        query.from(Quiz_Questions.class);
+        List<Quiz_Questions> data = session.createQuery(query).getResultList();
+        return data;
+    }
+
+    @GET
+    @Path("quiz")
+    public List<Quiz> getQuiz(){
+        Session session = sessionFactory.openSession();
+        JpaCriteriaQuery<Quiz> query = session.getCriteriaBuilder().createQuery(Quiz.class);
+        query.from(Quiz.class);
+        List<Quiz> data = session.createQuery(query).getResultList();
+        return data;
+    }
+
+
 }
 
