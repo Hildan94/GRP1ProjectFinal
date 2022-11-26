@@ -517,7 +517,7 @@ function Quiz() {
         return (
             <div onLoad={getDataFromDb()}>
                 <h1>Quiz loader.. </h1>
-                <button onClick={window.location.reload()}>KLik her hvis ikke du føres automatisk videre</button>
+                <button onClick={window.location.reload}>KLik her hvis ikke du føres automatisk videre</button>
             </div>
         );
     } else if (!end) { // Quiz ongoing
