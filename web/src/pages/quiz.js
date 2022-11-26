@@ -98,19 +98,17 @@ function Quiz() {
                         setgetQuizAPI(true);
                         console.log(quizObject)
                     }).catch(function (error) {
-                        if (true) {
-                            tokenizedAxios.get(`/api/quizresult/quiz`).then((response) => {
-                                quizObject = response.data;
-                                setgetQuizAPI(true);
-                                console.log(quizObject)
-                            }).catch(function (error) {
-                                if (error.response) { //if error, print info
-                                    console.log(error.response.data.title);
-                                    console.log(error.response.status);
-                                    console.log(error.response.data);
-                                }
-                            })
-                        }
+                        tokenizedAxios.get(`/api/quizresult/quiz`).then((response) => {
+                            quizObject = response.data;
+                            setgetQuizAPI(true);
+                            console.log(quizObject)
+                        }).catch(function (error) {
+                            if (error.response) { //if error, print info
+                                console.log(error.response.data.title);
+                                console.log(error.response.status);
+                                console.log(error.response.data);
+                            }
+                        })
                     })
                 }
             }
@@ -140,19 +138,18 @@ function Quiz() {
                         setgetQuestionsAPI(true);
                         console.log(questionsObject)
                     }).catch(function (error) {
-                        if (true) { //if error, print info
-                            tokenizedAxios.get(`/api/quizresult/questions`).then((response) => {
-                                questionsObject = response.data;
-                                setgetQuestionsAPI(true);
-                                console.log(questionsObject)
-                            }).catch(function (error) {
-                                if (error.response) { //if error, print info
-                                    console.log(error.response.data.title);
-                                    console.log(error.response.status);
-                                    console.log(error.response.data);
-                                }
-                            })
-                        }
+                         //if error, print info
+                        tokenizedAxios.get(`/api/quizresult/questions`).then((response) => {
+                            questionsObject = response.data;
+                            setgetQuestionsAPI(true);
+                            console.log(questionsObject)
+                        }).catch(function (error) {
+                            if (error.response) { //if error, print info
+                                console.log(error.response.data.title);
+                                console.log(error.response.status);
+                                console.log(error.response.data);
+                            }
+                        })
                     })
                 }
             }
@@ -182,19 +179,18 @@ function Quiz() {
                         setgetQuizQuestionsAPI(true);
                         console.log(db_quiz_questionsObject)
                     }).catch(function (error) {
-                        if (true) { //if error, print info
-                            tokenizedAxios.get(`/api/quizresult/quizquestions`).then((response) => {
-                                db_quiz_questionsObject = response.data;
-                                setgetQuizQuestionsAPI(true);
-                                console.log(db_quiz_questionsObject)
-                            }).catch(function (error) {
-                                if (error.response) { //if error, print info
-                                    console.log(error.response.data.title);
-                                    console.log(error.response.status);
-                                    console.log(error.response.data);
-                                }
-                            })
-                        }
+                         //if error, print info
+                        tokenizedAxios.get(`/api/quizresult/quizquestions`).then((response) => {
+                            db_quiz_questionsObject = response.data;
+                            setgetQuizQuestionsAPI(true);
+                            console.log(db_quiz_questionsObject)
+                        }).catch(function (error) {
+                            if (error.response) { //if error, print info
+                                console.log(error.response.data.title);
+                                console.log(error.response.status);
+                                console.log(error.response.data);
+                            }
+                        })
                     })
                 }
             }
@@ -221,15 +217,14 @@ function Quiz() {
                     console.log(error.response.data);
                 } else {
                     tokenizedAxios.post(`/api/quizresult`, object).then((response) => console.log(response.data)).catch(function (error) {
-                        if (true) { //if error, print info
-                            tokenizedAxios.post(`/api/quizresult`, object).then((response) => console.log(response.data)).catch(function (error) {
-                                if (error.response) { //if error, print info
-                                    console.log(error.response.data.title);
-                                    console.log(error.response.status);
-                                    console.log(error.response.data);
-                                }
-                            })
-                        }
+                         //if error, print info
+                        tokenizedAxios.post(`/api/quizresult`, object).then((response) => console.log(response.data)).catch(function (error) {
+                            if (error.response) { //if error, print info
+                                console.log(error.response.data.title);
+                                console.log(error.response.status);
+                                console.log(error.response.data);
+                            }
+                        })
                     })
                 }
             }
