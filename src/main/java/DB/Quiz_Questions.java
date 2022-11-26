@@ -13,9 +13,9 @@ import lombok.*;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class Quiz_Questions {
-    @Id
     @Column
     private int quiz_id;
+    @Id
     @Column
     private int questionslist_id;
 

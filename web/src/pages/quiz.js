@@ -5,16 +5,26 @@ import logo from "./../image/NEM_logo_noBackground2.png";
 import './../Backend/quiz.css';
 import {useSearchParams} from "react-router-dom";
 import Button from "@mui/material/Button";
+import axios from 'axios';
 
+const url = "http://localhost:8080"
+var token = localStorage.getItem("userToken");
+
+const tokenizedAxios = axios.create({
+    baseURL: url,
+    headers: {
+        Authorization: `Bearer ${token}`
+    }
+})
 
 var currUserId, category, quizId, username;
 
-var quizObject = {
+var quizObject = []; /*{
     "id": quizId = 752,
     "category": category = "Matematik",
-}
+}*/
 
-var db_quiz_questionsObject = [
+var db_quiz_questionsObject = []; /*[
     {
         quiz_id: "752",
         questionslist_id: "452",
@@ -41,10 +51,9 @@ var db_quiz_questionsObject = [
     },
 
 ];
+*/
 
-//This needs to be all the questions to the currently selected quiz. Mutate the format from db to this format.
-var questionNumber = 0;
-var questionsObject = [
+var questionsObject = []; /*[
     {
         questionName: "Hovedstad i DK?452",
         correctAnswer: 1,
@@ -100,11 +109,37 @@ var questionsObject = [
         answerd: "Especially not London",
     },
 ];
+*/
 
 var userObject = {
     "id": currUserId = 11337,
     "username": username = 'Dennis'
 }
+
+function db_getQuiz_old() {
+    var retryCount = 0;
+
+    tokenizedAxios.get(`/api/quizresult/quiz`).then((response) => {quizObject = response.data;  console.log(response.data); console.log("HERE");  console.log(quizObject)}).catch(function (error) { //if error retry due to current bug
+        if (error.response) {
+            console.log("Error in first iteration of api/quizresult/quiz call");
+            retryCount++;
+            if (retryCount > 1) {
+                console.log(error.response.data.title);
+                console.log(error.response.status);
+                console.log(error.response.data);
+            } else {
+                tokenizedAxios.get(`/api/quizresult/quiz`).then((response) => {quizObject = response.data; console.log(response.data); console.log(quizObject)}).catch(function (error) {
+                    if (error.response) { //if error, print info
+                        console.log(error.response.data.title);
+                        console.log(error.response.status);
+                        console.log(error.response.data);
+                    }
+                })
+            }
+        }
+    })
+}
+
 
 function UpdateAnswer() {
 
@@ -135,10 +170,16 @@ function Quiz() {
 
     const [end, setEnd] = useState(false); //is quiz ended
 
+    //to be used in api data
+    const [getQuizAPI, setgetQuizAPI] = useState(false); //is the API call done
+    const [getQuestionsAPI, setgetQuestionsAPI] = useState(false); //is the API call done
+    const [getQuizQuestionsAPI, setgetQuizQuestionsAPI] = useState(false); //is the API call done
+    const [updateData, setUpdateData] = useState(false); //not api, but updates internally used states once api's are loaded
+
     //const [questionNav, setQuestionNav] = useState(1); //for navigation purposes attempt
     const [answers, setAnswers] = useState(''); //to store all answers. Be aware this is only updated correctly after it has been updated
     const [answersArr, setAnswersArr] = useState([]); //to store all answers. TEST to be used in viewing answers when done.
-
+    const [quizName, setQuizName] = useState([]); //used to get quiz name
 
     const [dbquestionsNo, setdbQuestionsNo] = useState([]) //save the question id's for the currently selected quiz
     const [dbquestions, setdbQuestions] = useState([]); //save all the questions for currently selected quiz
@@ -158,39 +199,199 @@ function Quiz() {
     const navigate = useNavigate()
 
 
+    const db_getQuiz = () => {
+        var retryCount = 0;
+
+        tokenizedAxios.get(`/api/quizresult/quiz`).then((response) => {quizObject = response.data;  console.log(response.data); console.log("1 DOES THIS RUN FIRST OR "); setgetQuizAPI(true); console.log(quizObject)}).catch(function (error) { //if error retry due to current bug
+            if (error.response) {
+                console.log("Error in first iteration of api/quizresult/quiz call");
+                retryCount++;
+                if (retryCount > 1) {
+                    console.log(error.response.data.title);
+                    console.log(error.response.status);
+                    console.log(error.response.data);
+                } else {
+                    tokenizedAxios.get(`/api/quizresult/quiz`).then((response) => {quizObject = response.data;  console.log(response.data); console.log("1 DOES THIS RUN FIRST OR "); setgetQuizAPI(true); console.log(quizObject)}).catch(function (error) {
+                        if (error.response) { //if error, print info
+                            console.log(error.response.data.title);
+                            console.log(error.response.status);
+                            console.log(error.response.data);
+                        }
+                    })
+                }
+            }
+        })
+        //console.log("2 DOES THIS RUN FIRST?"); //THIS RUNS CONSIDERABLY EARLIER..
+    }
+
+
+
+    const db_getQuestions = () => { //local object: questionsObject
+        var retryCount = 0;
+
+        tokenizedAxios.get(`/api/quizresult/questions`).then((response) => {questionsObject = response.data;  console.log(response.data); console.log("1 DOES THIS RUN FIRST OR "); setgetQuestionsAPI(true); console.log(questionsObject)}).catch(function (error) { //if error retry due to current bug
+            if (error.response) {
+                console.log("Error in first iteration of api/quizresult/questions call");
+                retryCount++;
+                if (retryCount > 1) {
+                    console.log(error.response.data.title);
+                    console.log(error.response.status);
+                    console.log(error.response.data);
+                } else {
+                    tokenizedAxios.get(`/api/quizresult/questions`).then((response) => {questionsObject = response.data;  console.log(response.data); console.log("1 DOES THIS RUN FIRST OR "); setgetQuestionsAPI(true); console.log(questionsObject)}).catch(function (error) {
+                        if (error.response) { //if error, print info
+                            console.log(error.response.data.title);
+                            console.log(error.response.status);
+                            console.log(error.response.data);
+                        }
+                    })
+                }
+            }
+        })
+    }
+
+    const db_getQuiz_Questions = () => { //local object: db_quiz_questionsObject
+        var retryCount = 0;
+
+        tokenizedAxios.get(`/api/quizresult/quizquestions`).then((response) => {db_quiz_questionsObject = response.data;  console.log(response.data); console.log("1 DOES THIS RUN FIRST OR "); setgetQuizQuestionsAPI(true); console.log(db_quiz_questionsObject)}).catch(function (error) { //if error retry due to current bug
+            if (error.response) {
+                console.log("Error in first iteration of api/quizresult/quizquestions call");
+                retryCount++;
+                if (retryCount > 1) {
+                    console.log(error.response.data.title);
+                    console.log(error.response.status);
+                    console.log(error.response.data);
+                } else {
+                    tokenizedAxios.get(`/api/quizresult/quizquestions`).then((response) => {db_quiz_questionsObject = response.data;  console.log(response.data); console.log("1 DOES THIS RUN FIRST OR "); setgetQuizQuestionsAPI(true); console.log(db_quiz_questionsObject)}).catch(function (error) {
+                        if (error.response) { //if error, print info
+                            console.log(error.response.data.title);
+                            console.log(error.response.status);
+                            console.log(error.response.data);
+                        }
+                    })
+                }
+            }
+        })
+    }
+
+
+    const db_postQuizResults = () => {
+        var retryCount = 0;
+
+        var object = {
+            "quizid": parseInt(paramQuizId),
+            "selectedAnswers": answers,
+            "userid": 1213
+        }
+
+        tokenizedAxios.post(`/api/quizresult`, object).then((response) => console.log(response.data)).catch(function (error) { //if error retry due to current bug
+            if (error.response) {
+                retryCount++;
+                if (retryCount > 1) {
+                    console.log(error.response.data.title);
+                    console.log(error.response.status);
+                    console.log(error.response.data);
+                } else {
+                    tokenizedAxios.post(`/api/quizresult`, object).then((response) => console.log(response.data)).catch(function (error) {
+                        if (error.response) { //if error, print info
+                            console.log(error.response.data.title);
+                            console.log(error.response.status);
+                            console.log(error.response.data);
+                        }
+                    })
+                }
+            }
+        })
+    }
+
+
     const quizInit = () => {
+        //console.log("quizinit start run");
         if (dbquestions.length === 0) { //only do this once
-            getDataFromDb();
+            //console.log("quizinit within loop run");
+            //getDataFromDb();
             getQuestionNumbers();
             getQuestions();
+            updateQuizName();
         }
     }
 
+    const apitest = () => {
+        console.log("LOG 1: ")
+        console.log(quizObject)
+        console.log(quizObject[0].id.toString())
+        console.log(quizObject[0].category.toString())
+
+        console.log("LOG 2:");
+        console.log(dbquestions) //empty array? may be because only the first method in quiz init is done right
+    }
+
+    const updateQuizName = () => {
+        //console.log("Paramquizid: " + paramQuizId + ". .")
+        var quiznumberFromParam = parseInt(paramQuizId); // 752;
+        var quizCategory = quizObject.find(x => x.id === quiznumberFromParam)
+        //console.log(quizCategory); //entire object
+        console.log("This is : " + quizCategory.category);
+
+        quizName.push({ // add quizname to state array
+            category: quizCategory.category,
+        });
+
+    }
+
     const getDataFromDb = () => {
-        //TODO: NOT YET IMPLEMENTED. Get user, questions and quiz/question table data
+        console.log("<><><><><><>POINT 1")
+        db_getQuiz();
+        console.log(quizObject)
+
+        console.log("<><><><><><>POINT 2")
+        db_getQuestions();
+        console.log("<><><><><><>POINT 3")
+        db_getQuiz_Questions();
+        console.log("<><><><><><>POINT 4")
+
     }
 
     const saveQuizToDb = () => {
-        //TODO: NOT YET IMPLEMENTED.
-
         navigate('/quizzes') //when data is saved navigate back to quizzes
     }
 
 
     //Saves list of id's of the questions of current quiz to dbQuestionsNo state
-    const getQuestionNumbers = () => {
+    const getQuestionNumbers = () => { //works as intended || After API Work
         const testQuizId = paramQuizId; //452;
 
+        console.log("getQuestionNumbers debugging0 : ");
+        console.log(db_quiz_questionsObject);
+        console.log("getQuestionNumbers debugging1 : " + db_quiz_questionsObject.length);
+        console.log("getQuestionNumbers debugging2 : " + db_quiz_questionsObject[0].quiz_id);
+        console.log("getQuestionNumbers debugging3 : " + testQuizId.toString());
+        console.log("getQuestionNumbers debugging4 : " + db_quiz_questionsObject[0].questionslist_id.toString())
+        console.log(dbquestionsNo)
+
         for (let i = 0; i < db_quiz_questionsObject.length; i++) {
-            if (db_quiz_questionsObject[i].quiz_id === testQuizId.toString()) {
+            console.log("Value I is: " + i.toString())
+            if (db_quiz_questionsObject[i].quiz_id.toString() === testQuizId.toString()) {
+                console.log("DO I EVER GO HERE?");
                 console.log(db_quiz_questionsObject[i].questionslist_id.toString())
                 console.log("<<< INDEX " + i.toString() + " TRUE");
+
                 dbquestionsNo.push({
-                    id: db_quiz_questionsObject[i].questionslist_id,
+                    id: db_quiz_questionsObject[i].questionslist_id.toString(),
                 });
+
+
                 //console.log("Mit arrays værdi er " + dbquestionsNo[i].id); //this breaks the last quiz
+                console.log("Never get here right?");
                 console.log(dbquestionsNo);
             }
+
+            /*if (i++ === db_quiz_questionsObject.length) { //should not run anymore
+                console.log("JOE does this happen?");
+                getQuestions();
+            }
+
+             */
         }
 
     }
@@ -198,27 +399,33 @@ function Quiz() {
     //Saves the array of questions to be taken
     const getQuestions = () => {
 
+        console.log("QUESTIONS METHOD NOW");
+        console.log(questionsObject.length)
+        console.log("QUestions 1: " + questionsObject[0].id.toString())
+        console.log(dbquestionsNo[0].id.toString())
+
         for (let i = 0; i < questionsObject.length; i++) {
             for (let j = 0; j < dbquestionsNo.length; j++) { //only search for the indexes where we expect to have questions. Fx 2 questions, dont look at 3
-                if (questionsObject[i].questionId.toString() === dbquestionsNo[j].id.toString()) {
+                if (questionsObject[i].id.toString() === dbquestionsNo[j].id.toString()) {
 
-                    if (!dbquestions.includes(questionsObject[i].questionId)) { //only add if not already added
+                    if (!dbquestions.includes(questionsObject[i].id)) { //only add if not already added
                         console.log("new question added")
                         console.log(dbquestions);
                         dbquestions.push({ // add question to dbquestions state
                             questionName: questionsObject[i].questionName,
-                            correctAnswer: questionsObject[i].correctAnswer,
-                            questionId: questionsObject[i].questionId,
-                            questionNo: questionsObject[i].questionNo,
-                            answera: questionsObject[i].answera,
-                            answerb: questionsObject[i].answerb,
-                            answerc: questionsObject[i].answerc,
-                            answerd: questionsObject[i].answerd,
+                            correctanswer: questionsObject[i].correctanswer +1 , //BE AWARE IN THIS DB TABLE CORRECT ANSWERS ARE INDEXED FROM 0-3, AND NOT 1-4. caps or no caps?
+                            id: questionsObject[i].id,
+                            answerA: questionsObject[i].answerA,
+                            answerB: questionsObject[i].answerB,
+                            answerC: questionsObject[i].answerC,
+                            answerD: questionsObject[i].answerD,
                         });
                     }
                     //console.log("Mit Questions arrays værdi er " + dbquestions[j].questionId);
                 }
             }
+            console.log("THIS IS DBQUESTIONS");
+            console.log(dbquestions);
         }
 
     }
@@ -257,6 +464,8 @@ function Quiz() {
         navigate('/home')
     }
 
+
+
     const toNextQuestion = () => {
         if (active1 === active2 === active3 === active4) { // no answer selected insert answer 0
             if (answers.length >= UpdateAnswer() * 3 - 3 + 1) {
@@ -274,6 +483,7 @@ function Quiz() {
         }
 
         if (paramQuestionId - 100 === dbquestions.length) { //there are no more questions, end quiz
+            db_postQuizResults(); //send quiz info to db
             console.log("<<<<<<<>>>>>>");
             console.log(answers);
             endQuiz_finished();
@@ -429,11 +639,23 @@ function Quiz() {
         }
         console.log("Answers list (one behind!):: " + answers);
     }
+    if (!getQuizAPI || !getQuestionsAPI || !getQuizQuestionsAPI) { // {
+        console.log("This sad part gets loaded cause not all states are changed");
+        return (
+            <div onLoad={getDataFromDb()}>
+                <h1>Quiz loader.. </h1>
+                <button onClick={getDataFromDb()}>KLik her hvis ikke du føres automatisk videre</button>
+            </div>
+        );
+    } /*else if (!updateData) {
 
-    if (!end) { // Quiz ongoing
+    }
+    */
+
+    else if (!end) { // Quiz ongoing
         return (
 
-            <div onLoad={quizInit()}>
+            <div onLoad={quizInit()} >
                 <Helmet>
                     <title>NEM Læringsplatform | Quiz</title>
                 </Helmet>
@@ -441,6 +663,7 @@ function Quiz() {
                 <div>
                     <img onClick={toHome} src={logo} alt="logo" className="logo"/>
                     <div className={"right"}>Velkommen {username}</div>
+                    <h1>{}</h1>
                 </div>
 
                 <div className={"center_p"}>
@@ -452,7 +675,7 @@ function Quiz() {
                                 justifyContent: 'center',
                                 paddingBottom: "70px"
                             }}
-                        ><h1>{quizObject.category}</h1></div>
+                        ><h1>{quizName[0].category/*quizObject.category*/}</h1></div>
                     </div>
                     <div>
                         <h3 style={{
@@ -466,13 +689,13 @@ function Quiz() {
                         }}>
                             <ul>
                                 <Button name={"option1"} style={{backgroundColor: active1 ? "lightgray" : ""}}
-                                        onClick={optionOneClick}>{dbquestions[paramQuestionId - 101].answera}</Button>
+                                        onClick={optionOneClick}>{dbquestions[paramQuestionId - 101].answerA}</Button>
                                 <Button name={"option2"} style={{backgroundColor: active2 ? "lightgray" : ""}}
-                                        onClick={optionTwoClick}>{dbquestions[paramQuestionId - 101].answerb}</Button>
+                                        onClick={optionTwoClick}>{dbquestions[paramQuestionId - 101].answerB}</Button>
                                 <Button name={"option3"} style={{backgroundColor: active3 ? "lightgray" : ""}}
-                                        onClick={optionThreeClick}>{dbquestions[paramQuestionId - 101].answerc}</Button>
+                                        onClick={optionThreeClick}>{dbquestions[paramQuestionId - 101].answerC}</Button>
                                 <Button name={"option4"} style={{backgroundColor: active4 ? "lightgray" : ""}}
-                                        onClick={optionFourClick}>{dbquestions[paramQuestionId - 101].answerd}</Button>
+                                        onClick={optionFourClick}>{dbquestions[paramQuestionId - 101].answerD}</Button>
 
                             </ul>
                         </div>
@@ -482,6 +705,7 @@ function Quiz() {
                     }}>
                         <button onClick={toPrevQuestion}>Tilbage</button>
                         <button onClick={toNextQuestion}>Frem</button>
+                        <button onClick={apitest}>TEST</button>
                     </div>
                     <div style={{
                         display: 'flex',
@@ -530,12 +754,12 @@ function Quiz() {
                     paddingBottom: '20px',
                 }}>
                     {dbquestions.map(function (d, idx) {
-                        return (<ul key={idx}>Spørgsmål: {idx + 1 + ": " + d.questionName} <br/>
-                            Dit svar: {answersArr[idx].id} | Korrekt svar: {d.correctAnswer}
-                            <li>Mulighed 1: {d.answera} <br/></li>
-                            <li>Mulighed 2: {d.answerb} <br/></li>
-                            <li>Mulighed 3: {d.answerc} <br/></li>
-                            <li>Mulighed 4: {d.answerd} <br/></li>
+                        return (<ul key={idx}>Spørgsmål {idx + 1 + ": " + d.questionName} <br/>
+                            Dit svar: {answersArr[idx].id} | Korrekt svar: {d.correctanswer}
+                            <li>Mulighed 1: {d.answerA} <br/></li>
+                            <li>Mulighed 2: {d.answerB} <br/></li>
+                            <li>Mulighed 3: {d.answerC} <br/></li>
+                            <li>Mulighed 4: {d.answerD} <br/></li>
                         </ul>)
                     })}
                 </div>
