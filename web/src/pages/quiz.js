@@ -246,16 +246,6 @@ function Quiz() {
         }
     }
 
-    const apitest = () => {
-        console.log("LOG 1: ")
-        console.log(quizObject)
-        console.log(quizObject[0].id.toString())
-        console.log(quizObject[0].category.toString())
-
-        console.log("LOG 2:");
-        console.log(dbquestions) //empty array? may be because only the first method in quiz init is done right
-    }
-
     const updateQuizName = () => {
         //console.log("Paramquizid: " + paramQuizId + ". .")
         var quiznumberFromParam = parseInt(paramQuizId); // 752;
@@ -634,7 +624,6 @@ function Quiz() {
                     }}>
                         <button onClick={toPrevQuestion}>Tilbage</button>
                         <button onClick={toNextQuestion}>Frem</button>
-                        <button onClick={apitest}>TEST</button>
                     </div>
                     <div style={{
                         display: 'flex',
