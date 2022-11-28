@@ -1,12 +1,11 @@
 package DB;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
 
+@Table(name="Quiz")
 @Entity
-@Table(name="quiz")
 @Getter
 @Setter
 @Builder
@@ -15,11 +14,13 @@ import lombok.*;
 @AllArgsConstructor
 public class Quiz {
     @Id
-    @Column
+    @GeneratedValue
     private int id;
     @Column
+    private String quizName;
+    @Column
     private String category;
-
+    @OneToMany(cascade = {CascadeType.ALL})
+    private List<Question> questionsList;
 }
-
 

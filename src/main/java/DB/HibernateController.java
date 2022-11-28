@@ -12,7 +12,8 @@ public class HibernateController {//Should be a singleton…
         Configuration configuration = new Configuration(); //NB org.hibernate.cfg.Configuration
         configuration.addAnnotatedClass(User.class); //remember to do this for all DB entities
         configuration.addAnnotatedClass(Report.class);
-        configuration.addAnnotatedClass(Questions.class);
+        configuration.addAnnotatedClass(Quiz.class);
+        configuration.addAnnotatedClass(Question.class);
         configuration.addAnnotatedClass(QuizResult.class);
         configuration.addAnnotatedClass(Quiz_Questions.class);
         configuration.addAnnotatedClass(Quiz.class);
