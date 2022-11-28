@@ -1,0 +1,14 @@
+### Logintest
+
+POST http://localhost:8080/api/login
+Content-Type: application/json
+
+{"username": "brian","password":"kodeord"}
+
+### Token validation
+# Need to get valid token first
+
+POST http://localhost:8080/api/login/tokentest
+Content-Type: application/json
+
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJHaXJhZmZlRGVsdXhlIiwiZXhwIjoxNjY4ODYyOTA0LCJ1c2VyIjoie1wiaWRcIjowLFwidXNlcm5hbWVcIjpcImJyaWFuXCIsXCJwYXNzd29yZFwiOlwiXCJ9In0.B3mfS2av9tnIiyS_25r7iFmzwpkS6jVu73AwrDTlZvLwQ0-fOODIn11xiG-cyinheQ9Q2clAL86dcgYX-Y7erQ

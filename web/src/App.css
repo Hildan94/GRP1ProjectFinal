@@ -2,6 +2,21 @@
   text-align: center;
 }
 
+.center{
+  text-align: center;
+  border: 3px solid;
+}
+
+table, th, td {
+  border: 1px solid;
+}
+
+table {
+  border: 1px solid;
+  width: 90%;
+
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

@@ -1,17 +1,23 @@
 package DB;
 
-
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+@Slf4j
 public class HibernateController {//Should be a singleton…
     private final SessionFactory sessionFactory;
 
     public HibernateController(String dbUrl){
         Configuration configuration = new Configuration(); //NB org.hibernate.cfg.Configuration
         configuration.addAnnotatedClass(User.class); //remember to do this for all DB entities
+        configuration.addAnnotatedClass(Report.class);
         configuration.addAnnotatedClass(Quiz.class);
         configuration.addAnnotatedClass(Question.class);
+        configuration.addAnnotatedClass(QuizResult.class);
+        configuration.addAnnotatedClass(Quiz_Questions.class);
+        configuration.addAnnotatedClass(Quiz.class);
+        System.err.println("Hiberte " + System.getenv("devopse22user") + "hibernate.connection.password" + System.getenv("devopse22pass"));
         configuration.setProperty("hibernate.connection.username",System.getenv("devopse22user"));
         configuration.setProperty("hibernate.connection.password",System.getenv("devopse22pass"));
         configuration.setProperty("hibernate.connection.url", "jdbc:postgresql://" + dbUrl);

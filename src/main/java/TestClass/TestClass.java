@@ -1,5 +1,6 @@
 package TestClass;
 
+import DB.Report;
 import DB.HibernateController;
 import DB.User;
 import org.hibernate.Session;
@@ -27,6 +28,7 @@ public class TestClass {
         readTransaction.commit();
         session.close();
     }
+
 
 
 }
