@@ -41,7 +41,7 @@ function Quizzes() {
                 <h3 onClick={toQuiz}> Quiz 4 blok</h3>
             </div>
             <div>
-                <button onClick={toQuiznew}>Opret ny</button>
+                <button onClick={toQuiznew}>Opret ny quiz</button>
             </div>
             <div>
                 <button onClick={toReports}>Generer rapport</button>
