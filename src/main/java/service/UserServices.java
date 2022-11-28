@@ -26,7 +26,7 @@ public class UserServices {
     //No implementation yet
         throw new NoImplementationException("user-queries not implemented, yet");
     }
-/*
+
     public class NoImplementationException extends Exception {
         public NoImplementationException(String s) {
             super(s);
@@ -44,7 +44,7 @@ public class UserServices {
         }
     }
 
-*/
+
 
 
 }
