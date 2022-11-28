@@ -37,7 +37,7 @@ public class CampusNetLogin {
             user.setUsername(extractUserName(body));
             UserService service = new UserService();
 
-            if(!service.userInDB(user.getUsername())){
+            if(!service.userInDB(user.getUsername())) {
                 service.createInternalUser(user);
             }
             String tokenString = JWTHandler.generateJwtToken(new User());
