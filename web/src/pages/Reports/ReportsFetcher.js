@@ -2,6 +2,7 @@ import {makeAutoObservable, runInAction} from "mobx";
 import Report from "./Report";
 import ReportObject from "./ReportObject";
 
+//TODO: Hvordan redirectes der rigtigt til backenden?
 
 const baseUrl = process.env.NODE_ENV === 'development' ?
     "http://localhost:8080/":""; //Check if dev environment

@@ -22,6 +22,7 @@ public class CampusNetLogin {
         return Response.seeOther(UriBuilder.fromUri(URI).build()).build();
     }
     //TODO: Should assign right userId to token when loggin in through campusnet and is existing in DB
+    //TODO: Why no work with console.log?
     @GET
     @Path("redirect")
     public Response callback(@QueryParam("ticket") String cnTicket) throws NotAuthorizedException{
@@ -36,11 +37,21 @@ public class CampusNetLogin {
             User user = new User();
             user.setUsername(extractUserName(body));
             UserService service = new UserService();
+            User userInDB = service.userInDB(user.getUsername());
 
+            if(userInDB != null && user.getUsername().equals(userInDB.getUsername())){
+                user.setId(userInDB.getId());
+                System.out.println("User with ID " + user.getId() + " Logged in from CNet");
+            }else {
+                service.createInternalUser(user);
+                System.out.println("Created new user from CNet");
+            }
+            /*
             if(!service.userInDB(user.getUsername())) {
                 service.createInternalUser(user);
             }
-            String tokenString = JWTHandler.generateJwtToken(new User());
+             */
+            String tokenString = JWTHandler.generateJwtToken(user);
             return Response.seeOther(UriBuilder.fromUri("http://localhost:3000/?token="+ tokenString).build()).build();
         }
         throw new NotAuthorizedException("Login failed");

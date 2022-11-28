@@ -81,6 +81,20 @@ public class UserService {
     /**
      * Should be used with caution!
      */
+    public User userInDB(String userName){
+        Session session = sessionFactory.openSession();
+        JpaCriteriaQuery<User> query = session.getCriteriaBuilder().createQuery(User.class);
+        query.from(User.class);
+        List<User> users = session.createQuery(query).getResultList();
+
+        for (User user : users){
+            if(Objects.equals(user.getUsername(), userName)){
+                return user;
+            }
+        }
+        return null;
+    }
+    /*
     public boolean userInDB(String userName){
         Session session = sessionFactory.openSession();
         JpaCriteriaQuery<User> query = session.getCriteriaBuilder().createQuery(User.class);
@@ -94,6 +108,7 @@ public class UserService {
         }
         return false;
     }
+     */
 }
 
 
