@@ -48,11 +48,11 @@ public class QuizResultService {
 
     @GET
     @Path("questions")
-    public List<Questions> getQuestions() {
+    public List<Question> getQuestions() {
         Session session = sessionFactory.openSession();
-        JpaCriteriaQuery<Questions> query = session.getCriteriaBuilder().createQuery(Questions.class);
-        query.from(Questions.class);
-        List<Questions> data = session.createQuery(query).getResultList();
+        JpaCriteriaQuery<Question> query = session.getCriteriaBuilder().createQuery(Question.class);
+        query.from(Question.class);
+        List<Question> data = session.createQuery(query).getResultList();
         return data;
     }
 
