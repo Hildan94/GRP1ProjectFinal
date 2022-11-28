@@ -21,7 +21,8 @@ public class TestQuizClass {
         Transaction transaction = session.beginTransaction();
         Quiz quiz = new Quiz();
         System.out.println("QuizID before commit: " + quiz.getId());
-        List<Question> questionsList = new LinkedList<Question>();
+        quiz.setCategory("Geografi");
+        List<Question> questionsList = new LinkedList<>();
         Question question = new Question();
         question.setQuestionName("Hvad er hovedstaden i Danmark?");
         question.setAnswerA("København");
@@ -58,7 +59,8 @@ public class TestQuizClass {
         Transaction transaction = session.beginTransaction();
         Quiz quiz = new Quiz();
         System.out.println("QuizID before commit: " + quiz.getId());
-        List<Question> questionsList = new LinkedList<Question>();
+        quiz.setCategory("Matematik");
+        List<Question> questionsList = new LinkedList<>();
         Question question = new Question();
         question.setQuestionName("Hvor mange sider har et octagon?");
         question.setAnswerA("6");
