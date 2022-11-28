@@ -1,16 +1,13 @@
 import {useNavigate} from "react-router-dom";
-import {React} from "react";
+import React from "react";
 import { Helmet } from 'react-helmet';
-import OutlinedCard from "./Quiz_card";
+import Quiz from "./CreateQuiz";
 
 function Quiznew() {
 
     const navigate = useNavigate()
 
-    const toQuizzes = () => {
-        navigate('/quizzes')
-    }
-
+    //functional components for navigation:
     const toHome = () => {
         navigate('/home')
     }
@@ -23,18 +20,12 @@ function Quiznew() {
             <div>
                 <h1 onClick={toHome}> NEM Læringsplatform </h1>
             </div>
-
             <div>
-                <h1> VALGT FAG </h1>
-                <OutlinedCard />
-            </div>
+                <h1>Opret ny quiz</h1>
 
-            <div>
-                <button onClick={toQuizzes}>Opret quiz</button>
+                <Quiz />
             </div>
         </div>
     );
-
 }
-
 export default Quiznew;
