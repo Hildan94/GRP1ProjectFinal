@@ -7,7 +7,8 @@ const Question = () => {
 
     const navigate = useNavigate()
     const { quizid } = useParams();
-
+    const baseUrl = process.env.NODE_ENV === 'development' ?
+        "https://localhost:8080/":""; //Check if dev environment
     //initialize:
     const [formFields, setFormFields] = useState( [
         {questionName: '', answerA: '', answerB: '', answerC:'', answerD: '', correctAnswer: '0'}
@@ -40,7 +41,7 @@ const Question = () => {
         try {
             //https://nem.grp1.diplomportal.dk/api/quiznew
             //http://localhost:8080/api/quiznew/questions/${quizid}
-            const response = await fetch(`https://nem.grp1.diplomportal.dk/api/quiznew/questions/${quizid}`, {method: "POST",crossdomains: true, body: JSON.stringify(formFields), headers: {"Content-Type": "APPLICATION/JSON"}})
+            const response = await fetch(baseUrl + `api/quiznew/questions/${quizid}`, {method: "POST",crossdomains: true, body: JSON.stringify(formFields), headers: {"Content-Type": "APPLICATION/JSON"}})
             const data = await response.json();
             alert("Du har oprettet en quiz")
             navigate(`/quizzes`);

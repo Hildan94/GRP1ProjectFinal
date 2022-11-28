@@ -7,6 +7,9 @@ const Quiz = () => {
 
     const navigate = useNavigate()
 
+    const baseUrl = process.env.NODE_ENV === 'development' ?
+        "https://localhost:8080/":""; //Check if dev environment
+
         //initialize:
     const [quizName, setQuizName] = useState('');
     const [category, setCategory] = useState('Matematik');
@@ -21,7 +24,7 @@ const Quiz = () => {
 //http://localhost:8080/api/quiznew
 
         try {
-            const response = await fetch("http://localhost:8080/api/quiznew", {method: "POST", body: JSON.stringify(quiz), headers: {"Content-Type": "APPLICATION/JSON"}})
+            const response = await fetch(baseUrl + "api/quiznew", {method: "POST", body: JSON.stringify(quiz), headers: {"Content-Type": "APPLICATION/JSON"}})
             const data = await response.json();
             navigate(`/questions/${data}`);
         } catch (error) {
