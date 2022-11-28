@@ -16,7 +16,11 @@ public class Quiz {
     @Id
     @GeneratedValue
     private int id;
-    @OneToMany
+    @Column
+    private String quizName;
+    @Column
+    private String category;
+    @OneToMany(cascade = {CascadeType.ALL})
     private List<Question> questionsList;
 }
 
