@@ -18,10 +18,10 @@ const Quiz = () => {
         e.preventDefault();
         const quiz = {quizName, category, questionsList};
         //fetch("https://nem.grp1.diplomportal.dk/api/quiznew", {method: "POST", body: quiz, headers: {"Content-Type": "APPLICATION/JSON"}})
-
+//http://localhost:8080/api/quiznew
 
         try {
-            const response = await fetch("http://localhost:8080/api/quiznew", {method: "POST",crossdomains: true, body: JSON.stringify(quiz), headers: {"Content-Type": "APPLICATION/JSON"}})
+            const response = await fetch("https://nem.grp1.diplomportal.dk/api/quiznew", {method: "POST",crossdomains: true, body: JSON.stringify(quiz), headers: {"Content-Type": "APPLICATION/JSON"}})
             const data = await response.json();
             navigate(`/questions/${data}`);
         } catch (error) {

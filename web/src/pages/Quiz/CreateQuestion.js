@@ -38,7 +38,9 @@ const Question = () => {
             return;
         }
         try {
-            const response = await fetch(`http://localhost:8080/api/quiznew/questions/${quizid}`, {method: "POST",crossdomains: true, body: JSON.stringify(formFields), headers: {"Content-Type": "APPLICATION/JSON"}})
+            //https://nem.grp1.diplomportal.dk/api/quiznew
+            //http://localhost:8080/api/quiznew/questions/${quizid}
+            const response = await fetch(`https://nem.grp1.diplomportal.dk/api/quiznew/questions/${quizid}`, {method: "POST",crossdomains: true, body: JSON.stringify(formFields), headers: {"Content-Type": "APPLICATION/JSON"}})
             const data = await response.json();
             alert("Du har oprettet en quiz")
             navigate(`/quizzes`);
