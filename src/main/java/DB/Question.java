@@ -1,20 +1,18 @@
 package DB;
 
 import jakarta.persistence.*;
-import lombok.*;
-
-@Entity
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 @Table(name="Questions")
-@Getter
+@Entity
 @Setter
-@Builder
-@ToString
-@RequiredArgsConstructor
+@Getter
 @AllArgsConstructor
-public class Questions {
-
+@NoArgsConstructor
+public class Question {
     @Id @GeneratedValue
-    @Column
     private int id;
     @Column
     private String questionName;
@@ -27,7 +25,5 @@ public class Questions {
     @Column
     private String answerD;
     @Column
-    private int answerNr;
-
-
+    private int correctAnswer;
 }

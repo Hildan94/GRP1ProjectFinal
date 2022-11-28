@@ -8,7 +8,8 @@ import Signup from "./pages/signup";
 import Home from "./pages/home";
 import Quizzes from "./pages/quizzes";
 import Quiz from "./pages/quiz";
-import Quiznew from "./pages/quiznew";
+import Questions from "./pages/Quiz/questions"
+import Quiznew from "./pages/Quiz/quiznew";
 import ReportsOverview from "./pages/Reports/ReportsOverview";
 import Notfound from "./pages/notFound";
 
@@ -49,6 +50,7 @@ root.render(
             <Route path="/quizzes" element={<Quizzes/>}/>
             <Route exact path="/quiz/:quizid/:questionid" element={<Quiz/>}/>
             <Route path="/quiznew" element={<Quiznew/>}/>
+            <Route path="/questions/:quizid" element={<Questions/>}/>
             <Route path="/reportsoverview" element={<ReportsOverview/>}/>
             <Route path="/reportsoverview/report" element={<Report/>}/>
             <Route path="/campuslogin" element={<CampusLogin/>}/>
