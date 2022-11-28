@@ -36,7 +36,7 @@ function ReportsOverview() {
 
 
     function printToken(){
-        console.log(localStorage.getItem('userToken'))
+        console.log("JWT token" + localStorage.getItem('userToken'))
     }
 
     function clearToken(){
