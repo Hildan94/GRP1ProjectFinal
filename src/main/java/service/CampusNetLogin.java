@@ -41,7 +41,7 @@ public class CampusNetLogin {
                 service.createInternalUser(user);
             }
             String tokenString = JWTHandler.generateJwtToken(new User());
-            Response.seeOther(UriBuilder.fromUri("http://localhost:3000/?token="+ tokenString).build()).build();
+            return Response.seeOther(UriBuilder.fromUri("http://localhost:3000/?token="+ tokenString).build()).build();
         }
         throw new NotAuthorizedException("Login failed");
     }
