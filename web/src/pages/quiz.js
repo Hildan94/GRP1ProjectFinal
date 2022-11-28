@@ -302,7 +302,7 @@ function Quiz() {
                         console.log(dbquestions);
                         dbquestions.push({ // add question to dbquestions state
                             questionName: questionsObject[i].questionName,
-                            correctanswer: questionsObject[i].correctanswer + 1, //In db table the correct answers are indexed from 0-3 and not 1-4. Therefore, we increment +1.
+                            correctAnswer: questionsObject[i].correctAnswer + 1, //In db table the correct answers are indexed from 0-3 and not 1-4. Therefore, we increment +1.
                             id: questionsObject[i].id,
                             answerA: questionsObject[i].answerA,
                             answerB: questionsObject[i].answerB,
@@ -619,7 +619,7 @@ function Quiz() {
                 }}>
                     {dbquestions.map(function (d, idx) {
                         return (<ul key={idx}>Spørgsmål {idx + 1 + ": " + d.questionName} <br/>
-                            Dit svar: {answersArr[idx].id} | Korrekt svar: {d.correctanswer}
+                            Dit svar: {answersArr[idx].id} | Korrekt svar: {d.correctAnswer}
                             <li>Mulighed 1: {d.answerA} <br/></li>
                             <li>Mulighed 2: {d.answerB} <br/></li>
                             <li>Mulighed 3: {d.answerC} <br/></li>
