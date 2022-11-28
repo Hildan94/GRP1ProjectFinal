@@ -8,6 +8,7 @@ import Signup from "./pages/signup";
 import Home from "./pages/home";
 import Quizzes from "./pages/quizzes";
 import Quiz from "./pages/quiz";
+import Questions from "./pages/Quiz/questions"
 import Quiznew from "./pages/Quiz/quiznew";
 import Reports from "./pages/reports";
 import Notfound from "./pages/notFound";
@@ -28,6 +29,7 @@ root.render(
             <Route path="/quizzes" element={<Quizzes/>}/>
             <Route path="/quiz" element={<Quiz/>}/>
             <Route path="/quiznew" element={<Quiznew/>}/>
+            <Route path="/questions/:quizid" element={<Questions/>}/>
             <Route path="/reports" element={<Reports/>}/>
             <Route path="*" element={<Notfound/>}/>
         </Routes>
