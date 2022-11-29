@@ -1,5 +1,6 @@
 package DB;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,4 +27,8 @@ public class Question {
     private String answerD;
     @Column
     private int correctAnswer;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "quiz_fk")
+    @JsonIgnore
+    private Quiz parent;
 }
