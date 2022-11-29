@@ -20,20 +20,14 @@ function Signup() {
 
     const navigate = useNavigate()
     const toHome = () => { // Homepage of app after login
-        navigate('/home')
+        navigate('/#/home')
     }
     const toFrontpage = () => { // Login page
         navigate('/')
     }
 
-    const userObject = {
-        username: '',
-        password: '',
-        hash: ''
-    }
-
     const [input, setInput] = useState({
-        firstname: '',
+        username: '',
         surname: '',
         school: '',
         grade: '',
@@ -42,13 +36,17 @@ function Signup() {
     });
 
     const [error, setError] = useState({
-        firstname: '',
+        username: '',
         surname: '',
         school: '',
         grade: '',
         password: '',
         confirmPassword: ''
     })
+
+    const [userName, setUserName] = useState('');
+    const [passWord, setPassWord] = useState('');
+    const [hash, setHash] = useState('');
 
     const onInputChange = e => {
         const { name, value } = e.target;
@@ -59,13 +57,27 @@ function Signup() {
         validateInput(e);
     }
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const newUser = {"username":userName, "password":passWord, "hash":hash};
+
+        try {
+            userStore.addUser({"username":userName, "password":passWord, "hash":hash})
+            toHome();
+        } catch (error) {
+            alert("Fejl")
+        }
+
+        console.log(newUser);
+    };
+
     const validateInput = e => {
         let { name, value } = e.target;
         setError(prev => {
             const stateObj = { ...prev, [name]: "" };
 
             switch (name) {
-                case "firstname":
+                case "username":
                     if (!value) {
                         stateObj[name] = "Indtast fornavn.";
                     }
@@ -117,17 +129,17 @@ function Signup() {
     return (
         <div className="main">
             <div className={"sub-main"}>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <h1>Opret ny bruger</h1>
 
                         <input type="text"
-                               name="firstname"
+                               name="username"
                                placeholder="Fornavn"
-                               value={input.firstname}
-                               onChange={onInputChange}
+                               value={userName}
+                               onChange={(e) => setUserName(e.target.value)}
                                onBlur={validateInput}
                                className="name"/>
-                        { error.firstname && <span className='err'>{error.firstname}</span> }
+                        { error.username && <span className='err'>{error.username}</span> }
 
                     <div className="second-input">
                         <input type="text"
@@ -163,8 +175,9 @@ function Signup() {
                         <input type="password"
                                name="password"
                                placeholder="Kodeord"
-                               value={input.password}
-                               onChange={onInputChange}
+                               value={passWord}
+                               required
+                               onChange={(e) => setPassWord(e.target.value)}
                                onBlur={validateInput}
                                className="name"/>
                         { error.password && <span className='err'>{error.password}</span> }
@@ -181,10 +194,7 @@ function Signup() {
                     </div>
 
                     <div className="login-button">
-                        <button onClick={
-                            userStore.addUser("test", "test", "test")
-                            //toHome
-                        }>Opret bruger</button>
+                        <button type="submit">Opret bruger</button>
                     </div>
                     <p className="link">
                         <a href="/">Allerede oprettet?</a>
