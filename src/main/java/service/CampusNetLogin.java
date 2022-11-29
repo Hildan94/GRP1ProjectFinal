@@ -37,6 +37,7 @@ public class CampusNetLogin {
                         + cnTicket)
                 .asString()
                 .getBody();
+        System.out.println(body);
 
         if (body.contains("yes")) {
             User user = new User();
