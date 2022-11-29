@@ -1,8 +1,4 @@
 
-
-
-
-
 import './../Backend/frontpage.css';
 import profile from "./../image/a.png";
 import email from "./../image/email.png";
@@ -64,6 +60,7 @@ function Frontpage() {
                         <div className="login-button">
 
                             <button onClick={()=>tokenStore.doLogin(Username,Password)}>Log ind</button>
+
                             <button onClick={toThirdpartLogin}>Trejdepartslogin </button>
                         </div>
 

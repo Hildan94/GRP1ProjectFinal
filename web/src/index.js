@@ -12,7 +12,6 @@ import Questions from "./pages/Quiz/questions"
 import Quiznew from "./pages/Quiz/quiznew";
 import ReportsOverview from "./pages/Reports/ReportsOverview";
 import Notfound from "./pages/notFound";
-
 //<---------- Roboto font ---------->
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
