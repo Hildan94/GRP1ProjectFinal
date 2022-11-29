@@ -9,6 +9,7 @@ import DB.User;
 import com.auth0.jwt.JWT;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import lombok.extern.log4j.Log4j2;
 import org.apache.catalina.filters.ExpiresFilter;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -17,6 +18,7 @@ import service.exceptions.NoImplementationException;
 
 import java.util.*;
 
+@Log4j2
 @Produces(MediaType.APPLICATION_JSON)
 @Path("reports")
 public class ReportService {
@@ -32,18 +34,20 @@ public class ReportService {
             transaction.commit();
             session.close();
 
+            log.info("User " + validate.getId() + " Created Repport");
+
     }
 
     @GET
     public List<Report> reports(@HeaderParam("Authorization") String token){
         User validated = JWTHandler.validate(token);
+        log.info("User with ID " + validated.getId() + " loaded reports");
         Session session = sessionFactory.openSession();
 
         List reports = session.createQuery("FROM Report").list();
 
         for (Iterator iterator = reports.iterator(); iterator.hasNext(); ) {
             Report report = (Report) iterator.next();
-            System.out.println(report);
         }
         return reports;
     }
