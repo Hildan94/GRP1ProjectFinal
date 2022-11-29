@@ -15,7 +15,6 @@ class ReportsFetcher {
     constructor() {
         makeAutoObservable(this,{},{autoBind:true});
         //this.fetchReport();
-        this.fetchReports();
     }
 
 

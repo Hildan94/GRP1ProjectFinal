@@ -98,7 +98,7 @@ function ReportsOverview() {
 
             <div>
                 <button onClick={tokenStore.doLogin}> {tokenStore.state} </button>
-                <button onClick={scores.fetchReports}> Tryk for at indlæse værdier </button>
+                <button onClick={scores.fetchReports}> Tryk for at indlæse matematik rapporter </button>
                 <button onClick={printToken}> Print token </button>
                 <button onClick={clearToken}> Ryd token </button>
             </div>
