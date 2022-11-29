@@ -1,5 +1,7 @@
 import {useNavigate} from "react-router-dom";
 import {React, useState} from "react";
+import {userStore} from "./signupFetcher";
+import {observer} from "mobx-react-lite";
 
 /**
  * Page for signing up to use the site. When a user signs up they are to be assigned a unique ID.
@@ -13,6 +15,7 @@ import {React, useState} from "react";
  * */
 {/* validateInput is used when the input field is out of focus, and when passwords aren't matchin*/}
 {/* src.java.service.UserService. createUser() */}
+
 function Signup() {
 
     const navigate = useNavigate()
@@ -21,6 +24,12 @@ function Signup() {
     }
     const toFrontpage = () => { // Login page
         navigate('/')
+    }
+
+    const userObject = {
+        username: '',
+        password: '',
+        hash: ''
     }
 
     const [input, setInput] = useState({
@@ -172,7 +181,10 @@ function Signup() {
                     </div>
 
                     <div className="login-button">
-                        <button onClick={toHome}>Opret bruger</button>
+                        <button onClick={
+                            userStore.addUser("test", "test", "test")
+                            //toHome
+                        }>Opret bruger</button>
                     </div>
                     <p className="link">
                         <a href="/">Allerede oprettet?</a>
