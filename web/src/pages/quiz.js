@@ -6,7 +6,7 @@ import './../Backend/quiz.css';
 import Button from "@mui/material/Button";
 import axios from 'axios';
 
-const url = "https://nem.grp1.diplomportal.dk/"
+const url = "http://localhost:8080" //"https://nem.grp1.diplomportal.dk/"
 var token = localStorage.getItem("userToken");
 
 const tokenizedAxios = axios.create({
