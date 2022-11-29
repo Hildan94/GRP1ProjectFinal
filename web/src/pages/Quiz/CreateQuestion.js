@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import './assets/quiz.css';
+import { CircularProgress } from '@mui/material';
+import Button from '@mui/material/Button';
 
 
 const Question = () => {
@@ -8,11 +10,13 @@ const Question = () => {
     const navigate = useNavigate()
     const { quizid } = useParams();
     const baseUrl = process.env.NODE_ENV === 'development' ?
-        "https://localhost:8080/":""; //Check if dev environment
+        "http://localhost:8080/":""; //Check if dev environment
     //initialize:
     const [formFields, setFormFields] = useState( [
         {questionName: '', answerA: '', answerB: '', answerC:'', answerD: '', correctAnswer: '0'}
     ])
+
+    const [isLoading, setIsLoading] = useState(false);
 
     //handle change in fields:
     const handleFormChange = (event, index) => {
@@ -26,26 +30,37 @@ const Question = () => {
         e.preventDefault();
         //handle if any fields are empty
         let shouldSubmit = true;
-        formFields.forEach(q => {
-            if(q.questionName === "") shouldSubmit = false;
-            if(q.answerA === "") shouldSubmit = false;
-            if(q.answerB === "") shouldSubmit = false;
-            if(q.answerC === "") shouldSubmit = false;
-            if(q.answerD === "") shouldSubmit = false;
-            if(q.correctAnswer === "") shouldSubmit = false;
-        })
 
-        if(shouldSubmit === false){
+        formFields.forEach(q => {
+            if(q.questionName   === "" ||
+                q.answerA       === "" ||
+                q.answerB       === "" ||
+                q.answerC       === "" ||
+                q.answerD       === "" ||
+                q.correctAnswer === ""
+            ){ shouldSubmit = false; }
+        });
+
+        if(formFields.length === 0){
+            alert("Du kan ikke lave en quiz uden spørgsmål!")
             return;
         }
+
+        if(shouldSubmit === false){
+            alert("Udfyld venligst alle felter før du gemmer")
+            return;
+        }
+        setIsLoading(true);
         try {
             //https://nem.grp1.diplomportal.dk/api/quiznew
             //http://localhost:8080/api/quiznew/questions/${quizid}
-            const response = await fetch(baseUrl + `api/quiznew/questions/${quizid}`, {method: "POST",crossdomains: true, body: JSON.stringify(formFields), headers: {"Content-Type": "APPLICATION/JSON"}})
+            const response = await fetch(baseUrl + `api/quiznew/questions/${quizid}`, {method: "POST", body: JSON.stringify(formFields), headers: {Authorization : localStorage.getItem('userToken'), "Content-Type": "APPLICATION/JSON"}})
             const data = await response.json();
+            setIsLoading(false);
             alert("Du har oprettet en quiz")
             navigate(`/quizzes`);
         } catch (error) {
+            setIsLoading(false);
             alert("Der skete en fejl ):")
         }
         console.log(formFields);
@@ -134,14 +149,15 @@ const Question = () => {
                                 <option value="2">Svar 3</option>
                                 <option value="3">Svar 4</option>
                             </select>
-                            <button onClick={() => removeQuestion(index)}>Slet spørgsmål</button>
+                            <Button onClick={() => removeQuestion(index)}>Slet spørgsmål</Button>
                         </div>
                     )
 
                 })}
 
-                <button onClick={addQuestion}>Opret nyt spørgsmål</button>
-                <button type="submit" onClick={handleSubmit}>Gem spørgsmål og opret quiz</button>
+                <Button onClick={addQuestion}>Opret nyt spørgsmål</Button>
+                {isLoading? <CircularProgress/>:<></>}
+                <Button disabled={isLoading} type="submit" onClick={handleSubmit}>Gem spørgsmål og opret quiz</Button>
             </form>
         </div>
     );
