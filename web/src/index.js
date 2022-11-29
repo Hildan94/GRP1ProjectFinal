@@ -21,19 +21,7 @@ import Report from "./pages/Reports/Report";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <Router>
-        <Routes>
-            <Route path="/" element={<App/>}/>
-            <Route path="/signup" element={<Signup/>}/>
-            <Route path="/home" element={<Home/>}/>
-            <Route path="/quizzes" element={<Quizzes/>}/>
-            <Route exact path="/quiz/:quizid/:questionid" element={<Quiz/>}/>
-            <Route path="/quiznew" element={<Quiznew/>}/>
-            <Route path="/reportsoverview" element={<ReportsOverview/>}/>
-            <Route path="/reportsoverview/report" element={<Report/>}/>
-            <Route path="*" element={<Notfound/>}/>
-        </Routes>
-    </Router>
+<App/>
 );
 
 // If you want to start measuring performance in your app, pass a function

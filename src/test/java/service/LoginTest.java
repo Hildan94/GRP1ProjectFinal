@@ -22,7 +22,7 @@ import java.util.List;
 //import static org.testng.Assert.*;
 
 
-public class LoginTest {
+/*public class LoginTest {
 
     @Test
     public static void testGetUser() {
@@ -40,7 +40,7 @@ public class LoginTest {
         }
         */
 
-        HibernateController hibernateController =
+       /* HibernateController hibernateController =
                 new HibernateController("pgtest-db.caprover.grp1.diplomportal.dk:6543/pg");
                 //new HibernateController("test-db.prover.grp1.diplomata.dk:6543/pg");
         SessionFactory sessionFactory = hibernateController.getSessionFactory();
@@ -56,13 +56,13 @@ public class LoginTest {
         cr.select(root);
         /* Skriv hvilken user der skal findes */
         //String usertoFind = "Melman";
-        String usertoFind = "Melman";
+        /*String usertoFind = "Melman";
         cr.select(root).where(cb.like(root.get("username"), usertoFind));
 
         Query<User> query = session.createQuery(cr);
         List<User> results = query.getResultList();
 
-        if(results.toString().equals("Mel-man")){
+        if(results.toString().equals("Mel-man") && results.toString().equals(".")){
         //if(results.toString().equals("Melman")){
             System.out.println("True");
         }
@@ -70,4 +70,4 @@ public class LoginTest {
             System.out.print("False");
         }
     }
-}
+}*/
