@@ -15,6 +15,7 @@ import lombok.extern.log4j.Log4j2;
 @Path("campusnet")
 public class CampusNetLogin {
 
+    //TODO: Implement devMode
     boolean devMode = false;
 
     String urlBack = devMode ? "https://auth.dtu.dk/dtu/?service=https://localhost:8080/api/campusnet/redirect" : "https://auth.dtu.dk/dtu/?service=https://nem.grp1.diplomportal.dk:80/api/campusnet/redirect";
