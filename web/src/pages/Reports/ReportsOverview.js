@@ -2,12 +2,8 @@ import {useNavigate} from "react-router-dom";
 import {React} from "react";
 import {observer} from "mobx-react-lite";
 import {scores} from "./ReportsFetcher";
-import {observable} from "mobx";
 import {tokenStore} from "../../stores/TokenStore";
-import {Form} from "react-bootstrap";
-import Button from "@mui/material/Button";
-import reportObject from "./ReportObject";
-import {Link} from "@mui/material";
+
 
 
 //TODO: Ville være en fordel at rendere listen inden der bliver trykket / komme fra en anden side måske

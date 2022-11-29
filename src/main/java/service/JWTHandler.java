@@ -42,6 +42,7 @@ public class JWTHandler {
         try {
             return new ObjectMapper().reader().forType(User.class).readValue(user.asString());
         } catch (JsonProcessingException e) {
+            log.error("User with token " + s + "failed to validate");
             throw new RuntimeException(e);
         }
     }
