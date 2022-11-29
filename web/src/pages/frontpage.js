@@ -45,7 +45,7 @@ function Frontpage() {
                             </div>
 
                             <p className="link">
-                                <a href="#">Glemt kodeord?</a> Or <a href="#">Opret bruger</a>
+                                <a href="#">Glemt kodeord?</a> Or <a href="/#/signup">Opret bruger</a>
                             </p>
 
                         </div>

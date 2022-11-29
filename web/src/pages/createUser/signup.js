@@ -20,7 +20,7 @@ function Signup() {
 
     const navigate = useNavigate()
     const toHome = () => { // Homepage of app after login
-        navigate('/#/home')
+        navigate('/home')
     }
     const toFrontpage = () => { // Login page
         navigate('/')
@@ -63,7 +63,7 @@ function Signup() {
 
         try {
             userStore.addUser({"username":userName, "password":passWord, "hash":hash})
-            toHome();
+            toFrontpage();
         } catch (error) {
             alert("Fejl")
         }
@@ -197,7 +197,7 @@ function Signup() {
                         <button type="submit">Opret bruger</button>
                     </div>
                     <p className="link">
-                        <a href="/">Allerede oprettet?</a>
+                        <a href="/#/home">Allerede oprettet?</a>
                     </p>
                 </form>
             </div>
