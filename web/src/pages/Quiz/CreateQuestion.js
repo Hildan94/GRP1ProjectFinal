@@ -149,13 +149,13 @@ const Question = () => {
                                 <option value="2">Svar 3</option>
                                 <option value="3">Svar 4</option>
                             </select>
-                            <Button onClick={() => removeQuestion(index)}>Slet spørgsmål</Button>
+                            <Button disabled={isLoading} onClick={() => removeQuestion(index)}>Slet spørgsmål</Button>
                         </div>
                     )
 
                 })}
 
-                <Button onClick={addQuestion}>Opret nyt spørgsmål</Button>
+                <Button disabled={isLoading} onClick={addQuestion}>Opret nyt spørgsmål</Button>
                 {isLoading? <CircularProgress/>:<></>}
                 <Button disabled={isLoading} type="submit" onClick={handleSubmit}>Gem spørgsmål og opret quiz</Button>
             </form>
