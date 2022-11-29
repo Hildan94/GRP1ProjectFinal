@@ -1,7 +1,6 @@
 import {useNavigate} from "react-router-dom";
 import {React, useState} from "react";
 import {userStore} from "./signupFetcher";
-import {observer} from "mobx-react-lite";
 
 /**
  * Page for signing up to use the site. When a user signs up they are to be assigned a unique ID.
