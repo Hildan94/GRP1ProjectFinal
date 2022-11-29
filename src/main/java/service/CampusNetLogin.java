@@ -18,7 +18,7 @@ public class CampusNetLogin {
     @GET
     @Path("login")
     public Response login(){
-        String URI = "https://auth.dtu.dk/dtu/?service=https://nem.grp1.diplomportal.dk:8080/api/campusnet/redirect";
+        String URI = "https://auth.dtu.dk/dtu/?service=https://nem.grp1.diplomportal.dk:443/api/campusnet/redirect";
         return Response.seeOther(UriBuilder.fromUri(URI).build()).build();
     }
     //TODO: Should assign right userId to token when loggin in through campusnet and is existing in DB
@@ -28,7 +28,7 @@ public class CampusNetLogin {
     public Response callback(@QueryParam("ticket") String cnTicket) throws NotAuthorizedException{
         System.out.println(cnTicket); //Check if we got something back
         //Tjek ticket mod CampusNet
-        String body = Unirest.get( "https://auth.dtu.dk/dtu/validate?service=https://nem.grp1.diplomportal.dk:8080/api/campusnet/redirect&ticket="
+        String body = Unirest.get( "https://auth.dtu.dk/dtu/validate?service=https://nem.grp1.diplomportal.dk:443/api/campusnet/redirect&ticket="
                         + cnTicket)
                 .asString()
                 .getBody();
@@ -52,7 +52,7 @@ public class CampusNetLogin {
             }
              */
             String tokenString = JWTHandler.generateJwtToken(user);
-            return Response.seeOther(UriBuilder.fromUri("https://nem.grp1.diplomportal.dk:3000/?token="+ tokenString).build()).build();
+            return Response.seeOther(UriBuilder.fromUri("https://nem.grp1.diplomportal.dk:443/?token="+ tokenString).build()).build();
         }
         throw new NotAuthorizedException("Login failed");
     }
