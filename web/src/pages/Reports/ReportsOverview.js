@@ -6,6 +6,8 @@ import {observable} from "mobx";
 import {tokenStore} from "../../stores/TokenStore";
 import {Form} from "react-bootstrap";
 import Button from "@mui/material/Button";
+import reportObject from "./ReportObject";
+import {Link} from "@mui/material";
 
 
 //TODO: Tokens
@@ -15,6 +17,8 @@ import Button from "@mui/material/Button";
 //TODO: Skal ikke hardcode tabellen (måske tage størrelse af tabel fra reportsfetcheren
 //TODO: Error codes
 //TODO: Fix error messages
+//TODO: Tilføj knapper så der kan sorteres
+//TODO: Skal kun hente for den bruger der spørger?
 /**
  * Tror bare at tokens skal have nogle login data og så virker de
  */
@@ -22,11 +26,17 @@ import Button from "@mui/material/Button";
 function ReportsOverview() {
 
     function toReport(key){
-        navigate('report/' + (key+1).toString())
+        navigate('/report/' + (key+1).toString())
     }
 
+    function toCampusLogin(){
+        navigate('/campuslogin')
+    }
+
+
+
     function printToken(){
-        console.log(localStorage.getItem('userToken'))
+        console.log("JWT token" + localStorage.getItem('userToken'))
     }
 
     function clearToken(){
@@ -38,7 +48,7 @@ function ReportsOverview() {
      * /TODO : Skal vise rigtigt videre
      *
      */
-    const reports = scores.report.map((reportName,outer) =>
+     const reports = scores.report.map((reportName,outer) =>
         <tr>
             {Object.values(reportName).map((value) =>
                 <td>
@@ -78,7 +88,7 @@ function ReportsOverview() {
                         <td>quizId</td>
                         <td>quizname</td>
                         <td>quizresultat</td>
-                        <td>quizrigtige</td>
+                        <td>quizspørgsmål</td>
                         <td>userid</td>
                         <td>Klik for at se resultater</td>
 
@@ -91,6 +101,11 @@ function ReportsOverview() {
                 <button onClick={scores.fetchReports}> Tryk for at indlæse værdier </button>
                 <button onClick={printToken}> Print token </button>
                 <button onClick={clearToken}> Ryd token </button>
+            </div>
+            <div>
+                <button onClick={scores.reqeustCreateReport}> Lav rapport </button>
+                <button onClick={toCampusLogin}> Log ind campusnet </button>
+
             </div>
         </div>
     );

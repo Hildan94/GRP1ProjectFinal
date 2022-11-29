@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.testng.annotations.Test;
+import service.UserService;
 
 public class TestClass {
     @Test
@@ -28,7 +29,20 @@ public class TestClass {
         readTransaction.commit();
         session.close();
     }
+    @Test
+    public void testUserInDB(){
+        HibernateController hibernateController =
+                new HibernateController("pgtest-db.caprover.grp1.diplomportal.dk:6543/pg");
+        SessionFactory sessionFactory = hibernateController.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        User user = new User();
+        user.setUsername("s152780");
+        UserService service = new UserService();
 
+        System.out.println(service.userInDB(user.getUsername()));
+
+    }
 
 
 }

@@ -19,8 +19,28 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import Report from "./pages/Reports/Report";
+import CampusLogin from "./pages/CampusLogin";
+
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    //name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+const token = getParameterByName("token");
+if (token!=null && token.length>0){
+    //Store token and redirect to baseURL
+    localStorage.setItem("userToken",token);
+    window.location.replace("/");
+}
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+
 root.render(
     <Router>
         <Routes>
@@ -33,6 +53,7 @@ root.render(
             <Route path="/questions/:quizid" element={<Questions/>}/>
             <Route path="/reportsoverview" element={<ReportsOverview/>}/>
             <Route path="/reportsoverview/report" element={<Report/>}/>
+            <Route path="/campuslogin" element={<CampusLogin/>}/>
             <Route path="*" element={<Notfound/>}/>
         </Routes>
     </Router>

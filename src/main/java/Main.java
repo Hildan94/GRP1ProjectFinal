@@ -1,3 +1,5 @@
+import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.startup.Tomcat;
@@ -8,7 +10,7 @@ import java.lang.Exception;
 import io.sentry.ITransaction;
 import io.sentry.SpanStatus;
 
-@Slf4j
+@Log4j2
 
 public class Main {
 
@@ -22,7 +24,7 @@ public class Main {
             options.setDebug(true);
         });
 
-        System.err.println("Hiberte " + System.getenv("devopse22user") + " hibernate.connection.password" + System.getenv("devopse22pass"));
+        log.info("Hibernate " + System.getenv("devopse22user") + " hibernate.connection.password" + System.getenv("devopse22pass"));
         Tomcat tomcat = new Tomcat();
         tomcat.setBaseDir("temp");
         String port = System.getenv("DevOpsPort");

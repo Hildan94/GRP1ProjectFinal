@@ -4,6 +4,7 @@ import DB.HibernateController;
 import DB.User;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import lombok.extern.log4j.Log4j2;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -13,12 +14,15 @@ import service.exceptions.NoImplementationException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Produces(MediaType.APPLICATION_JSON)
 @Path("users")
 
 //TODO: Need to handle validation exceptions
 //TODO: Figure out how JWTHandler works
+//TODO: Makes report test API call
+@Log4j2
 public class UserService {
 
     List<User> users = new ArrayList<>();
@@ -62,6 +66,49 @@ public class UserService {
         //No implementation yet
         throw new NoImplementationException("user-queries not implemented yet");
     }
+
+    /**
+     * Should be used with caution!
+     */
+    public void createInternalUser(User user){
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        session.persist(user);
+        transaction.commit();
+        session.close();
+    }
+
+    /**
+     * Should be used with caution!
+     */
+    public User userInDB(String userName){
+        Session session = sessionFactory.openSession();
+        JpaCriteriaQuery<User> query = session.getCriteriaBuilder().createQuery(User.class);
+        query.from(User.class);
+        List<User> users = session.createQuery(query).getResultList();
+
+        for (User user : users){
+            if(Objects.equals(user.getUsername(), userName)){
+                return user;
+            }
+        }
+        return null;
+    }
+    /*
+    public boolean userInDB(String userName){
+        Session session = sessionFactory.openSession();
+        JpaCriteriaQuery<User> query = session.getCriteriaBuilder().createQuery(User.class);
+        query.from(User.class);
+        List<User> users = session.createQuery(query).getResultList();
+
+        for (User user : users){
+            if(Objects.equals(user.getUsername(), userName)){
+                return true;
+            }
+        }
+        return false;
+    }
+     */
 }
 
 
