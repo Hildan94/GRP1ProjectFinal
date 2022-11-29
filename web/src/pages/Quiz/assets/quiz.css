@@ -1,0 +1,193 @@
+/* variables */
+:root{
+    --primary: #2343ad;
+    --secondary: #fff;
+}
+
+/* quiz form */
+.Quiz {
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+}
+.Quiz label {
+    text-align: left;
+    display: block;
+}
+
+.Quiz input, .Quiz select {
+    background: rgba(255,255,255,0.05);
+    width: 100%;
+    padding: 10px 16px;
+    margin: 10px 0;
+    border: 2px solid #222;
+    border-radius: 20px;
+    box-sizing: border-box;
+    display: block;
+    color: #222;
+}
+
+.Quiz button{
+    background: none;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    padding: 6px 12px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    display: inline-block;
+}
+.Quiz button:hover{
+    color: #222;
+    background: var(--primary);
+}
+.Quiz div{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+/* reset */
+.Quiz body,p,a,ul,li{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+.Quiz li{
+    list-style-type: none;
+}
+
+/* base style */
+.Quiz body{
+    background: var(--secondary);
+    overflow-x: hidden;
+    font-family: 'Roboto Regular';
+}
+
+/* fonts */
+@font-face {
+    font-family: 'Roboto Regular';
+    src: url('fonts/Roboto-Regular.ttf');
+}
+.Quiz h1,h2,h3,h4{
+    color: #29292a;
+    font-weight: normal;
+}
+
+.Quiz p,a,li{
+    color: #262536FF;
+}
+
+.Quiz h1,h3{
+    font-size: 1.2em;
+}
+.Quiz h2{
+    font-size: 1.6em;
+}
+.Quiz h4{
+    font-size: 1.1em;
+}
+.Quiz .leading{
+    font-size: 1.1em;
+}
+
+/* Question form*/
+.Question {
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+}
+.Question label {
+    text-align: left;
+    display: block;
+}
+
+.Question input, .Question select {
+    background: rgba(255,255,255,0.05);
+    width: 100%;
+    padding: 10px 16px;
+    margin: 10px 0;
+    border: 2px solid #222;
+    border-radius: 20px;
+    box-sizing: border-box;
+    display: block;
+    color: #222;
+}
+
+.Question button{
+    background: none;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    padding: 6px 12px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+.Question button:hover{
+    color: #222;
+    background: var(--primary);
+}
+.Question div{
+    display: grid;
+    /*grid-template-columns: 1fr 1fr 1fr;*/
+}
+/* reset */
+.Question body,p,a,ul,li{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+.Question li{
+    list-style-type: none;
+}
+
+/* base style */
+.Question body{
+    background: var(--secondary);
+    overflow-x: hidden;
+    font-family: 'Roboto Regular';
+}
+
+/* fonts */
+@font-face {
+    font-family: 'Roboto Regular';
+    src: url('fonts/Roboto-Regular.ttf');
+}
+.Question h1,h2,h3,h4{
+    color: #29292a;
+    font-weight: normal;
+}
+
+.Question p,a,li{
+    color: #262536FF;
+}
+
+.Question h1,h3{
+    font-size: 1.2em;
+}
+.Question h2{
+    font-size: 1.6em;
+}
+.Question h4{
+    font-size: 1.1em;
+}
+.Question .leading{
+    font-size: 1.1em;
+}
+/* mobile styles */
+
+/* small tablet styles */
+@media screen and (min-width: 620px){
+    body{
+        font-size: 18px;
+    }
+}
+
+/* large tablets and laptops styles */
+@media screen and (min-width: 960px){
+
+}
+/* Desktops styles */
+@media screen and (min-width: 1200px){
+    body{
+        font-size: 20px;
+    }
+}
