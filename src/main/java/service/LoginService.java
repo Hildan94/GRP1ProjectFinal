@@ -42,7 +42,7 @@ public class LoginService {
                 return JWTHandler.generateJwtToken(user);
             }
         }
-        log.error("Failed login" + login.getUsername());
+        log.info("Failed login" + login.getUsername());
         throw new NotAuthorizedException("forkert brugernavn/kodeord");
     }
 
