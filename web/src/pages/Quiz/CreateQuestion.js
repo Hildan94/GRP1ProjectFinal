@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
-import './assets/quiz.css';
+import './assets/createQuiz.css';
 import { CircularProgress } from '@mui/material';
 import Button from '@mui/material/Button';
 

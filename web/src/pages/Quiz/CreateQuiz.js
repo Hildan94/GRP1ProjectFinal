@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useNavigate} from "react-router-dom";
-import './assets/quiz.css';
+import './assets/createQuiz.css';
 import { CircularProgress } from '@mui/material';
 import Button from '@mui/material/Button';
 
@@ -43,7 +43,7 @@ const Quiz = () => {
         <div className="Quiz">
             <form id="quiz" onSubmit={handleSubmit}>
                     <label>Quiz navn</label>
-                <input
+                <input className="Quiz"
                     type="text"
                     value={quizName}
                     name="Quizname"

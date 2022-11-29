@@ -2,6 +2,7 @@ import {useNavigate} from "react-router-dom";
 import React from "react";
 import { Helmet } from 'react-helmet';
 import Quiz from "./CreateQuiz";
+import './assets/createQuiz.css';
 
 function Quiznew() {
 
