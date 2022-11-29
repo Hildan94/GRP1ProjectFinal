@@ -121,10 +121,7 @@
     display: inline-block;
     margin-bottom: 10px;
 }
-.Question button:hover{
-    color: #222;
-    background: var(--primary);
-}
+
 .Question div{
     display: grid;
     /*grid-template-columns: 1fr 1fr 1fr;*/
