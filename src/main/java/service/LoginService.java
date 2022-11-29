@@ -11,6 +11,7 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
 import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j2;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.criteria.JpaCriteriaQuery;
@@ -24,6 +25,7 @@ import java.util.Objects;
 @Path("login")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@Log4j2
 public class LoginService {
     private static final SessionFactory sessionFactory = new HibernateController("pgtest-db.caprover.grp1.diplomportal.dk:6543/pg").getSessionFactory();
 
@@ -39,34 +41,17 @@ public class LoginService {
             if (login.getUsername().equals(user.getUsername()) && BCrypt.checkpw(login.getPassword(),user.getHash())){
                 return JWTHandler.generateJwtToken(user);
             }
-        }throw new NotAuthorizedException("forkert brugernavn/kodeord");
+        }
+        log.info("Failed login" + login.getUsername());
+        throw new NotAuthorizedException("forkert brugernavn/kodeord");
     }
 
     @POST
     @Path("tokentest")
     public User postToken(@HeaderParam("Authorization") String token){
+        System.out.println("Endpoint tokentest hit");
         User validate = JWTHandler.validate(token);
         return  validate;
     }
-
-    /*
-public class NotAuthorizedException extends Throwable {
-    public NotAuthorizedException(String s) {
-        super((s));
-    }
-}
-
-@Provider
-public class NotAuthorizedExceptionMapper implements ExceptionMapper<NotAuthorizedException> {
-
-    @Override
-    public Response toResponse(NotAuthorizedException e) {
-        return Response.status(Response.Status.UNAUTHORIZED).entity(e.getMessage()).build();
-    }
-}
-
- */
-
-
 }
 

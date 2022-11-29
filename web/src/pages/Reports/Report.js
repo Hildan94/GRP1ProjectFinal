@@ -24,7 +24,6 @@ function Report(){
                         <input type="text" name="input" />
                     </label>
                 </form>
-                <button onClick={()=> scores.addSomething("Ny Quiz")}> Lav shit </button>
             </div>
         </div>
     );

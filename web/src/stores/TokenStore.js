@@ -43,8 +43,28 @@ class TokenStore {
         ).catch(() => this.state = Loginstates.LOGGEDOUT)
     }
 
+    campusLogin = ()=>{
+        fetch(baseUrl + 'campusnet/login', {
+            method: 'GET'
+        }).then(
+            (response) => {
+                response.text().then(
+                    (token) => {
+                        console.log("Got Token: " + token)
+                        this.token = token;
+                        localStorage.setItem("userToken", token);
+                        this.state = Loginstates.LOGGED_IN;
+                    }
+                )
+            }
+        )
 
-    /**
+
+    }
+
+
+
+/**
      * Check hvad der skal være i .then
      */
     checkToken = ()=> {
@@ -72,16 +92,6 @@ class TokenStore {
         }).then(/*....*/)
     }
 }
-
-
-/*
-decorate(TokenStore,{
-    state: observable,
-    token: observable,
-    logindata:observable
-
-});
- */
 
 
 
