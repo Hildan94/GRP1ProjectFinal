@@ -10,11 +10,8 @@ import {tokenStore} from "../stores/TokenStore";
 
 function Frontpage() {
 
-
-
     const [Username, setUsername] = useState('Username');
     const [Password, setPassword] = useState('Password');
-
 
         return (
             <div className="main">
