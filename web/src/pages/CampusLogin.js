@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 function Contact() {
 
     useEffect(() => {
-        window.location.href = "http://localhost:8080/api/campusnet/login ";
+        window.location.href = "https://nem.grp1.diplomportal.dk/api/campusnet/login ";
     }, []);
 
     return (
