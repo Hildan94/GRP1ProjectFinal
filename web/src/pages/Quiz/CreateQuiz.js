@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import './assets/quiz.css';
+import { CircularProgress } from '@mui/material';
+import Button from '@mui/material/Button';
 
 
 const Quiz = () => {
@@ -8,26 +10,29 @@ const Quiz = () => {
     const navigate = useNavigate()
 
     const baseUrl = process.env.NODE_ENV === 'development' ?
-        "https://localhost:8080/":""; //Check if dev environment
+        "http://localhost:8080/":"" //Check if dev environment
 
         //initialize:
     const [quizName, setQuizName] = useState('');
     const [category, setCategory] = useState('Matematik');
-    const [questionsList, setQuestionsList] = useState([]);
+    const [children, setChildren] = useState([]);
 
+    const [isLoading, setIsLoading] = useState(false);
 
     //handle submit:
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const quiz = {quizName, category, questionsList};
-        //fetch("https://nem.grp1.diplomportal.dk/api/quiznew", {method: "POST", body: quiz, headers: {"Content-Type": "APPLICATION/JSON"}})
-//http://localhost:8080/api/quiznew
-
+        const quiz = {quizName, category, children};
+        //fetch("https://nem.grp1.diplomportal.dk/api/quiznew", {method: "POST",crossdomains: true, body: quiz, headers: {"Content-Type": "APPLICATION/JSON"}})
+        //http://localhost:8080/api/quiznew
+        setIsLoading(true);
         try {
-            const response = await fetch(baseUrl + "api/quiznew", {method: "POST", body: JSON.stringify(quiz), headers: {"Content-Type": "APPLICATION/JSON"}})
+            const response = await fetch(baseUrl + "api/quiznew", {method: 'POST',crossdomains: true, body: JSON.stringify(quiz), headers: {Authorization : localStorage.getItem('userToken'), "Content-Type": "APPLICATION/JSON"}})
             const data = await response.json();
+            setIsLoading(false);
             navigate(`/questions/${data}`);
         } catch (error) {
+            setIsLoading(false);
             alert("Der skete en fejl ):")
         }
 
@@ -46,6 +51,7 @@ const Quiz = () => {
                     onChange={(e) => setQuizName(e.target.value)}>
                 </input>
 
+
                 <label>Kategori</label>
                     <select
                         value={category}
@@ -58,7 +64,8 @@ const Quiz = () => {
                         <option value="Historie">Historie</option>
                         <option value="Geografi">Geografi</option>
                     </select>
-                <button type="submit">Opret quiz</button>
+                {isLoading? <CircularProgress/>:<></>}
+                <Button disabled={isLoading} type="submit">Opret quiz</Button>
             </form>
         </div>
     );
