@@ -1,3 +1,5 @@
+NOTE: If running locally remember to set env variables to "devopse22user=pg;devopse22pass=889226e9a74ce148" in order to acess DB
+
 # GRP1ProjectFinal
 
 A project made for DTU course 62582 Complex Systems and Devops, fall 2022. 
