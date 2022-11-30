@@ -4,7 +4,6 @@ import {userStore} from "./signupFetcher";
 
 /**
  * Page for signing up to use the site. When a user signs up they are to be assigned a unique ID.
- *
  * The className attribute is used to specify a CSS class
  *
  * Confirm pw validation from:
@@ -12,15 +11,12 @@ import {userStore} from "./signupFetcher";
  *
  * https://reactjs.org/docs/forms.html
  * */
-{/* validateInput is used when the input field is out of focus, and when passwords aren't matchin*/}
-{/* src.java.service.UserService. createUser() */}
+{/* validateInput is used when the input field is out of focus, and when passwords aren't matching*/}
 
 function Signup() {
 
     const navigate = useNavigate()
-    const toHome = () => { // Homepage of app after login
-        navigate('/home')
-    }
+
     const toFrontpage = () => { // Login page
         navigate('/')
     }
@@ -47,6 +43,7 @@ function Signup() {
     const [passWord, setPassWord] = useState('');
     const [hash, setHash] = useState('');
 
+    // Writes
     const onInputChange = e => {
         const { name, value } = e.target;
         setInput(prev => ({
@@ -78,33 +75,33 @@ function Signup() {
             switch (name) {
                 case "username":
                     if (!value) {
-                        stateObj[name] = "Indtast fornavn.";
+                        stateObj[name] = "Indtast fornavn";
                     }
                     break;
 
                 case "surname":
                     if (!value) {
-                        stateObj[name] = "Indtast efternavn.";
+                        stateObj[name] = "Indtast efternavn";
                     }
                     break;
 
                 case "school":
                     if (!value) {
-                        stateObj[name] = "Indtast skole.";
+                        stateObj[name] = "Indtast skole";
                     }
                     break;
 
                 case "grade":
                     if (!value) {
-                        stateObj[name] = "Indtast klassetrin.";
+                        stateObj[name] = "Indtast klassetrin";
                     }
                     break;
 
                 case "password":
                     if (!value) {
-                        stateObj[name] = "Indtast kodeord.";
+                        stateObj[name] = "Indtast kodeord";
                     } else if (input.confirmPassword && value !== input.confirmPassword) {
-                        stateObj["confirmPassword"] = "Kodeord og Bekræft kodeord matcher ikke.";
+                        stateObj["confirmPassword"] = "Kodeord og Bekræft kodeord matcher ikke";
                     } else {
                         stateObj["confirmPassword"] = input.confirmPassword ? "" : error.confirmPassword;
                     }
@@ -112,9 +109,9 @@ function Signup() {
 
                 case "confirmPassword":
                     if (!value) {
-                        stateObj[name] = "Indtast bekræft kode.";
-                    } else if (input.password && value !== input.password) {
-                        stateObj[name] = "Kodeordet matcher ikke.";
+                        stateObj[name] = "Indtast bekræft kode";
+                    } else if (passWord && value !== passWord) {
+                        stateObj[name] = "Kodeordet matcher ikke";
                     }
                     break;
 
