@@ -2,8 +2,8 @@
 
 describe('Render homepage', () => {
     it('mounts', () => {
-        cy.visit('/')
-        //cy.visit('https://nem.grp1.diplomportal.dk')
+        //cy.visit('/')
+        cy.visit('https://nem.grp1.diplomportal.dk')
     })
 
     it('insert username and password', () => {
