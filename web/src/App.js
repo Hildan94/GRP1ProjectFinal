@@ -18,7 +18,9 @@ import React from "react";
 //import Questions from "./pages/Quiz/questions"
 import CampusLogin from "./pages/CampusLogin";
 import Questions from "./pages/Quiz/questions"
-//import Quiznew from "./pages/quiznew";
+//import Quiznew from "./pages/quiznew"
+
+
 
 function App() {
     const loggedIn = tokenStore.state===Loginstates.LOGGED_IN
@@ -32,13 +34,19 @@ function App() {
                     <Route path="/quizzes" element={<Quizzes/>}/>
                     <Route exact path="/quiz/:quizid/:questionid" element={<Quiz/>}/>
                     <Route path="/quiznew" element={<Quiznew/>}/>
+                    <Route path="/campuslogin" element={<CampusLogin/>}/>
                     <Route path="/questions/:quizid" element={<Questions/>}/>
                     <Route path="/reportsoverview" element={<ReportsOverview/>}/>
                     <Route path="/reportsoverview/report" element={<Report/>}/>
-                    <Route path="/campuslogin" element={<CampusLogin/>}/>
                     <Route path="*" element={<Notfound/>}/>
                 </Routes>
-            </> : <Frontpage/>}
+            </> :  <Routes>
+                    <Route path="/" element={<Frontpage/>}></Route>
+                    <Route path="/signup" element={<Signup/>}/>
+                    <Route path="/campuslogin" element={<CampusLogin/>}/>
+                </Routes>
+
+                }
         </div>
     );
 }
