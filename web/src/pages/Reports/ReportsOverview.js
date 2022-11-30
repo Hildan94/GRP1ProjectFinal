@@ -2,7 +2,6 @@ import {useNavigate} from "react-router-dom";
 import {React, useState} from "react";
 import {observer} from "mobx-react-lite";
 import {scores} from "./ReportsFetcher";
-import {tokenStore} from "../../stores/TokenStore";
 import {CircularProgress} from "@mui/material";
 
 
@@ -23,22 +22,6 @@ function ReportsOverview() {
 
     const [Loading, setLoading] = useState(false);
 
-    function toReport(key){
-        navigate('/report/' + (key+1).toString())
-    }
-
-    function toCampusLogin(){
-        navigate('/campuslogin')
-    }
-
-    function printToken(){
-        console.log("JWT token" + localStorage.getItem('userToken'))
-    }
-
-    function clearToken(){
-        localStorage.removeItem('userToken')
-    }
-
     /**
      * Mapper hvert objekt og dets value til et table
      * /TODO : Skal vise rigtigt videre
@@ -57,6 +40,8 @@ function ReportsOverview() {
             alert("Something happened")
         }
     }
+
+
 
     const reports = scores.report.map((reportName,outer) =>
         <tr>
@@ -93,23 +78,29 @@ function ReportsOverview() {
             </div>
             <div>
                 <table>
+                    <tbody>
+                    <tr>
                     <td colSpan={6} align={"center"}>Matematik</td>
-                    <tr></tr>
+                    </tr>
+
+                    <tr>
                         <td>quizId</td>
                         <td>quizname</td>
                         <td>quizresultat</td>
                         <td>quizspørgsmål</td>
                         <td>userid</td>
                         <td>Klik for at se resultater</td>
+                    </tr>
 
                     {reports}
+                    </tbody>
                 </table>
             </div>
 
             <div>
                 <button disabled={Loading} onClick={handleButtonPress}> Indlæse matematik rapporter </button>
                 {Loading? <CircularProgress/>:<></>}
-                <button  onClick={scores.reqeustCreateReport}> Lav rapport </button>
+                <button  onClick={scores.reqeustCreateReport}> Lav rapport (Stub) </button>
             </div>
             <div>
 
