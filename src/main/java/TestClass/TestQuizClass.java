@@ -21,8 +21,9 @@ public class TestQuizClass {
         Transaction transaction = session.beginTransaction();
         Quiz quiz = new Quiz();
         System.out.println("QuizID before commit: " + quiz.getId());
+        quiz.setQuizName("Hovedstæder og flag");
         quiz.setCategory("Geografi");
-        List<Question> questionsList = new LinkedList<>();
+        List<Question> children = new LinkedList<>();
         Question question = new Question();
         question.setQuestionName("Hvad er hovedstaden i Danmark?");
         question.setAnswerA("København");
@@ -30,7 +31,8 @@ public class TestQuizClass {
         question.setAnswerC("Oslo");
         question.setAnswerD("Reykavík");
         question.setCorrectAnswer(0);
-        questionsList.add(question);
+        question.setParent(quiz);
+        children.add(question);
         Question question2 = new Question();
         question2.setQuestionName("Hvilken farver er i det norkse flag?");
         question2.setAnswerA("Grøn, lilla og gul");
@@ -38,8 +40,9 @@ public class TestQuizClass {
         question2.setAnswerC("Orange og blå");
         question2.setAnswerD("Blå og gul");
         question2.setCorrectAnswer(1);
-        questionsList.add(question2);
-        quiz.setQuestionsList(questionsList);
+        question2.setParent(quiz);
+        children.add(question2);
+        //quiz.setQuestionsList(children);
         session.persist(question);
         session.persist(question2);
         session.persist(quiz);
@@ -59,8 +62,9 @@ public class TestQuizClass {
         Transaction transaction = session.beginTransaction();
         Quiz quiz = new Quiz();
         System.out.println("QuizID before commit: " + quiz.getId());
+        quiz.setQuizName("Trigonometri");
         quiz.setCategory("Matematik");
-        List<Question> questionsList = new LinkedList<>();
+        List<Question> children = new LinkedList<>();
         Question question = new Question();
         question.setQuestionName("Hvor mange sider har et octagon?");
         question.setAnswerA("6");
@@ -68,8 +72,10 @@ public class TestQuizClass {
         question.setAnswerC("2");
         question.setAnswerD("8");
         question.setCorrectAnswer(3);
-        questionsList.add(question);
-        quiz.setQuestionsList(questionsList);
+        question.setParent(quiz);
+        children.add(question);
+        quiz.setChildren(children);
+        //quiz.setQuestionsList(children);
         session.persist(question);
         session.persist(quiz);
         transaction.commit();
