@@ -22,12 +22,12 @@ import io.prometheus.client.exporter.HTTPServer;
 @Log4j2
 public class LoginService {
     private static final SessionFactory sessionFactory = new HibernateController("pgtest-db.caprover.grp1.diplomportal.dk:6543/pg").getSessionFactory();
-
     public final static Counter attemptCounter = Counter.build().name("loginAttempts").help("Total login Attemts").register();
     public final static Counter failCounter = Counter.build().name("loginFails").help("Total Faileed Attempts").register();
 
     @POST
     public String postLoginData(LoginData login) throws NotAuthorizedException {
+        attemptCounter.inc();
 
         Session session = sessionFactory.openSession();
         JpaCriteriaQuery<User> query = session.getCriteriaBuilder().createQuery(User.class);
@@ -40,6 +40,7 @@ public class LoginService {
             }
         }
         log.info("Failed login" + login.getUsername());
+        failCounter.inc();
         throw new NotAuthorizedException("forkert brugernavn/kodeord");
     }
 
