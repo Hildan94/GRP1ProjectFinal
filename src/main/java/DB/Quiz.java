@@ -2,10 +2,11 @@ package DB;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.LinkedList;
 import java.util.List;
 
-@Table(name="Quiz")
 @Entity
+@Table(name="Quiz")
 @Getter
 @Setter
 @Builder
@@ -14,13 +15,17 @@ import java.util.List;
 @AllArgsConstructor
 public class Quiz {
     @Id
+    @Column(name = "quiz_id")
     @GeneratedValue
     private int id;
+
     @Column
     private String quizName;
+
     @Column
     private String category;
-    @OneToMany(cascade = {CascadeType.ALL})
-    private List<Question> questionsList;
+
+    @OneToMany(mappedBy = "parent",cascade = CascadeType.ALL)
+    private List<Question> children = new LinkedList<>();
 }
 

@@ -1,7 +1,7 @@
 import {useNavigate} from "react-router-dom";
 import React from "react";
 import { Helmet } from 'react-helmet';
-import './assets/quiz.css';
+import './assets/createQuiz.css';
 import Question from "./CreateQuestion";
 
 function Questionsnew() {
