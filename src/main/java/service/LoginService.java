@@ -3,24 +3,17 @@ package service;
 import DB.HibernateController;
 import DB.User;
 import DB.LoginData;
-import com.auth0.jwt.exceptions.JWTDecodeException;
-import com.auth0.jwt.exceptions.JWTVerificationException;
+import io.prometheus.client.Counter;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.ext.ExceptionMapper;
-import jakarta.ws.rs.ext.Provider;
-import lombok.extern.java.Log;
 import lombok.extern.log4j.Log4j2;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.criteria.JpaCriteriaQuery;
 import org.mindrot.jbcrypt.BCrypt;
 import service.exceptions.NotAuthorizedException;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
 
 @Path("login")
 @Produces(MediaType.APPLICATION_JSON)
@@ -28,6 +21,9 @@ import java.util.Objects;
 @Log4j2
 public class LoginService {
     private static final SessionFactory sessionFactory = new HibernateController("pgtest-db.caprover.grp1.diplomportal.dk:6543/pg").getSessionFactory();
+
+    public final static Counter attemptCounter = Counter.build().name("loginAttempts").help("Total login Attemts").register();
+    public final static Counter failCounter = Counter.build().name("loginFails").help("Total Faileed Attempts").register();
 
     @POST
     public String postLoginData(LoginData login) throws NotAuthorizedException {
