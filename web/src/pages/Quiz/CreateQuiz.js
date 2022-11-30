@@ -27,7 +27,7 @@ const Quiz = () => {
         //http://localhost:8080/api/quiznew
         setIsLoading(true);
         try {
-            const response = await fetch(baseUrl + "api/quiznew", {method: 'POST',crossdomains: true, body: JSON.stringify(quiz), headers: {Authorization : localStorage.getItem('userToken'), "Content-Type": "APPLICATION/JSON"}})
+            const response = await fetch(baseUrl + "api/quiznew", {method: 'POST', body: JSON.stringify(quiz), headers: {Authorization : localStorage.getItem('userToken'), "Content-Type": "APPLICATION/JSON"}})
             const data = await response.json();
             setIsLoading(false);
             navigate(`/questions/${data}`);
@@ -40,7 +40,7 @@ const Quiz = () => {
     };
 
     return (
-        <div className="Quiz">
+        <div className="Quiz" id="quiz_container">
             <form id="quiz" onSubmit={handleSubmit}>
                     <label>Quiz navn</label>
                 <input className="Quiz"
@@ -65,7 +65,7 @@ const Quiz = () => {
                         <option value="Geografi">Geografi</option>
                     </select>
                 {isLoading? <CircularProgress/>:<></>}
-                <Button disabled={isLoading} type="submit">Opret quiz</Button>
+                <Button name="createQuiz" disabled={isLoading} type="submit">Opret quiz</Button>
             </form>
         </div>
     );

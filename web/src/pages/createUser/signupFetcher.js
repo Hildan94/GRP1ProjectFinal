@@ -9,7 +9,7 @@ export class UserStore {
 
     constructor() {
         makeAutoObservable(this,{},{autoBind:true});
-        this.fetchUsers();
+        //this.fetchUsers();
     }
 
     addUser = (user) => {
