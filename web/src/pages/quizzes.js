@@ -61,11 +61,11 @@ function Quizzes() {
                 })}
             </div>
             <div>
-                <button onClick={toQuiznew}>Opret ny quiz</button>
+                <button name="newQuiz" onClick={toQuiznew}>Opret ny quiz</button>
             </div>
             <br/>
             <div>
-                <button onClick={toReports}>Generer rapport</button>
+                <button name="reports" onClick={toReports}>Generer rapport</button>
             </div>
         </div>
     );
