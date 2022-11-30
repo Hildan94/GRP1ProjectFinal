@@ -4,7 +4,7 @@ import {observer} from "mobx-react-lite";
 import {Loginstates, tokenStore} from "./stores/TokenStore";
 import Home from "./pages/home";
 import {HashRouter as Router, Route, Routes} from "react-router-dom";
-import Signup from "./pages/signup";
+import Signup from "./pages/createUser/signup";
 import Quizzes from "./pages/quizzes";
 import Quiz from "./pages/quiz";
 //import Quiznew from "./pages/quiznew";
