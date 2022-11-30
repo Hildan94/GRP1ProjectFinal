@@ -13,6 +13,7 @@ import org.hibernate.query.criteria.JpaCriteriaQuery;
 import org.mindrot.jbcrypt.BCrypt;
 import service.exceptions.NotAuthorizedException;
 import java.util.List;
+import io.prometheus.client.exporter.HTTPServer;
 
 
 @Path("login")

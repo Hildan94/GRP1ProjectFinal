@@ -1,3 +1,4 @@
+import io.prometheus.client.exporter.HTTPServer;
 import io.prometheus.client.hotspot.DefaultExports;
 import lombok.extern.log4j.Log4j2;
 import org.apache.catalina.LifecycleException;
@@ -12,7 +13,6 @@ import io.sentry.SpanStatus;
 @Log4j2
 
 public class Main {
-
     public static void main(String[] args) throws IOException {
         Sentry.init(options -> {
             options.setDsn("https://46139fe6db6b4681aa7057f566799439@o4504162380808192.ingest.sentry.io/4504198685261824");
@@ -24,8 +24,7 @@ public class Main {
         });
 
         DefaultExports.initialize();
-
-        Tomcat prometheusServer = new Tomcat();
+        HTTPServer prometheusServer = new HTTPServer(1234);
 
 
 
