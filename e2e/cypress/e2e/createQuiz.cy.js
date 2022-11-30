@@ -17,7 +17,7 @@ describe('Render homepage', () => {
     it('login request', () => {
         cy.request({
             method: 'POST',
-            url: 'http://localhost:8080/api/login',
+            url: 'https://nem.grp1.diplomportal.dk/api/login',
             body: {
                 "username": "hildi",
                 "password": "123"
@@ -43,7 +43,7 @@ describe('Render homepage', () => {
     it('create quiz request', () => {
         cy.request({
             method: 'POST',
-            url: 'http://localhost:8080/api/quiznew',
+            url: 'https://nem.grp1.diplomportal.dk/api/quiznew',
             headers: {Authorization: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJTZXJ2ZXIiLCJleHAiOjE2Njk5OTk3MzQsInVzZXIiOiJ7XCJpZFwiOjE1MDQsXCJ1c2VybmFtZVwiOlwiVHJvZWxzXCIsXCJwYXNzd29yZFwiOm51bGx9In0.IB5qKVyVe9TurVgyHsHaobFEb0MmZtODyFcA5vqvr5yUp3Q8qghw-xf2czUccSCVxWS4_r7VTpJfj5CuXHMbJw'
             },
             body: {
