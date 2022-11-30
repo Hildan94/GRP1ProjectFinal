@@ -1,5 +1,4 @@
 import {makeAutoObservable, runInAction} from "mobx";
-import Report from "./Report";
 import ReportObject from "./ReportObject";
 
 //TODO: Hvordan redirectes der rigtigt til backenden?
@@ -18,6 +17,8 @@ class ReportsFetcher {
     }
 
 
+
+
     fetchReports() {
         fetch(baseUrl + "api/reports",{
             method: 'GET',
@@ -34,7 +35,7 @@ class ReportsFetcher {
 
     /**
      * Skal gå videre til den rigtige rapport og se resultater
-     * //TODO: Implement this and FIIIX
+     * //TODO: Implement this for know it can redirect to right url backend cant handle
      */
 
     fetchReport(key){

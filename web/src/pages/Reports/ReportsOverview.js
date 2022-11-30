@@ -1,8 +1,8 @@
 import {useNavigate} from "react-router-dom";
-import {React} from "react";
+import {React, useState} from "react";
 import {observer} from "mobx-react-lite";
 import {scores} from "./ReportsFetcher";
-import {tokenStore} from "../../stores/TokenStore";
+import {CircularProgress} from "@mui/material";
 
 
 
@@ -20,36 +20,41 @@ import {tokenStore} from "../../stores/TokenStore";
 
 function ReportsOverview() {
 
-    function toReport(key){
-        navigate('/report/' + (key+1).toString())
-    }
-
-    function toCampusLogin(){
-        navigate('/campuslogin')
-    }
-
-
-
-    function printToken(){
-        console.log("JWT token" + localStorage.getItem('userToken'))
-    }
-
-    function clearToken(){
-        localStorage.removeItem('userToken')
-    }
+    const [Loading, setLoading] = useState(false);
 
     /**
      * Mapper hvert objekt og dets value til et table
      * /TODO : Skal vise rigtigt videre
      *
      */
-     const reports = scores.report.map((reportName,outer) =>
+
+
+    const handleButtonPress = async (e) =>{
+        e.preventDefault();
+        setLoading(true)
+        try{
+            scores.fetchReports()
+            setLoading(false)
+        }catch (error){
+            setLoading(false)
+            alert("Something happened")
+        }
+    }
+
+    function addToReports(){
+        scores.reqeustCreateReport()
+        scores.fetchReports()
+    }
+
+
+
+    const reports = scores.report.map((reportName,outer) =>
         <tr>
             {Object.values(reportName).map((value) =>
                 <td>
                     {value}
                 </td>
-        )}
+            )}
             <td onClick={e=>scores.fetchReport(outer)}> Se resultat </td>
         </tr>
     )
@@ -78,28 +83,31 @@ function ReportsOverview() {
             </div>
             <div>
                 <table>
+                    <tbody>
+                    <tr>
                     <td colSpan={6} align={"center"}>Matematik</td>
-                    <tr></tr>
+                    </tr>
+
+                    <tr>
                         <td>quizId</td>
                         <td>quizname</td>
                         <td>quizresultat</td>
                         <td>quizspørgsmål</td>
                         <td>userid</td>
                         <td>Klik for at se resultater</td>
+                    </tr>
 
                     {reports}
+                    </tbody>
                 </table>
             </div>
 
             <div>
-                <button onClick={tokenStore.doLogin}> {tokenStore.state} </button>
-                <button onClick={scores.fetchReports}> Indlæse matematik rapporter </button>
-                <button name="token" onClick={printToken}> Print token </button>
-                <button onClick={clearToken}> Ryd token </button>
+                <button disabled={Loading} onClick={handleButtonPress}> Indlæse matematik rapporter </button>
+                {Loading? <CircularProgress/>:<></>}
+                <button  onClick={addToReports}> Lav rapport (Stub) </button>
             </div>
             <div>
-                <button onClick={scores.reqeustCreateReport}> Lav rapport </button>
-                <button onClick={toCampusLogin}> Log ind campusnet </button>
 
             </div>
         </div>
