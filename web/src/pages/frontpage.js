@@ -6,9 +6,9 @@ import pass from "./../image/pass.png";
 import {useNavigate} from "react-router-dom";
 import {Helmet} from "react-helmet";
 import React, {useState} from 'react';
+import {Loginstates, tokenStore} from "../stores/TokenStore";
+import {Signup} from "../pages/createUser/signup"
 
-
-import {tokenStore} from "../stores/TokenStore";
 
 function Frontpage() {
 
@@ -16,9 +16,11 @@ function Frontpage() {
     const [Password, setPassword] = useState('Password');
 
     const navigate = useNavigate()
-
     const toThirdpartLogin = () => {
         navigate('/campuslogin')
+    }
+    const toCreateUser = () => {
+        navigate('/signup')
     }
 
     return (
@@ -62,12 +64,9 @@ function Frontpage() {
                             <button onClick={()=>tokenStore.doLogin(Username,Password)}>Log ind</button>
 
                             <button onClick={toThirdpartLogin}>Trejdepartslogin </button>
+
+                            <button onClick={toCreateUser}> Opret bruger</button>
                         </div>
-
-                        <p className="link">
-                            <a href="#">Glemt kodeord</a> Or <a href="/#/signup">Opret bruger </a>
-                        </p>
-
                     </div>
                 </div>
 
