@@ -26,8 +26,6 @@ public class Main {
         DefaultExports.initialize();
         HTTPServer prometheusServer = new HTTPServer(1234);
 
-
-
         log.info("Hibernate " + System.getenv("devopse22user") + " hibernate.connection.password " + System.getenv("devopse22pass"));
         Tomcat tomcat = new Tomcat();
         tomcat.setBaseDir("temp");
