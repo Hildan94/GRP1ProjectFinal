@@ -41,6 +41,11 @@ function ReportsOverview() {
         }
     }
 
+    function addToReports(){
+        scores.reqeustCreateReport()
+        scores.fetchReports()
+    }
+
 
 
     const reports = scores.report.map((reportName,outer) =>
@@ -100,7 +105,7 @@ function ReportsOverview() {
             <div>
                 <button disabled={Loading} onClick={handleButtonPress}> Indlæse matematik rapporter </button>
                 {Loading? <CircularProgress/>:<></>}
-                <button  onClick={scores.reqeustCreateReport}> Lav rapport (Stub) </button>
+                <button  onClick={addToReports}> Lav rapport (Stub) </button>
             </div>
             <div>
 
