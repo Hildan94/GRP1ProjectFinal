@@ -6,9 +6,8 @@ import {tokenStore} from "../../stores/TokenStore";
 
 
 
-//TODO: Tokens
+//TODO: Ville være en fordel at rendere listen inden der bliver trykket / komme fra en anden side måske
 //TODO: Tests
-//TODO: Skal køre med backend
 //TODO: Skal køre rigtigt videre til de rigtige sider
 //TODO: Skal ikke hardcode tabellen (måske tage størrelse af tabel fra reportsfetcheren
 //TODO: Error codes
@@ -94,7 +93,7 @@ function ReportsOverview() {
 
             <div>
                 <button onClick={tokenStore.doLogin}> {tokenStore.state} </button>
-                <button onClick={scores.fetchReports}> Tryk for at indlæse værdier </button>
+                <button onClick={scores.fetchReports}> Indlæse matematik rapporter </button>
                 <button onClick={printToken}> Print token </button>
                 <button onClick={clearToken}> Ryd token </button>
             </div>

@@ -1,5 +1,5 @@
-describe('empty spec', () => {
+describe('open deployed site', () => {
   it('passes', () => {
-    cy.visit('https://example.cypress.io')
+    cy.visit('https://nem.grp1.diplomportal.dk')
   })
 })
