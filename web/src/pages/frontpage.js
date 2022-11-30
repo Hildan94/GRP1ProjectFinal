@@ -52,7 +52,7 @@ function Frontpage() {
 
                             <img src={pass} alt="pass" className="email"/>
                             <input
-                                type="text"
+                                type="password"
                                 name="Kodeord"
                                 required
                                 onChange={(e) => setPassword(e.target.value)}>

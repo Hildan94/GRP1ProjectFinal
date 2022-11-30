@@ -3,15 +3,16 @@ import {render, screen} from "@testing-library/react";
 import Quiz from "../pages/quiz";
 
 test('on render the load page is shown', () => {
-    render(<Quiz></Quiz>)
+    render(<Quiz/>)
 
     screen.debug();
 });
 
-test("next question", () => {
+test("Loading render is shown", () => {
     render(<Quiz/>)
 
     screen.debug();
-    const quizLoadHeader = screen.getByTestId("quiz_load");
+    let button = screen.getByRole("button");
+    expect(button).toHaveTextContent("Klik hvis der ikke sker noget");
 
 });

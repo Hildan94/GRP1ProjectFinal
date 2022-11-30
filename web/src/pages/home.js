@@ -32,16 +32,16 @@ function Home() {
                 <h2> Vælg et fag </h2>
             </div>
             <div>
-                <button onClick={toQuizzes}>* Matematik</button>
+                <button name="Matematik" onClick={toQuizzes}>* Matematik</button>
             </div>
             <div>
-                <button onClick={toQuizzes}>* Dansk</button>
+                <button name="Dansk" onClick={toQuizzes}>* Dansk</button>
             </div>
             <div>
-                <button onClick={toQuizzes}>* Historie</button>
+                <button name="Historie" onClick={toQuizzes}>* Historie</button>
             </div>
             <div>
-                <button onClick={toQuizzes}>* Geografi</button>
+                <button name="Geografi" onClick={toQuizzes}>* Geografi</button>
             </div>
             <div>
             </div>
