@@ -4,22 +4,20 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {HashRouter as Router, Route, Routes} from 'react-router-dom';
-import Signup from "./pages/createUser/signup";
-import Home from "./pages/home";
-import Quizzes from "./pages/quizzes";
-import Quiz from "./pages/quiz";
-import Questions from "./pages/Quiz/questions"
-import Quiznew from "./pages/Quiz/quiznew";
-import ReportsOverview from "./pages/Reports/ReportsOverview";
-import Notfound from "./pages/notFound";
+//import Signup from "./pages/signup";
+//import Home from "./pages/home";
+//import Quizzes from "./pages/quizzes";
+//import Quiz from "./pages/quiz";
+    //import Quiznew from "./pages/quiznew";
+//import ReportsOverview from "./pages/Reports/ReportsOverview";
+//import Notfound from "./pages/notFound";
 
 //<---------- Roboto font ---------->
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import Report from "./pages/Reports/Report";
-import CampusLogin from "./pages/CampusLogin";
+//import Report from "./pages/Reports/Report";
 
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
@@ -37,25 +35,10 @@ if (token!=null && token.length>0){
     window.location.replace("/");
 }
 
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
-
-
 root.render(
     <Router>
-        <Routes>
-            <Route path="/" element={<App/>}/>
-            <Route path="/signup" element={<Signup/>}/>
-            <Route path="/home" element={<Home/>}/>
-            <Route path="/quizzes" element={<Quizzes/>}/>
-            <Route exact path="/quiz/:quizid/:questionid" element={<Quiz/>}/>
-            <Route path="/quiznew" element={<Quiznew/>}/>
-            <Route path="/questions/:quizid" element={<Questions/>}/>
-            <Route path="/reportsoverview" element={<ReportsOverview/>}/>
-            <Route path="/reportsoverview/report" element={<Report/>}/>
-            <Route path="/campuslogin" element={<CampusLogin/>}/>
-            <Route path="*" element={<Notfound/>}/>
-        </Routes>
+        <App/>
     </Router>
 );
 
