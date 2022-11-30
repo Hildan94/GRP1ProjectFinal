@@ -67,10 +67,6 @@ function Frontpage() {
 
                             <button onClick={toCreateUser}> Opret bruger</button>
                         </div>
-
-                        <p className="link">
-                            <a href="/page/createUser/signup">Opret bruger </a>
-                        </p>
                     </div>
                 </div>
 
