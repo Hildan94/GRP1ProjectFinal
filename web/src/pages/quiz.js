@@ -2,6 +2,7 @@ import {useNavigate} from "react-router-dom";
 import {React, useState} from "react";
 import {Helmet} from 'react-helmet';
 import logo from "./../image/NEM_logo_noBackground2.png";
+import loading from "./../image/loading.gif";
 import './../Backend/quiz.css';
 import Button from "@mui/material/Button";
 import axios from 'axios';
@@ -514,8 +515,9 @@ function Quiz() {
     if (!getQuizAPI || !getQuestionsAPI || !getQuizQuestionsAPI) { // If data has not been loaded from database show load screen
         return (
             <div onLoad={getDataFromDb()}>
-                <h1>Quiz loader.. </h1>
-                <button onClick={updatePage}>Klik her for at komme videre</button>
+                <img src={loading}/>
+                <h1> </h1>
+                <button onClick={updatePage}>Klik hvis der ikke sker noget</button>
             </div>
         );
     } else if (!end) { // Quiz ongoing
