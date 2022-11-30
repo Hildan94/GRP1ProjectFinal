@@ -1,8 +1,9 @@
 import {useNavigate} from "react-router-dom";
-import {React} from "react";
+import {React, useState} from "react";
 import {observer} from "mobx-react-lite";
 import {scores} from "./ReportsFetcher";
 import {tokenStore} from "../../stores/TokenStore";
+import {CircularProgress} from "@mui/material";
 
 
 
@@ -20,6 +21,8 @@ import {tokenStore} from "../../stores/TokenStore";
 
 function ReportsOverview() {
 
+    const [Loading, setLoading] = useState(false);
+
     function toReport(key){
         navigate('/report/' + (key+1).toString())
     }
@@ -27,8 +30,6 @@ function ReportsOverview() {
     function toCampusLogin(){
         navigate('/campuslogin')
     }
-
-
 
     function printToken(){
         console.log("JWT token" + localStorage.getItem('userToken'))
@@ -43,13 +44,27 @@ function ReportsOverview() {
      * /TODO : Skal vise rigtigt videre
      *
      */
-     const reports = scores.report.map((reportName,outer) =>
+
+
+    const handleButtonPress = async (e) =>{
+        e.preventDefault();
+        setLoading(true)
+        try{
+            scores.fetchReports()
+            setLoading(false)
+        }catch (error){
+            setLoading(false)
+            alert("Something happened")
+        }
+    }
+
+    const reports = scores.report.map((reportName,outer) =>
         <tr>
             {Object.values(reportName).map((value) =>
                 <td>
                     {value}
                 </td>
-        )}
+            )}
             <td onClick={e=>scores.fetchReport(outer)}> Se resultat </td>
         </tr>
     )
@@ -92,14 +107,11 @@ function ReportsOverview() {
             </div>
 
             <div>
-                <button onClick={tokenStore.doLogin}> {tokenStore.state} </button>
-                <button onClick={scores.fetchReports}> Indlæse matematik rapporter </button>
-                <button onClick={printToken}> Print token </button>
-                <button onClick={clearToken}> Ryd token </button>
+                <button disabled={Loading} onClick={handleButtonPress}> Indlæse matematik rapporter </button>
+                {Loading? <CircularProgress/>:<></>}
+                <button  onClick={scores.reqeustCreateReport}> Lav rapport </button>
             </div>
             <div>
-                <button onClick={scores.reqeustCreateReport}> Lav rapport </button>
-                <button onClick={toCampusLogin}> Log ind campusnet </button>
 
             </div>
         </div>
