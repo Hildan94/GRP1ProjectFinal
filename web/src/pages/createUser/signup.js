@@ -12,7 +12,7 @@ import {userStore} from "./signupFetcher";
  *
  * https://reactjs.org/docs/forms.html
  * */
-{/* validateInput is used when the input field is out of focus, and when passwords aren't matchin*/}
+{/* validateInput is used when the input field is out of focus, and when passwords aren't matching*/}
 
 function Signup() {
 
