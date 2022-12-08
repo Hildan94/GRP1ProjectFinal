@@ -28,8 +28,7 @@ public class UserService {
     List<User> users = new ArrayList<>();
     private static final SessionFactory sessionFactory = new HibernateController("pgtest-db.caprover.grp1.diplomportal.dk:6543/pg").getSessionFactory();
     @POST
-    public int createUser(User user, @HeaderParam("Authorization") String token){
-        User validated = JWTHandler.validate(token);
+    public int createUser(User user){
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         String hash = BCrypt.hashpw(user.getPassword(),BCrypt.gensalt());
