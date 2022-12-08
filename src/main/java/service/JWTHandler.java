@@ -4,14 +4,12 @@ import DB.User;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.log4j.Log4j2;
-import org.apache.logging.log4j.Logger;
 
 import java.util.Calendar;
 
@@ -44,6 +42,21 @@ public class JWTHandler {
         } catch (JsonProcessingException e) {
             log.error("User with token " + s + "failed to validate");
             throw new RuntimeException(e);
+        }
+    }
+
+    public static boolean loginValidate(String s) {
+
+        JWTVerifier verifier = JWT.require(Algorithm.HMAC512(key)).build();
+        DecodedJWT verify = verifier.verify(s);
+        Claim user = verify.getClaim("user");
+        try {
+            new ObjectMapper().reader().forType(User.class).readValue(user.asString());
+            log.info("token is validated");
+            return true;
+        } catch (JWTVerificationException | JsonProcessingException e) {
+            log.error("User with token " + s + "failed to validate");
+            return false;
         }
     }
 }
