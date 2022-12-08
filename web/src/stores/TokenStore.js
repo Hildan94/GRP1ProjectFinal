@@ -11,7 +11,7 @@ export const Loginstates = {LOGGING_IN:"Loading", LOGGEDOUT:"Logout", LOGGED_IN:
 class TokenStore {
     state = Loginstates.LOGGEDOUT;
     token = null;
-    logindata = {username: "Troels", password: "Superkodeord"};
+    logindata = {username: "", password: ""};
     states;
 
     constructor() {
@@ -21,8 +21,10 @@ class TokenStore {
     }
 
 
-    doLogin = ()=> {
+    doLogin = (username, password)=> {
         this.state =  Loginstates.LOGGING_IN;
+        this.logindata.username = username;
+        this.logindata.password = password;
         fetch(baseUrl + 'api/login', {
             method: 'POST',
             body: JSON.stringify(this.logindata),
@@ -31,14 +33,19 @@ class TokenStore {
             }
         }).then(
             (response) => {
+                if(response.ok){
+                console.log("response", response.status)
                 response.text().then(
                     (token) => {
                         console.log("Got Token: " + token)
                         this.token = token;
                         localStorage.setItem("userToken", token);
                         this.state = Loginstates.LOGGED_IN;
+                        console.log("made it to here", localStorage.getItem(token));
                     }
                 )
+            }
+                else{this.state = Loginstates.LOGGEDOUT}
             }
         ).catch(() => this.state = Loginstates.LOGGEDOUT)
     }
