@@ -3,7 +3,6 @@ package service;
 import DB.HibernateController;
 import DB.Quiz;
 import DB.Question;
-import DB.User;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import org.hibernate.Session;
@@ -21,8 +20,7 @@ public class QuizService {
     private static final SessionFactory sessionFactory = new HibernateController("pgtest-db.caprover.grp1.diplomportal.dk:6543/pg").getSessionFactory();
 
     @POST
-    public int createQuiz(Quiz quiz, @HeaderParam("Authorization") String token){
-        User validate = JWTHandler.validate(token);
+    public int createQuiz(Quiz quiz){
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         session.persist(quiz);
@@ -33,8 +31,7 @@ public class QuizService {
 
     @POST
     @Path("/questions/{id}")
-    public int addQuestions(@PathParam("id") int quizId, List<Question> children, @HeaderParam("Authorization") String token){
-        User validate = JWTHandler.validate(token);
+    public int addQuestions(@PathParam("id") int quizId, List<Question> children){
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         Quiz quiz = session.get(Quiz.class, quizId);
