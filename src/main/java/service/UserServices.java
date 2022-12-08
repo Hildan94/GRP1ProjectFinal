@@ -32,7 +32,7 @@ public class UserServices {
             super(s);
         }
     }
-
+/*
     @Provider
     public class NoImplementationExceptionMapper implements
             ExceptionMapper<NoImplementationException> {
@@ -43,6 +43,8 @@ public class UserServices {
                             build();
         }
     }
+
+ */
 
 
 
