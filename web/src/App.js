@@ -44,9 +44,6 @@ function App() {
                     <Route path="/" element={<Frontpage/>}></Route>
                     <Route path="/signup" element={<Signup/>}/>
                     <Route path="/campuslogin" element={<CampusLogin/>}/>
-                    <Route exact path="/quiz/:quizid/:questionid" element={<Quiz/>}/>
-                    <Route path="/quizzes" element={<Quizzes/>}/>
-                    <Route path="/home" element={<Home/>}/>
                     <Route path="*" element={<Notfound/>}/>
             </Routes>
 
