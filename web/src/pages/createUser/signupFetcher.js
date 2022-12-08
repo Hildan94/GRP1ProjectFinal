@@ -13,7 +13,7 @@ export class UserStore {
     }
 
     addUser = (user) => {
-        this.users.push(user);
+        //this.users.push(user);
         fetch(baseUrl + 'api/users', {
             method: 'POST',
             body: JSON.stringify(user),
