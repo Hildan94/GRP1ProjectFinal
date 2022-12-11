@@ -44,7 +44,7 @@ describe('Render homepage', () => {
         cy.request({
             method: 'POST',
             url: 'https://nem.grp1.diplomportal.dk/api/quiznew',
-            headers: {Authorization: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJTZXJ2ZXIiLCJleHAiOjE2Njk5OTk3MzQsInVzZXIiOiJ7XCJpZFwiOjE1MDQsXCJ1c2VybmFtZVwiOlwiVHJvZWxzXCIsXCJwYXNzd29yZFwiOm51bGx9In0.IB5qKVyVe9TurVgyHsHaobFEb0MmZtODyFcA5vqvr5yUp3Q8qghw-xf2czUccSCVxWS4_r7VTpJfj5CuXHMbJw'
+            headers: {Authorization: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJTZXJ2ZXIiLCJleHAiOjE2NzA5MjY4NDUsInVzZXIiOiJ7XCJpZFwiOjMxNTIsXCJ1c2VybmFtZVwiOlwiaGlsZGlcIixcInBhc3N3b3JkXCI6bnVsbH0ifQ.ieGdgiSjAlZ3fYN3I6kNN9DOvgcPKG7aPkU5-__DWaYp6C04lZzY1XYK6bcJ1uHvZvbMPhKqokYztDLyjLg_Wg'
             },
             body: {
                 "quizName": "Cypress test",
